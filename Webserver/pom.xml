@@ -8,7 +8,7 @@
   </parent>
 
     <groupId>fh.ostfalia.projekt2014</groupId>
-    <artifactId>WEBSERVER</artifactId>
+    <artifactId>Webserver</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
