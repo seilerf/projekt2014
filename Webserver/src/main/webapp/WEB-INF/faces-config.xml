@@ -19,8 +19,8 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>Mp3BeanConverter</managed-bean-name>
-        <managed-bean-class>fh.ostfalia.projekt2014.rmi.Mp3BeanConverter</managed-bean-class>
+        <managed-bean-name>Mp3DaoRmi</managed-bean-name>
+        <managed-bean-class>fh.ostfalia.projekt2014.rmi.Mp3DaoRmi</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>
