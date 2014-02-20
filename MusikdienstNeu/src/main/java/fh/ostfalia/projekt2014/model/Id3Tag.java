@@ -28,7 +28,7 @@ public class Id3Tag {
     public Id3Tag() {
         mp3 = new Mp3();
         mp3Artist = new Mp3Artist();
-        uploadDir = new File("C:\\Users\\fseiler\\Documents\\NetBeansProjects\\Abschlussprojekt2014\\MUSICSERVICE\\Upload");
+        uploadDir = new File("C:\\Users\\fseiler\\Documents\\GitHub\\projekt2014\\Upload");
     }
 
     public Id3Tag(String customUploadPath) {

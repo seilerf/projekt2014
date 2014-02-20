@@ -10,6 +10,8 @@ import fh.ostfalia.projekt2014.dao.Mp3Dao;
 import fh.ostfalia.projekt2014.model.Mp3;
 import fh.ostfalia.projekt2014.rmi.Mp3DaoRmi;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,6 +24,14 @@ public class Main {
     
     public static void main (String[] args){
         //Mp3Dao mp3Dao = new Mp3Dao();
+        Mp3DaoRmi mp3DaoRmi;
+        try {
+            mp3DaoRmi = new Mp3DaoRmi(null);
+            mp3DaoRmi.registerRMI();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3");
         EntityManager em = emf.createEntityManager();
         
@@ -34,9 +44,7 @@ public class Main {
         
         em.close();
         emf.close();
-       
-        //Mp3DaoRmi mp3DaoRmi = new Mp3DaoRmi(mp3Dao);
-        //mp3DaoRmi.registerRMI();
+        
     }
     
 }
