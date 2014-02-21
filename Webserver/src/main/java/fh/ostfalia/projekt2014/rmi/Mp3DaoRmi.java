@@ -48,7 +48,6 @@ public class Mp3DaoRmi implements IMp3, Serializable {
     
     @Override
     public String getTest() {
-        System.out.println("Client: " + intfMusikdienst.getTest());
         return intfMusikdienst.getTest();
     }
 
@@ -64,6 +63,9 @@ public class Mp3DaoRmi implements IMp3, Serializable {
 
     @Override
     public String[] getMp3(int mp3_id) {
+        this.lookupRMI();
+        String[] mp3 = intfMusikdienst.getMp3(mp3_id);
+        System.out.println("Client --> Titel: " + mp3[1]);
         return intfMusikdienst.getMp3(mp3_id);
     }
 
