@@ -87,11 +87,11 @@ public class Mp3Dao implements IMp3Dao{
     }
 
     public String getMp3_title(int mp3_id) {
-        return em.find(Mp3.class, mp3_id).getMp3_title();
+        return em.find(Mp3.class, mp3_id).getMp3Title();
     }
 
     public byte[] getMp3_file(int mp3_id) {
-        return em.find(Mp3.class, mp3_id).getMp3_file();
+        return em.find(Mp3.class, mp3_id).getMp3File();
     }
 
     @Override

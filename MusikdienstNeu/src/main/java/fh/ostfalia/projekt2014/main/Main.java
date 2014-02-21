@@ -37,10 +37,8 @@ public class Main {
         
         em.getTransaction().begin();
         
-        Mp3 mp3 = new Mp3();
-        mp3.setMp3Artist(null);
-        mp3.setMp3_file(null);
-        mp3.setMp3_title("Testtitel");
+        Mp3 mp3 = em.find(Mp3.class, 1);
+        System.out.println("MP3: " + mp3.getMp3Title());
         
         em.close();
         emf.close();

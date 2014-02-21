@@ -52,9 +52,9 @@ public class Id3Tag {
             
 
             mp3Artist.setArtistName(this.readArtist(file));
-            mp3.setMp3_title(this.readTitle(file));
-            mp3.setMp3Artist(mp3Artist);
-            mp3.setMp3ByteCodeFromFile(file);            
+            mp3.setMp3Title(this.readTitle(file));
+            mp3.setArtist(mp3Artist);
+            mp3.setByteCodeFromFile(file);
             
         } catch (TagException ex) {
             Logger.getLogger(Id3Tag.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,10 +88,10 @@ public class Id3Tag {
                         input.read(bytes, 0, read);
                     }
 
-                    mp3.setMp3_file(bytes);
+                    mp3.setMp3File(bytes);
                             
                     //mp3.setMp3_artist(mp3artist);
-                    mp3.setMp3_title(this.readTitle(file));
+                    mp3.setMp3Title(this.readTitle(file));
                     list.add(mp3);
                 } catch (TagException ex) {
                     Logger.getLogger(Id3Tag.class.getName()).log(Level.SEVERE, null, ex);

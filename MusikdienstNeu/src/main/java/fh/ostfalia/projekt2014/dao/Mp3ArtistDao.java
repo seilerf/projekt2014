@@ -41,10 +41,10 @@ public class Mp3ArtistDao implements IMp3ArtistDao{
     @Override
     public void persistMp3Artist(Mp3Artist mp3Artist) {
         try {
-            System.out.println("Beginne persistMp3Artist....");
+            System.out.println("Beginne Persistierung der MP3-Artists...");
             ut.begin();
             System.out.println(mp3Artist.getArtistName());
-            System.out.println(mp3Artist.getArtist_id());
+            System.out.println(mp3Artist.getArtistId());
             em.persist(mp3Artist);
             ut.commit();
 
@@ -68,15 +68,15 @@ public class Mp3ArtistDao implements IMp3ArtistDao{
 
     public void upload() throws IOException {
         id3 = new Id3Tag();
-        File file = new File("C:\\Users\\fseiler\\Documents\\NetBeansProjects\\Abschlussprojekt2014\\MUSICSERVICE\\Upload\\" + part.getSubmittedFileName());
+        File file = new File("C:\\Users\\fseiler\\Documents\\GitHub\\projekt2014\\Upload\\" + part.getSubmittedFileName());
 
         Mp3Artist mp3Artist;
 
         Mp3 mp3 = new Mp3();
         mp3 = id3.readMp3File(file);
-        System.out.println(mp3.getMp3_title());
+        System.out.println(mp3.getMp3Title());
 
-        mp3Artist = mp3.getMp3Artist();
+        mp3Artist = mp3.getArtist();
 
         mp3Artist.addMp3(mp3);
 
@@ -96,7 +96,7 @@ public class Mp3ArtistDao implements IMp3ArtistDao{
 
     public String getMp3ArtistNameByMp3Id(int mp3Id) {
         
-         return em.find(Mp3.class, mp3Id).getMp3Artist().getArtistName();
+         return em.find(Mp3.class, mp3Id).getArtist().getArtistName();
     }
     
      public String getMp3ArtistNameByArtistBean(Mp3Artist mp3Artist) {

@@ -7,12 +7,16 @@
 package fh.ostfalia.projekt2014.rmi;
 
 import fh.ostfalia.projekt2014.dao.Mp3Dao;
+import fh.ostfalia.projekt2014.model.Mp3;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -42,6 +46,19 @@ public class Mp3DaoRmi extends UnicastRemoteObject implements IMp3{
         } catch (MalformedURLException ex) {
             System.err.println("Musikserver: MalformedURLException aufgetreten");
         }
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3");
+        EntityManager em = emf.createEntityManager();
+        
+        em.getTransaction().begin();
+        
+        Mp3 mp3 = em.find(Mp3.class, 1);
+        System.out.println("MP3: " + mp3.getMp3Title());
+        System.out.println("Künstler: " + mp3.getArtist().getArtistName());
+        
+        em.close();
+        emf.close();
+        
     }
 
     @Override
@@ -61,9 +78,9 @@ public class Mp3DaoRmi extends UnicastRemoteObject implements IMp3{
 
     @Override
     public String[] getMp3(int mp3_id) throws RemoteException {
-        String title = mp3Dao.getMp3(mp3_id).getMp3_title();
-        String artist = mp3Dao.getMp3(mp3_id).getMp3Artist().getArtistName();
-        String mp3Id = String.valueOf(mp3Dao.getMp3(mp3_id).getMp3_id());
+        String title = mp3Dao.getMp3(mp3_id).getMp3Title();
+        String artist = mp3Dao.getMp3(mp3_id).getArtist().getArtistName();
+        String mp3Id = String.valueOf(mp3Dao.getMp3(mp3_id).getMp3Id());
         String[] mp3 = {title, artist, mp3Id};
 
         return mp3;

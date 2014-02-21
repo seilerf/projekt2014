@@ -3,6 +3,8 @@
   <persistence-unit name="Mp3" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fh.ostfalia.projekt2014.ejb.Mp3</class>
+    <class>fh.ostfalia.projekt2014.model.Mp3Artist</class>
+    <class>fh.ostfalia.projekt2014.model.Mp3</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/webservice?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="mysql@1tnc"/>

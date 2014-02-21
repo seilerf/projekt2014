@@ -7,71 +7,81 @@
 package fh.ostfalia.projekt2014.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author fseiler
  */
-
-@Entity(name = "Mp3Artist")
+@Entity
+@Table(name = "mp3artist")
 @NamedQueries({
-@NamedQuery(name = "Mp3Artist.getAll", query = "SELECT e FROM Mp3Artist e")})
-
-public class Mp3Artist implements Serializable{
-    private int artist_id;
-    private String artist_name;
-    private Set<Mp3> mp3Beans = new HashSet();
-    
-    public Mp3Artist(){
-    }
-
-    public Mp3Artist(String artist_name) {
-        this.artist_name = artist_name;
-    }
-    
-
+    @NamedQuery(name = "Mp3Artist.findAll", query = "SELECT m FROM Mp3Artist m")})
+public class Mp3Artist implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "artist_id", unique = true, nullable = false)
-    public int getArtist_id() {
-        return artist_id;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "artist_id")
+    private Integer artistId;
+    @Size(max = 255)
+    @Column(name = "artist_name")
+    private String artistName;
+
+    public Mp3Artist() {
     }
 
-    public void setArtist_id(int artist_id) {
-        this.artist_id = artist_id;
+    public Mp3Artist(Integer artistId) {
+        this.artistId = artistId;
+    }
+
+    public Integer getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(Integer artistId) {
+        this.artistId = artistId;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (artistId != null ? artistId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Mp3Artist)) {
+            return false;
+        }
+        Mp3Artist other = (Mp3Artist) object;
+        if ((this.artistId == null && other.artistId != null) || (this.artistId != null && !this.artistId.equals(other.artistId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "fh.ostfalia.projekt2014.model.Mp3Artist[ artistId=" + artistId + " ]";
     }
     
-    public void addMp3(Mp3 mp3){
-        mp3Beans.add(mp3);
-    }
-
-    @Column(name = "artist_name")
-    public String getArtistName() {
-        return artist_name;
-    }
-
-    public void setArtistName(String artist_name) {
-        this.artist_name = artist_name;
-    }
-
-    @OneToMany(cascade=CascadeType.ALL , fetch = FetchType.LAZY, mappedBy = "Mp3Artist")
-    public Set<Mp3> getMp3s() {
-        return this.mp3Beans;
-    }
-
-    public void setMp3s(Set<Mp3> mp3s) {
-        this.mp3Beans = mp3s;
-    }
 }
