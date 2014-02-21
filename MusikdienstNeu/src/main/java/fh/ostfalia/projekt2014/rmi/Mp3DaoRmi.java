@@ -78,12 +78,16 @@ public class Mp3DaoRmi extends UnicastRemoteObject implements IMp3{
 
     @Override
     public String[] getMp3(int mp3_id) throws RemoteException {
-        String title = mp3Dao.getMp3(mp3_id).getMp3Title();
-        String artist = mp3Dao.getMp3(mp3_id).getArtist().getArtistName();
-        String mp3Id = String.valueOf(mp3Dao.getMp3(mp3_id).getMp3Id());
-        String[] mp3 = {title, artist, mp3Id};
-
-        return mp3;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Mp3 mp3 = em.find(Mp3.class, mp3_id);
+        em.close();
+        emf.close();
+        
+        String[] mp3String = {String.valueOf(mp3.getMp3Id()), mp3.getMp3Title(), mp3.getArtist().getArtistName()};
+        
+        return mp3String;
     }
 
     @Override
