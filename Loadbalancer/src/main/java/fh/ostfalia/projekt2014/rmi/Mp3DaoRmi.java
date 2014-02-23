@@ -6,16 +6,15 @@
 
 package fh.ostfalia.projekt2014.rmi;
 
+import java.util.List;
+
 /**
  *
  * @author fseiler
  */
-public class Mp3DaoRmi implements IMp3{
+//public class Mp3DaoRmi implements {
+
+  
     
-    private IMp3 intf;
     
-    public String[] getAllMp3() {
-        return intf.getAllMp3();
-    }
-    
-}
+//}
