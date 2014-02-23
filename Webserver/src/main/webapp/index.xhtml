@@ -13,9 +13,10 @@
               <br />
             <h:outputText id="text_password" value="Passwort: "/>
             <h:inputText id="j_password" value="#{LoginBean.password}"/>
-            <h:outputLabel id="mp3ID" value="#{Mp3DaoRmi.getMp3(1)[0]}" /> - 
-            <h:outputLabel id="mp3Titel" value="#{Mp3DaoRmi.getMp3(1)[1]}" /> - 
-            <h:outputLabel id="mp3Artist" value="#{Mp3DaoRmi.getMp3(1)[2]}" />
+            <h:outputLabel id="mp3ID" value="#{Mp3DaoRmi.getMp3(4)[0]}" /> - 
+            <h:outputLabel id="mp3Titel" value="#{Mp3DaoRmi.getMp3(4)[1]}" /> - 
+            <h:outputLabel id="mp3Artist" value="#{Mp3DaoRmi.getMp3(4)[2]}" />
+            <h:outputLabel id="mserveradress" value="#{BalanceRmi.getAdress()}" />
 
             <br />
             <h:commandButton value="Login" 
@@ -24,8 +25,7 @@
           
         </h:form>
         <h:form> 
-            <h:commandButton action="#{DienstServerImp.testrmi()}" value="MUSIKDIENST"/>
-            <h:commandButton action="#{Mp3DaoRmi.getMp3(1)}" value="Lookup Musikdienst"/>
+            
         </h:form>
     </h:body>
 </html>

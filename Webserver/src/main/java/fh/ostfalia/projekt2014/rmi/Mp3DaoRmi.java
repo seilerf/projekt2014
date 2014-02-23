@@ -6,6 +6,7 @@
 
 package fh.ostfalia.projekt2014.rmi;
 
+import fh.ostfalia.projekt2014.balance.BalanceRmi;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -21,6 +22,8 @@ public class Mp3DaoRmi implements IMp3, Serializable {
     
     private IMp3 intfMusikdienst;
     
+    private String serveradress;
+    
     public Mp3DaoRmi(){
         super();
         this.lookupRMI();
@@ -32,7 +35,12 @@ public class Mp3DaoRmi implements IMp3, Serializable {
     }
 
     private void lookupRMI(){
+        
+         //BalanceRmi br= new BalanceRmi();
+           // this.serveradress=br.getAdress();
+            //System.out.println(serveradress);
         try {
+           
             Registry registry = LocateRegistry.getRegistry("localhost", 1099);
             System.out.println("Registry erkannt");
             //Remote obj = (Remote) Naming.lookup("Mp3DaoRmi");
