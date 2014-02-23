@@ -83,5 +83,9 @@ public class Mp3Artist implements Serializable {
     public String toString() {
         return "fh.ostfalia.projekt2014.model.Mp3Artist[ artistId=" + artistId + " ]";
     }
+
+    public void addMp3(Mp3 mp3) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

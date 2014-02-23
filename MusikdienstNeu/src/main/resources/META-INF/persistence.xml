@@ -7,7 +7,7 @@
     <class>fh.ostfalia.projekt2014.model.Mp3</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/webservice?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.password" value="mysql@1tnc"/>
+      <property name="javax.persistence.jdbc.password" value="testpw"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
