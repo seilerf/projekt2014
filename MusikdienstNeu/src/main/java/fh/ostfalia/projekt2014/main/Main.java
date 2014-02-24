@@ -32,7 +32,7 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3PU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3");
         EntityManager em = emf.createEntityManager();
         
         em.getTransaction().begin();
