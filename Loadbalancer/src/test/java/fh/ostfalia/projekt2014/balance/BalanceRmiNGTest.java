@@ -11,7 +11,7 @@ import static org.testng.Assert.*;
 /**
  *
  * @author Anton
- */
+**/
 public class BalanceRmiNGTest {
     
     public BalanceRmiNGTest() {
@@ -35,7 +35,7 @@ public class BalanceRmiNGTest {
 
     /**
      * Test of registerRMI method, of class BalanceRmi.
-     */
+
     @org.testng.annotations.Test
     public void testRegisterRMI() {
         System.out.println("registerRMI");
@@ -47,7 +47,7 @@ public class BalanceRmiNGTest {
 
     /**
      * Test of getAdress method, of class BalanceRmi.
-     */
+    
     @org.testng.annotations.Test
     public void testGetAdress() throws Exception {
         System.out.println("getAdress");
@@ -58,5 +58,6 @@ public class BalanceRmiNGTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    **/
     
 }
