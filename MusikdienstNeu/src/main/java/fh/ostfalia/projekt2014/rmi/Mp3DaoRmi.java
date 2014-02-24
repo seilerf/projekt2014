@@ -47,7 +47,7 @@ public class Mp3DaoRmi extends UnicastRemoteObject implements IMp3{
             System.err.println("Musikserver: MalformedURLException aufgetreten");
         }
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3PU");
         EntityManager em = emf.createEntityManager();
         
         em.getTransaction().begin();
