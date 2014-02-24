@@ -31,10 +31,15 @@
                 <td><h:outputText id="test_mp3Artist" value="TestMp3Artist:"/> </td>
                 <td><h:outputLabel id="mp3Artist" value="#{Mp3DaoRmi.getMp3(1)[2]}" /> </td>
             </tr>
-            <h:outputLabel id="mserveradress" value="#{BalanceRmi.getAdress()}" />
-            <h:commandButton value="Login" 
-                             action="#{LoginBean.login}" />
-            <h:link outcome="registrierung.xhtml" value="Registrierung"/>
+            <tr>
+                   <td><h:outputLabel id="mserveradress" value="#{BalanceRmi.getAdress()}" /></td>
+                   <td><h:commandButton value="Login" 
+                             action="#{LoginBean.login}" /></td>
+                   <td><h:link outcome="registrierung.xhtml" value="Registrierung"/></td>
+            </tr>
+            <tr>
+                <td><h:link outcome="" value="Testfall_Kommentar"/></td>       
+            </tr>
           </table>
         </h:form>
         <h:form> 
