@@ -7,22 +7,35 @@
     </h:head>
     <h:body>
        <h:form id="j_security_check">
-           
-            <h:outputText id="text_username" value="Username: "/>
-            <h:inputText id="j_username"  value="#{LoginBean.username}"/>
-              <br />
-            <h:outputText id="text_password" value="Passwort: "/>
-            <h:inputText id="j_password" value="#{LoginBean.password}"/>
-            <h:outputLabel id="mp3ID" value="#{Mp3DaoRmi.getMp3(4)[0]}" /> - 
-            <h:outputLabel id="mp3Titel" value="#{Mp3DaoRmi.getMp3(4)[1]}" /> - 
-            <h:outputLabel id="mp3Artist" value="#{Mp3DaoRmi.getMp3(4)[2]}" />
+           <table border="0" cellpadding="3" cellspacing="0">
+               <tr>
+                   <td><h:outputText id="text_username" value="Username: "/> </td>
+                   <td><h:inputText id="j_username"  value="#{LoginBean.username}"/> </td>
+               </tr>
+               <tr>
+                   <td><h:outputText id="text_password" value="Passwort: "/> </td>
+                   <td><h:inputText id="j_password" value="#{LoginBean.password}"/> </td>
+               </tr>
+                   
+            <tr>
+                <h1>Test Musikservice DB-Eintrag</h1>
+               
+                <td><h:outputText id="test_mp3ID" value="TestMp3ID:"/> </td>
+                <td><h:outputLabel id="mp3ID" value="#{Mp3DaoRmi.getMp3(1)[0]}"/> </td>
+            </tr>
+            <tr>
+                <td><h:outputText id="test_mp3Titel" value="TestMp3Titel:"/> </td>
+                <td><h:outputLabel id="mp3Titel" value="#{Mp3DaoRmi.getMp3(1)[1]}" /> </td>
+            </tr>
+            <tr>
+                <td><h:outputText id="test_mp3Artist" value="TestMp3Artist:"/> </td>
+                <td><h:outputLabel id="mp3Artist" value="#{Mp3DaoRmi.getMp3(1)[2]}" /> </td>
+            </tr>
             <h:outputLabel id="mserveradress" value="#{BalanceRmi.getAdress()}" />
-
-            <br />
             <h:commandButton value="Login" 
                              action="#{LoginBean.login}" />
             <h:link outcome="registrierung.xhtml" value="Registrierung"/>
-          
+          </table>
         </h:form>
         <h:form> 
             
