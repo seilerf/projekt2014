@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IntfCommentDao {
     void addComment(Comment c);
-    void deleteComment(Integer comment_ID);
-    Comment getComment(Integer comment_ID);
+    void deleteComment(int comment_ID);
+    Comment getComment(int comment_ID);
     List<Comment> getAllComment();    
 }

@@ -18,8 +18,8 @@ public interface IntfComment extends Remote {
     
     public String getTest() throws RemoteException;
     public void addComment(String comment_Title, String comment_Description) throws RemoteException;
-    public void deleteCpmment(Integer comment_ID) throws RemoteException;
-    public String[] getComment(Integer comment_ID) throws RemoteException;
+    public void deleteComment(int comment_ID) throws RemoteException;
+    public String[] getComment(int comment_ID) throws RemoteException;
     public List<String[]> getAllComment() throws RemoteException;
     
 }

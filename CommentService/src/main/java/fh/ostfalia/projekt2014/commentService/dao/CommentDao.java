@@ -64,11 +64,11 @@ public class CommentDao implements IntfCommentDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void deleteComment(Integer comment_ID) {
+    public void deleteComment(int comment_ID) {
         em.remove(getComment(comment_ID));
     }
 
-    public Comment getComment(Integer comment_ID) {
+    public Comment getComment(int comment_ID) {
         return em.find(Comment.class, comment_ID);
     }
 
@@ -77,19 +77,19 @@ public class CommentDao implements IntfCommentDao {
         return em.createNamedQuery("Comment.getAll").getResultList();
     }
     
-    public String getComment_Title(Integer comment_ID) {
+    public String getComment_Title(int comment_ID) {
         return em.find(Comment.class, comment_ID).getCommentTitle();
     }
     
-    public Integer getComment_ID(Integer comment_ID) {
+    public int getComment_ID(int comment_ID) {
         return em.find(Comment.class, comment_ID).getCommentID();
     }
     
-    public String getComment_Description(Integer comment_ID) {
+    public String getComment_Description(int comment_ID) {
         return em.find(Comment.class, comment_ID).getCommentDescription();
     }
     
-    public Integer getComment_RefMusicTitleID(Integer comment_ID) {
+    public int getComment_RefMusicTitleID(int comment_ID) {
         return em.find(Comment.class, comment_ID).getRefMusicTitleID();
     }
    

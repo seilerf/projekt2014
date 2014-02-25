@@ -74,11 +74,13 @@ public class CommentDaoRmi extends UnicastRemoteObject implements IntfComment{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void deleteCpmment(Integer comment_ID) throws RemoteException {
+    @Override
+    public void deleteComment(int comment_ID) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String[] getComment(Integer comment_ID) throws RemoteException {
+    @Override
+    public String[] getComment(int comment_ID) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("CommentServicePU");
         EntityManager em = emf.createEntityManager();
         
@@ -96,6 +98,4 @@ public class CommentDaoRmi extends UnicastRemoteObject implements IntfComment{
     public List<String[]> getAllComment() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
 }
