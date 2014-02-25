@@ -58,12 +58,12 @@ public class CommentDaoRmi implements IntfComment, Serializable {
     }
 
     @Override
-    public void deleteCpmment(Integer comment_ID) {
+    public void deleteCpmment(int comment_ID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String[] getComment(Integer comment_ID) {
+    public String[] getComment(int comment_ID) {
         this.lookupRMI();
         String[] comment = intfCommentService.getComment(comment_ID);
         System.out.println("Comment_Title: " + comment[1]);
