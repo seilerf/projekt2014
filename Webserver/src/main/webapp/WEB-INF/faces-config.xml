@@ -13,11 +13,6 @@
         <managed-bean-class>fh.ostfalia.projekt2014.dao.UserDao</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-     <managed-bean>
-        <managed-bean-name>DienstServerImp</managed-bean-name>
-        <managed-bean-class>fh.ostfalia.projekt2014.rmibsp.DienstServerImpl</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
     <managed-bean>
         <managed-bean-name>Mp3DaoRmi</managed-bean-name>
         <managed-bean-class>fh.ostfalia.projekt2014.rmi.Mp3DaoRmi</managed-bean-class>

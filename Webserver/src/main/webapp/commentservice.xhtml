@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>CommentService</title>
+        <meta name="viewport" content="width=device-width"/>
+    </head>
+    <body>
+        <h:form id="j_security_check">
+            <table border="0" cellpadding="3" cellspacing="0">
+               <tr>
+                   <h1>Comment Service</h1>
+                   <td><h:outputText id="text_comment_ID" value="Comment_ID: "/> </td>
+                   <td><h:outputLabel id="commentID"  value="#{CommentDaoRmi.getComment(1)[1]}"/> </td>
+               </tr>
+            </table>
+        </h:form>
+    </body>
+</html>
