@@ -38,7 +38,7 @@ public class CommentDaoRmi implements IntfComment, Serializable {
             Registry registry = LocateRegistry.getRegistry("localhost", 1088);
             System.out.println("Registry erkannt");
             this.intfCommentService = (IntfComment) registry.lookup("AccessToComment");
-            System.out.println("Lookup für das MusikInterface ausgeführt");
+            System.out.println("Lookup für das CommentInterface ausgeführt");
 
         } catch (RemoteException ex) {
             System.err.println("RemotExeption beim RMI-Lookup aufgetreten (Klasse: "+ getClass().getName() +")");
@@ -58,15 +58,16 @@ public class CommentDaoRmi implements IntfComment, Serializable {
     }
 
     @Override
-    public void deleteCpmment(int comment_ID) {
+    public void deleteComment(int comment_ID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String[] getComment(int comment_ID) {
         this.lookupRMI();
-        String[] comment = intfCommentService.getComment(comment_ID);
-        System.out.println("Comment_Title: " + comment[1]);
+        //String[] comment = intfCommentService.getComment(comment_ID);
+        //System.out.println("Comment_Title: " + comment[1]);
+        System.out.println("Hier an der Stelle FUCK ---> Comment_ID:" + comment_ID);
         return intfCommentService.getComment(comment_ID);
     }
 

@@ -16,7 +16,8 @@ public interface IntfComment {
     
     public String getTest();
     public void addComment(String comment_Title, String comment_Description);
-    public void deleteCpmment(int comment_ID);
+    public void deleteComment(int comment_ID);
     public String[] getComment(int comment_ID);
     public List<String[]> getAllComment();
+    
 }
