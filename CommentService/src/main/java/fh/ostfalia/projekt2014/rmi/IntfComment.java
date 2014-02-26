@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package fh.ostfalia.projekt2014.commentService.rmi;
+package fh.ostfalia.projekt2014.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

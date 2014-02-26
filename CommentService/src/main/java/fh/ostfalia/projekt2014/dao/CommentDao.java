@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package fh.ostfalia.projekt2014.commentService.dao;
+package fh.ostfalia.projekt2014.dao;
 
-import fh.ostfalia.projekt2014.commentService.model.Comment;
+import fh.ostfalia.projekt2014.model.Comment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,6 +31,9 @@ public class CommentDao implements IntfCommentDao {
     private EntityManager em;
     @Resource
     private UserTransaction ut;
+    
+    public CommentDao() {    
+    }
     
     public void addCommentToList(ArrayList<Comment> commentList) {
         try {
@@ -59,15 +62,16 @@ public class CommentDao implements IntfCommentDao {
             Logger.getLogger(CommentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @Override
     public void addComment(Comment c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    @Override
     public void deleteComment(int comment_ID) {
         em.remove(getComment(comment_ID));
     }
 
+    @Override
     public Comment getComment(int comment_ID) {
         return em.find(Comment.class, comment_ID);
     }

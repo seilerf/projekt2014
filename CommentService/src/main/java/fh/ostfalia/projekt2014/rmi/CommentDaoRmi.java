@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-package fh.ostfalia.projekt2014.commentService.rmi;
+package fh.ostfalia.projekt2014.rmi;
 
-import fh.ostfalia.projekt2014.commentService.dao.CommentDao;
-import fh.ostfalia.projekt2014.commentService.model.Comment;
+import fh.ostfalia.projekt2014.dao.CommentDao;
+import fh.ostfalia.projekt2014.model.Comment;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -26,37 +26,37 @@ public class CommentDaoRmi extends UnicastRemoteObject implements IntfComment{
     private CommentDao commentDao;
     
     public CommentDaoRmi(CommentDao commentDao) throws RemoteException {
-        this.commentDao = this.commentDao;
+        this.commentDao = commentDao;
     }
          
-    public void registerRmi() {
+    public void registerRMI() {
         try {
             System.out.println("Server: Dienst für RMI registrieren...");
             
-            IntfComment intfMusicService = this;
+            IntfComment intfCommentService = this;
             
            // LocateRegistry.createRegistry(1088);
           //  Naming.rebind("rmi://localhost/AccessToComment", intfMusicService);
             LocateRegistry.createRegistry(1088);  
             Registry registry = LocateRegistry.getRegistry(1088);  
-            registry.rebind("CommentService", intfMusicService);
+            registry.rebind("AccessToComment", intfCommentService);
             
             System.out.println("Server: Remote-Dienst registriert!");
         } catch (RemoteException ex) {
            System.err.println("CommentService: RemoteException aufgetreten!");
         }
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CommentServicePU");
+      /**  EntityManagerFactory emf = Persistence.createEntityManagerFactory("CommentServicePU");
         EntityManager em = emf.createEntityManager();
         
         em.getTransaction().begin();
         
-        /**Comment comment = em.find(Comment.class, 1);
-        System.out.println("Commnet:" +comment.getCommentTitle());
+        Comment comment = em.find(Comment.class, 1);
+       /** System.out.println("Commnet:" +comment.getCommentTitle());
         System.out.println("Comment_Beschreibung:" +comment.getCommentDescription());
-        */
+        
         em.close();
-        emf.close();
+        emf.close();**/
     }
     
     /**

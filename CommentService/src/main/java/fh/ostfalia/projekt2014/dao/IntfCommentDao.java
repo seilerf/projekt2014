@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package fh.ostfalia.projekt2014.commentService.dao;
+package fh.ostfalia.projekt2014.dao;
 
-import fh.ostfalia.projekt2014.commentService.model.Comment;
+import fh.ostfalia.projekt2014.model.Comment;
 import java.util.List;
 
 /**

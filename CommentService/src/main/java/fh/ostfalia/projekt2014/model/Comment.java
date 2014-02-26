@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package fh.ostfalia.projekt2014.commentService.model;
+package fh.ostfalia.projekt2014.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -20,28 +20,35 @@ import javax.persistence.Table;
  *
  * @author AdminMax
  */
-@Entity
-@Table(name="Comment")
+
+@Table(name = "comment")
 @NamedQueries({
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")})
+@Entity
 public class Comment implements Serializable {
+    
     private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "commnet_ID")
-    @GeneratedValue(strategy = IDENTITY)
     private Integer commentID;
-    
-    @Column(name = "comment_Title")
     private String commentTitle;
-    
-    @Column(name = "comment_Description")
     private String commentDescription;
-    
-    @Column(name = "comment_RefID")
     /* Dieser Datenbankeintrag ist der Referenzverweisung(FK), der auf den Musiktitel verweißt, zu dem der Kommentar gehört*/
     private Integer refMusicTitleID;
+    
+    public Comment() {
+    }
+    
+    public Comment(Integer commentID) {
+        this.commentID = commentID;
+    }
 
+    @Id
+    @Column(name = "comment_ID")
+    @GeneratedValue(strategy = IDENTITY)
+    public Integer getCommentID() {
+        return commentID;
+    }
+    
+    @Column(name = "comment_Title")
     public String getCommentTitle() {
         return commentTitle;
     }
@@ -50,6 +57,7 @@ public class Comment implements Serializable {
         this.commentTitle = commentTitle;
     }
 
+     @Column(name = "comment_Description")
     public String getCommentDescription() {
         return commentDescription;
     }
@@ -58,19 +66,13 @@ public class Comment implements Serializable {
         this.commentDescription = commentDescription;
     }
 
+     @Column(name = "comment_RefID")
     public Integer getRefMusicTitleID() {
         return refMusicTitleID;
     }
 
     public void setRefMusicTitleID(Integer refMusicTitleID) {
         this.refMusicTitleID = refMusicTitleID;
-    }
-
-    public Comment() {
-    }
-
-    public Integer getCommentID() {
-        return commentID;
     }
 
     public void setCommentID(Integer commentID) {
