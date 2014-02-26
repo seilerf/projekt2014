@@ -9,11 +9,11 @@
     </h:head>
     <h:body>
         <h1>Musictitles</h1>
-        <f:view>
-            <h:link outcome="index" value="Home"/>
-            <h:commandButton value="Test RMI" action="#{Mp3BeanConverter.getMp3(1)}" />
-        </f:view>
-        <h:link outcome="#{Mp3BeanConverter.getMp3(1)}" value=""/>
+        
+         <h:outputLabel id="mp3ID" value="#{Mp3DaoRmi.getMp3(4)[0]}" /> -
+            <h:outputLabel id="mp3Titel" value="#{Mp3DaoRmi.getMp3(4)[1]}" /> -
+            <h:outputLabel id="mp3Artist" value="#{Mp3DaoRmi.getMp3(4)[2]}" />
+        
     </h:body>
 </html>
 

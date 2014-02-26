@@ -12,6 +12,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import javax.enterprise.inject.spi.Bean;
 
 /**
  *
@@ -21,9 +22,19 @@ public class BalanceRmi implements IBalance, Serializable {
     
     
        private IBalance iBalance;
+       private String server1;
+
+    public String getServer1() {
+        return server1;
+    }
+
+    public String getServer2() {
+        return server2;
+    }
+       private String server2;
     
     public BalanceRmi(){
-        super();
+       super();
         this.lookupRMI();
     }
     
@@ -54,4 +65,25 @@ public class BalanceRmi implements IBalance, Serializable {
 return iBalance.getAdress();
     }
     
+    @Override
+     public void setAnzserv(int anzserv)  {
+        iBalance.setAnzserv(anzserv);
+    }
+     
+    @Override
+    public void setServer1(String server1)  {
+      iBalance.setServer1(server1);
+    }
+    
+    @Override
+    public void setServer2(String server2) {
+        iBalance.setServer2(server2);
+    }
+    public void setServer(String server1, String server2)
+        {
+            setServer1(server1);
+            setServer2(server2);
+        }
+    
+
 }

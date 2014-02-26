@@ -6,6 +6,7 @@
 
 package fh.ostfalia.projekt2014.balance;
 
+
 /**
  *
  * @author Anton
@@ -13,5 +14,11 @@ package fh.ostfalia.projekt2014.balance;
 public interface IBalance {
     
      public String getAdress();
+     
+     public void setAnzserv(int anzserv) ;
+    
+     public void setServer1(String server1);
+    
+     public void setServer2(String server2);
     
 }

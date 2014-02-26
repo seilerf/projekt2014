@@ -7,8 +7,11 @@
         <property name="databaseName" value="test123"/>
         <property name="User" value="root"/>
         <property name="Password" value="asdfghjk1"/>
-        <property name="URL" value="jdbc:mysql://localhost:3306/userdb?zeroDateTimeBehavior=convertToNull"/>
+        <property name="URL" value="jdbc:mysql://localhost:3306/test123?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="test1234" object-type="user" pool-name="mysql_webservice_rootPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/userdb" object-type="user" pool-name="mysql_userdb_rootPool"/>
 </resources>
+
+
+

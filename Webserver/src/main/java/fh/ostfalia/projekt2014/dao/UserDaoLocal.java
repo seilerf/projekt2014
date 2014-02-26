@@ -14,19 +14,19 @@ import javax.ejb.Local;
  *
  * @author anton
  */
+@Local
+public interface UserDaoLocal  {
 
-public interface UserDaoLocal extends Remote {
+    void addUser(User user) ;
 
-    void addUser(User user)throws RemoteException;
+    void editUser(User user) ;
 
-    void editUser(User user)throws RemoteException;
+    void deleteUser(int userId) ;
 
-    void deleteUser(int userId)throws RemoteException;
+    User getUser(int userId) ;
 
-    User getUser(int userId)throws RemoteException;
-
-    List<User> getAllUsers()throws RemoteException;
+    List<User> getAllUsers() ;
     
-    void testRMI() throws RemoteException;
+    
     
 }

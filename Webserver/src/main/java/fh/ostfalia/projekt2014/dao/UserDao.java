@@ -5,9 +5,6 @@
 package fh.ostfalia.projekt2014.dao;
 
 import fh.ostfalia.projekt2014.model.User;
-import fh.ostfalia.projekt2014.webserver.Jndi;
-import fh.ostfalia.projekt2014.webserver.LoginBean;
-import fh.ostfalia.projekt2014.webserver.LoginBeanFactory;
 import java.lang.annotation.Annotation;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -36,7 +33,7 @@ import javax.transaction.UserTransaction;
  */
 
 @Stateless
-public class UserDao extends UnicastRemoteObject implements UserDaoLocal{
+public class UserDao  implements UserDaoLocal{
 
     @PersistenceContext
     private EntityManager em;
@@ -45,16 +42,23 @@ public class UserDao extends UnicastRemoteObject implements UserDaoLocal{
     private String userDao;
 
     
-    public UserDao() throws RemoteException{
+    public UserDao(){
         super();
     }
     
     @Override
     public void addUser(User user) {
         try {
+                        System.out.println("User hinzufügen0");
+
             ut.begin();
+            System.out.println("User hinzufügen1");
             em.persist(user);
+                        System.out.println("User hinzufügen2");
+
             ut.commit();
+                        System.out.println("User hinzufügen3");
+
         } catch (NotSupportedException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SystemException ex) {
@@ -72,39 +76,29 @@ public class UserDao extends UnicastRemoteObject implements UserDaoLocal{
         }
     }
 
-    @Override
+    
     public void editUser(User user) {
         em.merge(user);
     }
 
-    @Override
     public void deleteUser(int userId) {
         em.remove(getUser(userId));
     }
 
-    @Override
     public User getUser(int userId) {
         return em.find(User.class, userId);
     }
 
-    @Override
+    
     public List<User> getAllUsers() {
         return em.createNamedQuery("User.getAll").getResultList();
     }
 
-    public void test() {
-       Jndi j = new Jndi();
-       j.jndi();
-    }
+    
 
+    
 
-
-    @Override
-    public void testRMI() throws RemoteException {
-        System.out.println("RMI GEHT, YOOOOOOO!!!!!");
-        
-    }
-
+   
 
 
     

@@ -69,7 +69,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "fh.ostfalia.projekt2014.webserver.LoginEntityBean[ id=" + id + " ]";
+        return "fh.ostfalia.projekt2014.webserver.LoginBean[ id=" + id + " ]";
     }
     
 }
