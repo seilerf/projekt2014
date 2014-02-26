@@ -6,7 +6,7 @@
 
 package fh.ostfalia.projekt2014.loadbalancer;
 
-import fh.ostfalia.projekt2014.rmi.IMp3;
+import fh.ostfalia.projekt2014.rmi.IMusikd;
 import java.net.MalformedURLException;
 import static java.rmi.Naming.lookup;
 import java.rmi.NotBoundException;
@@ -116,7 +116,7 @@ public class Balance {
           if (ghf == 1)
     {
         try {
-            IMp3 intf = (IMp3) lookup(server1);
+            IMusikd intf = (IMusikd) lookup(server1);
         } catch (NotBoundException ex) {
             Logger.getLogger(Balance.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -128,7 +128,7 @@ public class Balance {
     }
     else{
         try {
-            IMp3 intf = (IMp3) lookup(server2);
+            IMusikd intf = (IMusikd) lookup(server2);
         } catch (NotBoundException ex) {
             Logger.getLogger(Balance.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
