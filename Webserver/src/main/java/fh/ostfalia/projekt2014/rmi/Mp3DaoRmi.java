@@ -6,7 +6,6 @@
 
 package fh.ostfalia.projekt2014.rmi;
 
-import fh.ostfalia.projekt2014.balance.BalanceRmi;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -18,9 +17,9 @@ import java.util.List;
  *
  * @author fseiler
  */
-public class Mp3DaoRmi implements IMp3, Serializable {
+public class Mp3DaoRmi implements IMusikd, Serializable {
     
-    private IMp3 intfMusikdienst;
+    private IMusikd intfMusikd = null;
     
     private String serveradress;
     
@@ -28,35 +27,25 @@ public class Mp3DaoRmi implements IMp3, Serializable {
         super();
         this.lookupRMI();
     }
-    
-    public Mp3DaoRmi(IMp3 intfMusikdienst){
-        this.intfMusikdienst = intfMusikdienst;
-        this.lookupRMI();
-    }
 
     private void lookupRMI(){
-        
-         //BalanceRmi br= new BalanceRmi();
-           // this.serveradress=br.getAdress();
-            //System.out.println(serveradress);
         try {
-           
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry(1099);
             System.out.println("Registry erkannt");
-            //Remote obj = (Remote) Naming.lookup("Mp3DaoRmi");
-            this.intfMusikdienst = (IMp3) registry.lookup("AccessToMp3");
+            this.intfMusikd = (IMusikd) registry.lookup("Musikd");
             System.out.println("Lookup für das MusikInterface ausgeführt");
 
         } catch (RemoteException ex) {
             System.err.println("RemotExeption beim RMI-Lookup aufgetreten (Klasse: "+ getClass().getName() +")");
         } catch (NotBoundException ex) {
-            System.err.println("NotBoundException aufgetreten. Objekt nicht gefunden.");;
+            System.err.println("NotBoundException aufgetreten. Objekt nicht gefunden.");
         } 
     }
     
     @Override
     public String getTest() {
-        return intfMusikdienst.getTest();
+        System.out.println("MP3: " + this.getMp3(1)[1]);
+        return intfMusikd.getTest();
     }
 
     @Override
@@ -71,10 +60,10 @@ public class Mp3DaoRmi implements IMp3, Serializable {
 
     @Override
     public String[] getMp3(int mp3_id) {
-        this.lookupRMI();
-        String[] mp3 = intfMusikdienst.getMp3(mp3_id);
+        //this.lookupRMI();
+        String[] mp3 = (String[]) intfMusikd.getMp3(mp3_id);
         System.out.println("Client --> Titel: " + mp3[1]);
-        return intfMusikdienst.getMp3(mp3_id);
+        return (String[]) intfMusikd.getMp3(mp3_id);
     }
 
     @Override
