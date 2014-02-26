@@ -9,11 +9,16 @@ package fh.ostfalia.projekt2014.rmi;
 import fh.ostfalia.projekt2014.dao.Mp3Dao;
 import fh.ostfalia.projekt2014.model.Mp3;
 import java.net.MalformedURLException;
+import java.rmi.AccessException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,48 +27,52 @@ import javax.persistence.Persistence;
  *
  * @author fseiler
  */
-public class Mp3DaoRmi extends UnicastRemoteObject implements IMp3{
+public class Musikd extends UnicastRemoteObject implements IMusikd{
     
-    private Mp3Dao mp3Dao;
-    
-    public Mp3DaoRmi(Mp3Dao mp3Dao) throws RemoteException{
-        this.mp3Dao = mp3Dao;
+    private EntityManagerFactory emf;
+    private EntityManager em;
+        
+    public Musikd() throws RemoteException{
+        this.emf = Persistence.createEntityManagerFactory("Mp3");
+        this.em = emf.createEntityManager();
     }
     
-    public void registerRMI(){
+    public void registerForRmi(){
+        System.out.println("Musikdienst: Dienste für RMI registrieren...");
+        IMusikd intfMusikdienst = this;
+        
         try {
-            System.out.println("Server: Dienst für RMI registrieren...");
-
-            IMp3 intfMusikdienst = this;
-            
             LocateRegistry.createRegistry(1099);
-            Naming.rebind("rmi://localhost/AccessToMp3", intfMusikdienst);
+        } 
+        catch (RemoteException ex){
+            System.err.println("Musikdienst: Port 1099 bereits belegt.");
+        } 
+        try {    
+            Registry registry = LocateRegistry.getRegistry(1099);
+            registry.bind("rmi://localhost/Musikd_1", intfMusikdienst);
+            System.out.println("Stub an \"/Musikd_1\" gebunden.");
+        } 
+        catch (RemoteException ex) {
+            System.err.println("Musikdienst: RemoteException aufgetreten!");
             
-            System.out.println("Server: Remote-Dienst registriert!");
-            
-        } catch (RemoteException ex) {
-            System.err.println("Musikserver: RemoteException aufgetreten");
-        } catch (MalformedURLException ex) {
-            System.err.println("Musikserver: MalformedURLException aufgetreten");
+        } catch (AlreadyBoundException ex) {
+            try {
+                Registry registry = LocateRegistry.getRegistry(1099);
+                registry.bind("rmi://localhost/Musikd_2", intfMusikdienst);
+                System.out.println("Stub an \"/Musikd_2\" gebunden.");
+            } catch (RemoteException ex1) {
+                Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (AlreadyBoundException ex1) {
+                Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3");
-        EntityManager em = emf.createEntityManager();
-        
-        em.getTransaction().begin();
-        
-        Mp3 mp3 = em.find(Mp3.class, 1);
-        System.out.println("MP3: " + mp3.getMp3Title());
-        System.out.println("Künstler: " + mp3.getArtist().getArtistName());
-        
-        em.close();
-        emf.close();
-        
+        System.out.println("Musikdienst: RMI-Dienste registriert!");
     }
 
     @Override
     public String getTest() throws RemoteException {
-        return "Antwort von Server";
+        return "Musikdienst online!";
     }
 
     @Override
@@ -78,15 +87,8 @@ public class Mp3DaoRmi extends UnicastRemoteObject implements IMp3{
 
     @Override
     public String[] getMp3(int mp3_id) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Mp3");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Mp3 mp3 = em.find(Mp3.class, mp3_id);
-        em.close();
-        emf.close();
-        
+        Mp3 mp3 = mp3Dao.getMp3(mp3_id);
         String[] mp3String = {String.valueOf(mp3.getMp3Id()), mp3.getMp3Title(), mp3.getArtist().getArtistName()};
-        
         return mp3String;
     }
 

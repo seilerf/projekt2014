@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author fseiler
  */
-public interface IMp3 extends Remote{
+public interface IMusikd extends Remote{
     
     public String getTest() throws RemoteException;
     public void addMp3(String mp3_title, String mp3_Artist, String mp3_name) throws RemoteException;
