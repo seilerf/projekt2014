@@ -9,7 +9,7 @@
     </h:head>
    <h:body>
  
-    	<h1>Anzahl der Server</h1>
+    	   <p:panel header="Adminseite">
     	<h:form>
  
 	   <select name="server">	
@@ -25,9 +25,14 @@
             <h:outputText id="serveradress2" value="Server Adresse 2: "/>
             <h:inputText id="serveradr2" value="#{BalanceRmi.server2}"/>
             
-            <h:commandButton value="Submit" 
-                              />
+            <h:commandButton value="Submit" />
+                       
+
     	</h:form>
+               </p:panel>
+       <h:form>
+                <h:commandButton value="Logout" action="#{UserBean.logout()}" />
+                  </h:form>
     </h:body>
 </html>
 

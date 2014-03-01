@@ -41,7 +41,7 @@
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
             <description/>
-            <url-pattern>/faces/admin/*</url-pattern>
+            <url-pattern>/faces/adminseite.xhtml</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
@@ -53,12 +53,11 @@
         <web-resource-collection>
             <web-resource-name>user</web-resource-name>
             <description/>
-            <url-pattern>/faces/users/*</url-pattern>
+            <url-pattern>/faces/musikservice.xhtml</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>admin</role-name>
             <role-name>user</role-name>
         </auth-constraint>
     </security-constraint>

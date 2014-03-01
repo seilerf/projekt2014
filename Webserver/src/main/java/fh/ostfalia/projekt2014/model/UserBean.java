@@ -47,72 +47,11 @@ public class UserBean implements Serializable{
         this.password = password;
     }
     
-    public String login() {
-    
-    System.out.println("Ich wurde aufgerufen! :D");
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest request;
-        request = (HttpServletRequest) fc.getExternalContext().getRequest();
-        System.out.println(username);
-         System.out.println(password);
-        try {
-            System.out.println("Login wird gestartet ... ");
-            request.login(username, password);
-                        System.out.println("Login wird gestartet ... 2");
-
-            Principal principal = request.getUserPrincipal();
-            if (request.isUserInRole("user")) {
-                String msg = "User: " + principal.getName() + ", Role: user";
-                fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-                return "musikservice";
-                    
-                    
-                
-            } else if     (request.isUserInRole("admin")) {
-                String msg = "User: " + principal.getName() + ", Role: admin";
-                fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-                return "adminseite";
-            }
-            return "du_musst_die_rollen_noch_definieren";
-        } catch (ServletException e) {
-
-            fc.addMessage(null, new FacesMessage("Login failed."));
-            return "error";
-        }
-    }
+   
     
 
-  public String login2() {
-
-        System.out.println("Ich wurde aufgerufen! :D");
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest request;
-        request = (HttpServletRequest) fc.getExternalContext().getRequest();
-        System.out.println(username);
-         System.out.println(password);
-        try {
-            System.out.println("Login wird gestartet ... ");
-                request.login(this.username, this.password);                        
-                System.out.println("Login wird gestartet ... 2");
-
-            Principal principal = request.getUserPrincipal();
-            if (request.isUserInRole("admin")) {
-                String msg = "User: " + principal.getName() + ", Role: admin";
-                fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-                return "musikservice";
-            } else  {
-                String msg = "User: " + principal.getName() + ", Role: user";
-                fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-                return "registrierung";
-            }
-        } catch (ServletException e) {
-
-            fc.addMessage(null, new FacesMessage("Login failed."));
-            return "error";
-        }
-    }
-  
-  public String login1 () {
+      
+  public String login () {
       
      FacesContext fc = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
@@ -129,12 +68,12 @@ public class UserBean implements Serializable{
 				String msg = "User: " + principal.getName() + ", Role: admin";
 				fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
 				return "adminseite";
-			} else if (request.isUserInRole("User")) {
+			} else if (request.isUserInRole("user")) {
 				String msg = "User: " + principal.getName() + ", Role: User";
 				fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
 				return "musikservice";
 			} 
-			return "du_musst_die_rollen_noch_definieren";	// hier sollte etwas sinnvolles passieren ;-)
+			return "error";	// hier sollte etwas sinnvolles passieren ;-)
 		} catch (ServletException e) {
 			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An Error Occured: Login failed", null));
 			e.printStackTrace();
@@ -142,7 +81,7 @@ public class UserBean implements Serializable{
 		return "loginFailed";
 	}
 
-  public void logout() {
+  public String logout() {
     FacesContext fc = FacesContext.getCurrentInstance();
     HttpServletRequest request = (HttpServletRequest)
         fc.getExternalContext().getRequest();
@@ -152,6 +91,7 @@ public class UserBean implements Serializable{
   
       fc.addMessage(null, new FacesMessage("Logout failed."));
     }
+    return "index";
   }
 
     

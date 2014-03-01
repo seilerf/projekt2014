@@ -5,19 +5,11 @@
 package fh.ostfalia.projekt2014.dao;
 
 import fh.ostfalia.projekt2014.model.User;
-import java.lang.annotation.Annotation;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.naming.NamingException;
-import javax.naming.Reference;
-import javax.naming.Referenceable;
-import javax.naming.StringRefAddr;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.HeuristicMixedException;
