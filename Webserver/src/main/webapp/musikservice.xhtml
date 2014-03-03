@@ -4,16 +4,23 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:jsp="http://java.sun.com/jsp/jstl/core">
+    <f:view>
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h1>Musictitles</h1>
-        <f:view>
-            <h:link outcome="index" value="Home"/>
-            <h:commandButton value="Test RMI" action="#{Mp3BeanConverter.getMp3(1)}" />
-        </f:view>
-        <h:link outcome="#{Mp3BeanConverter.getMp3(1)}" value=""/>
+        <h:form id="j_security_check">
+            <div>
+                <h1>Musictitles</h1>
+            </div>
+            <div>    
+                <h:link outcome="index" value="Home"/>
+            </div>
+            <div>
+                
+            </div>
+        </h:form>
     </h:body>
+    </f:view>
 </html>
 
