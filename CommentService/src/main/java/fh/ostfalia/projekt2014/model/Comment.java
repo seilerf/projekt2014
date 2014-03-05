@@ -7,6 +7,7 @@
 package fh.ostfalia.projekt2014.model;
 
 import java.io.Serializable;
+import fh.ostfalia.projekt2014.model.Mp3;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,11 +32,14 @@ import javax.persistence.Table;
 public class Comment implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    //CommentID um den jeweiligen Comment eindeutig zu definieren
     private Integer commentID;
+    //CommentTitel, welcher als Überschrift oder Schlagwort gedacht ist
     private String commentTitle;
+    //Der CommentTitle ist immer der Mp3-Name zu dem das Comment gehört
+    private Mp3 comToMp3ID;
     private String commentDescription;
-    /* Dieser Datenbankeintrag ist der Referenzverweisung(FK), der auf den Musiktitel verweißt, zu dem der Kommentar gehört*/
-    private Integer refMusicTitleID;
+
     
     public Comment() {
     }
@@ -55,9 +59,20 @@ public class Comment implements Serializable {
     public String getCommentTitle() {
         return commentTitle;
     }
-
+    
     public void setCommentTitle(String commentTitle) {
         this.commentTitle = commentTitle;
+    }
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_ToMp3ID", referencedColumnName = "mp3_id" , nullable = false)
+    // @Column(name = "comment_ToMp3")
+    public Mp3 getCommentToMp3() {
+        return this.comToMp3ID;
+    }
+
+    public void setCommentToMp3(Mp3 commentToMp3) {
+        this.comToMp3ID = commentToMp3;
     }
 
      @Column(name = "comment_Description")
@@ -68,17 +83,7 @@ public class Comment implements Serializable {
     public void setCommentDescription(String commentDescription) {
         this.commentDescription = commentDescription;
     }
-    
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "comment_RefID", nullable = false)
-     @Column(name = "comment_RefID")
-    public Integer getRefMusicTitleID() {
-        return refMusicTitleID;
-    }
-
-    public void setRefMusicTitleID(Integer refMusicTitleID) {
-        this.refMusicTitleID = refMusicTitleID;
-    }
+ 
 
     public void setCommentID(Integer commentID) {
         this.commentID = commentID;

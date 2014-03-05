@@ -3,10 +3,12 @@
   <persistence-unit name="CommentServicePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fh.ostfalia.projekt2014.model.Comment</class>
+    <class>fh.ostfalia.projekt2014.model.Mp3</class>
+    <class>fh.ostfalia.projekt2014.model.Mp3Artist</class> 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/commentservice?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.2:3306/commentservice?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="testpw"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/> <!--Driver -->
       <property name="javax.persistence.jdbc.user" value="root"/>
     </properties>
   </persistence-unit>

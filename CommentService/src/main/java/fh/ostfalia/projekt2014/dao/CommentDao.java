@@ -31,6 +31,7 @@ public class CommentDao implements IntfCommentDao {
     private EntityManager em;
     @Resource
     private UserTransaction ut;
+    private Mp3Dao mp3Dao;
     
     public CommentDao() {    
     }
@@ -92,10 +93,7 @@ public class CommentDao implements IntfCommentDao {
     public String getComment_Description(int comment_ID) {
         return em.find(Comment.class, comment_ID).getCommentDescription();
     }
-    
-    public int getComment_RefMusicTitleID(int comment_ID) {
-        return em.find(Comment.class, comment_ID).getRefMusicTitleID();
-    }
+
    
     //Methode zum Extrahieren der ID aus der URI, um das Comment zu identifizieren
     private String passedParameter;

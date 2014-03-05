@@ -90,7 +90,7 @@ public class CommentDaoRmi extends UnicastRemoteObject implements IntfComment{
         em.close();
         emf.close();
         
-        String[] commentString = {String.valueOf(comment.getCommentID()),comment.getCommentTitle(),comment.getCommentDescription(),String.valueOf(comment.getRefMusicTitleID())};
+        String[] commentString = {String.valueOf(comment.getCommentID()),comment.getCommentTitle()};//,comment.getCommentDescription(), String.valueOf(comment.getCommentToMp3())
         
         return commentString;
     }
