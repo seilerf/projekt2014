@@ -68,7 +68,7 @@ public class Mp3ArtistDao implements IMp3ArtistDao{
 
     public void upload() throws IOException {
         id3 = new Id3Tag();
-        File file = new File("C:\\Users\\fseiler\\Documents\\GitHub\\projekt2014\\Upload\\" + part.getSubmittedFileName());
+        File file = new File("C:\\Users\\Anton\\Documents\\GitHub\\projekt2014\\Upload\\" + part.getSubmittedFileName());
 
         Mp3Artist mp3Artist;
 
@@ -78,7 +78,7 @@ public class Mp3ArtistDao implements IMp3ArtistDao{
 
         mp3Artist = mp3.getArtist();
 
-        mp3Artist.addMp3(mp3);
+     //   mp3Artist.addMp3(mp3);
 
         this.persistMp3Artist(mp3Artist);
 

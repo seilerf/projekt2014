@@ -72,6 +72,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
 
     @Override
     public String getTest() throws RemoteException {
+        System.out.println("md aufgerufen!!");
         return "Musikdienst online!";
     }
 
@@ -87,6 +88,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
 
     @Override
     public String[] getMp3(int mp3_id) throws RemoteException {
+        Mp3Dao mp3Dao = new Mp3Dao();
         Mp3 mp3 = mp3Dao.getMp3(mp3_id);
         String[] mp3String = {String.valueOf(mp3.getMp3Id()), mp3.getMp3Title(), mp3.getArtist().getArtistName()};
         return mp3String;
