@@ -38,8 +38,8 @@ public class BalanceRmi extends UnicastRemoteObject implements IBalance{
             
             
             LocateRegistry.createRegistry(1100);  
-        Registry registry = LocateRegistry.getRegistry(1100);  
-        registry.rebind("Balance", intbalance);
+            Registry registry = LocateRegistry.getRegistry(1100);  
+            registry.rebind("Balance", intbalance);
             
            // LocateRegistry.createRegistry(1099);
            // Registry registry = LocateRegistry.getRegistry("localhost", 1099);
@@ -61,13 +61,33 @@ public class BalanceRmi extends UnicastRemoteObject implements IBalance{
     public String getAdress() throws RemoteException {
         
         
-        Balance balance = new Balance();
+       
         String adress = balance.BalanceWith1();
         
         System.out.println(adress);
         
         return adress;
     }
+   @Override
+    public void setAnzserv(int anzserv) throws RemoteException {
+       
+        balance.setAnzserv(anzserv);
+    }
+   @Override
+    public void setServer1(String server1) throws RemoteException {
+       System.out.println("Loadbalancer: server1 adresse "+server1);
+       
+        balance.setServer1(server1);
+    }
+       @Override
+    public void setServer2(String server2) throws RemoteException {
+               System.out.println("Loadbalancer: server2 adresse "+server2);
+
+        balance.setServer1(server2);
+    }
+    
+    
+   
 
 }
 
