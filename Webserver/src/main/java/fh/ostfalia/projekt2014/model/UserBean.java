@@ -7,6 +7,7 @@ package fh.ostfalia.projekt2014.model;
 import fh.ostfalia.projekt2014.dao.UserDao;
 import java.io.Serializable;
 import java.security.Principal;
+import javax.annotation.security.DeclareRoles;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Yannick
  */
-
+@DeclareRoles({"user", "admin"})
 public class UserBean implements Serializable{
 
     
@@ -91,14 +92,14 @@ public class UserBean implements Serializable{
   
       fc.addMessage(null, new FacesMessage("Logout failed."));
     }
-    return "index";
+    return "logout";
   }
 
     
     public Reference getReference() throws NamingException {
         return new Reference(
 	    UserBean.class.getName(),
-	    new StringRefAddr("loginBean", loginBean),
+	    new StringRefAddr("UserBean", loginBean),
 	    null,
 	    null);          // Factory location
     }

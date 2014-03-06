@@ -18,5 +18,7 @@ public interface IMusikd {
     public Object getMp3(int mp3_id);
     public Object getMp3ByArtist (int mp3ArtistId);
     public Object getAllMp3();
+    public void setServeradress1(String serveradress1);
+    public void setServeradress2(String serveradress2);
     
 }

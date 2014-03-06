@@ -44,8 +44,9 @@ public class Mp3DaoRmi implements IMusikd, Serializable {
     
     @Override
     public String getTest() {
-        System.out.println("MP3: " + this.getMp3(1)[1]);
+       // System.out.println("MP3: " + this.getMp3(4)[1]);
         return intfMusikd.getTest();
+        
     }
 
     @Override
@@ -62,7 +63,7 @@ public class Mp3DaoRmi implements IMusikd, Serializable {
     public String[] getMp3(int mp3_id) {
         //this.lookupRMI();
         String[] mp3 = (String[]) intfMusikd.getMp3(mp3_id);
-        System.out.println("Client --> Titel: " + mp3[1]);
+        System.out.println("Client --> Titel: " + mp3[4]);
         return (String[]) intfMusikd.getMp3(mp3_id);
     }
 
@@ -75,5 +76,17 @@ public class Mp3DaoRmi implements IMusikd, Serializable {
     public List<String[]> getAllMp3() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    @Override
+    public void setServeradress1(String serveradress1)  {
+      intfMusikd.setServeradress1(serveradress1);
+    }
+    
+    @Override
+    public void setServeradress2(String serveradress2) {
+        intfMusikd.setServeradress2(serveradress2);
+    }
+    
     
 }

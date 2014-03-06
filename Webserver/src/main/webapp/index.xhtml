@@ -22,12 +22,11 @@
 					<h:outputText value="Password : "/>
 					<h:inputSecret id="j_password" value="#{UserBean.password}"/>
 
-					<h:commandButton value="Login" action="#{UserBean.login}"
-									 type="submit"/>
+					<h:commandButton value="Login" action="#{UserBean.login}" type="submit"/>
 				</h:panelGrid>
-            
-        
-            <h:link outcome="registrierung.xhtml" value="Registrierung"/>
+                                <br />
+        				<h:commandButton value="Registrierung" action="registrierung.xhtml" type="submit"/>
+
             
         </h:form>
         
