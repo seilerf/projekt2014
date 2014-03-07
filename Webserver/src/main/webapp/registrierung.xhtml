@@ -14,15 +14,29 @@
             
             <h:panelGrid columns="2">
             
-            <h:outputText value="Benutzername: "/>
+            <h:outputText value="Username: "/>
             <h:inputText id="username" value="#{user.username}"/>
             
-            <h:outputText value="Passwort: "/>
-            <h:inputText id="password" value="#{user.password}"/>
+            <h:outputText value="Password: "/>
+            <h:inputSecret id="password" value="#{user.password}"/>
             
-            <h:commandButton value="Add User" action="#{UserDao.addUser(user)}"/>
+            <p:commandButton value="Add User" action="#{UserDao.addUser(user)}" update="display" oncomplete="PF('dlg').show()"/>
             </h:panelGrid>
-             <h:link outcome="index.xhtml" value="Zurück zur Anmeldung"/>
+             
+             
+              <p:dialog header="Sie wurden angemeldet" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+        <h:panelGrid columns="3" id="display">  
+            <h:outputText value="Benutzername:" /><h:outputText id="susername" value="#{user.username}" />  
+  <br />
+            <h:outputText value="Passwort:" /><h:outputText id="spassword" value="#{user.password}" />  
+  <br />           
+            <h:link outcome="index.xhtml" value="Zurück zur Anmeldung"/> 
+       
+
+        </h:panelGrid>  
+    </p:dialog>  
+             
+<p:commandButton value="Zurück zur Anmeldung" action="index.xhtml"/>
         </h:form>
           </p:panel>
     </h:body>

@@ -18,10 +18,25 @@
 
            </p:panel>
 
+        <h:form>
         
-       <h:form>
-                <h:commandButton value="Logout" action="#{UserBean.logout()}" />
+       
+           <p:commandButton value="Logout" action="#{UserBean.logout()}" update="display" oncomplete="PF('dlg').show()"/>
+                  
+        
+         <p:dialog header="Logout" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+        <h:panelGrid columns="2" id="display">  
+           Sie wurden erfolgreich ausgeloggt
+    <br />           
+
+            <h:link outcome="index.xhtml" value="Zurück zur Anmeldung"/> 
+            
+       
+
+        </h:panelGrid>  
+    </p:dialog> 
                   </h:form>
+
         
     </h:body>
 </html>

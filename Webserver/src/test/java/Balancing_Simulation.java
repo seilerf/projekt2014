@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 import fh.ostfalia.projekt2014.rmi.Mp3DaoRmi;
 import org.junit.After;
@@ -23,21 +19,13 @@ public class Balancing_Simulation {
     public Balancing_Simulation() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+   /**
+ *
+ * Diese Methode ruft die getTest() Methode 49 mal über rmi auf, über den
+ * Loadbalancer bis hin zum entsprechenden Musikdienst. Dabei entstehen die entsprechenden Ausgaben, 
+ * welche beweisen, dass das Loadbalancing funktioniert. Wenn es funktioniert müssen abwechselnd "Musikdienst online 1"
+ * // "Musikdienst online 2" in der Ausgabe erscheinen.
+ */
     
     @Test
     public void balancetest()
@@ -51,9 +39,5 @@ public class Balancing_Simulation {
         }
     }
     
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
 }

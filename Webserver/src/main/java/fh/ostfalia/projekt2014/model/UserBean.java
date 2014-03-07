@@ -79,10 +79,10 @@ public class UserBean implements Serializable{
 			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An Error Occured: Login failed", null));
 			e.printStackTrace();
 		}
-		return "loginFailed";
+		return "error";
 	}
 
-  public String logout() {
+  public void logout() {
     FacesContext fc = FacesContext.getCurrentInstance();
     HttpServletRequest request = (HttpServletRequest)
         fc.getExternalContext().getRequest();
@@ -92,7 +92,6 @@ public class UserBean implements Serializable{
   
       fc.addMessage(null, new FacesMessage("Logout failed."));
     }
-    return "logout";
   }
 
     

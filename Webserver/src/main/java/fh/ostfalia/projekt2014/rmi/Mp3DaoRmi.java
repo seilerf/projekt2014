@@ -88,5 +88,25 @@ public class Mp3DaoRmi implements IMusikd, Serializable {
         intfMusikd.setServeradress2(serveradress2);
     }
     
+    @Override
+    public void setServeranzahl(int serveranzahl) {
+        intfMusikd.setServeranzahl(serveranzahl);
+    }
+    
+    
+       @Override
+    public String getServeradress1()  {
+      return intfMusikd.getServeradress1();
+    }
+    
+    @Override
+    public String getServeradress2() {
+       return intfMusikd.getServeradress2();
+    }
+    
+    @Override
+    public int getServeranzahl() {
+       return intfMusikd.getServeranzahl();
+    }
     
 }

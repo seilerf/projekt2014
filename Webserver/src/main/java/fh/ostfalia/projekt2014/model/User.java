@@ -32,7 +32,8 @@ public class User implements Serializable{
     private String username;
     @Column (name = "password")
     private String password;
-  
+    @Column (name = "groupname")
+    private String groupname="user";
 
 
     public String getUsername() {
@@ -51,7 +52,21 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getGroupname() {
+        return groupname;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
+    }
 
  
 
