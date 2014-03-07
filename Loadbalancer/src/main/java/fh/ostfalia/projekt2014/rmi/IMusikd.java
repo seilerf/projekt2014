@@ -24,6 +24,9 @@ public interface IMusikd extends Remote{
     public List<String[]> getAllMp3() throws RemoteException;
     public void setServeradress1(String serveradress1) throws RemoteException;
     public void setServeradress2(String serveradress2) throws RemoteException;
-    
+    public void setServeranzahl(int serveranzahl) throws RemoteException;
+    public String getServeradress1() throws RemoteException;
+    public String getServeradress2() throws RemoteException;
+    public int getServeranzahl() throws RemoteException;
     
 }

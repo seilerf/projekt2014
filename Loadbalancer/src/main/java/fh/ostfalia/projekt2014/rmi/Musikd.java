@@ -28,6 +28,15 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
   
     private String serveradress1= "localhost";
     private String serveradress2= "localhost";
+    private int serveranzahl=2;
+
+    public int getServeranzahl() {
+        return serveranzahl;
+    }
+
+    public void setServeranzahl(int serveranzahl) {
+        this.serveranzahl = serveranzahl;
+    }
 
     private IMusikd iServer1;
     private IMusikd iServer2;
@@ -102,34 +111,43 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
 
     public String getTest() {
       
+        if(serveranzahl==2)
+        {
+        
         if (ghf == 1)
     {
            try {
+               System.out.println("Methodenaufruf getTest von server 2");
+               this.ghf=0;
                return this.iServer2.getTest();
+               
            } catch (RemoteException ex) {
                Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
            }
-           System.out.println("Methodenaufruf getTest von server 2");
-        this.ghf=0;
-        System.out.println(ghf);
     }
     else{
            try {
+               System.out.println("Methodenaufruf getTest von server 1");
+               this.ghf+=1;
                return this.iServer1.getTest();
            } catch (RemoteException ex) {
                Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
            }
-                 System.out.println("Methodenaufruf getTest von server 1");
 
-        this.ghf+=1;
-                System.out.println(ghf);
-
-    }
-        String horst = valueOf(ghf);
-        return horst;
+        }
         
     }
-        
+        else
+             try {
+               System.out.println("Methodenaufruf getTest von server 1");
+               this.ghf+=1;
+               return this.iServer1.getTest();
+           } catch (RemoteException ex) {
+               Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+           }
+                return null;
+
+    }
         
     
 
