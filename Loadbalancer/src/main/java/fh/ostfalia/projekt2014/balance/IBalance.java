@@ -17,11 +17,11 @@ import java.rmi.RemoteException;
  */
 public interface IBalance extends Remote {
     
-    public String getAdress() throws RemoteException;
     
     public void setAnzserv(int anzserv) throws RemoteException;
-    
-    public void setServer1(String server1) throws RemoteException;
-    
-    public void setServer2(String server2) throws RemoteException;
+    public int getAnzserv() throws RemoteException;
+    public boolean getBalancemethod() throws RemoteException;
+    public void setBalancemethod(boolean balancemethod) throws RemoteException;
+     
+   
 }

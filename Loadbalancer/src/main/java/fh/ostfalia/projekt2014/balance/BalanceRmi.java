@@ -7,6 +7,7 @@
 package fh.ostfalia.projekt2014.balance;
 
 import fh.ostfalia.projekt2014.loadbalancer.Balance;
+import fh.ostfalia.projekt2014.rmi.IMusikd;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
@@ -25,70 +26,53 @@ import java.util.logging.Logger;
 public class BalanceRmi extends UnicastRemoteObject implements IBalance{
 
  private Balance balance;
+ private IBalance iBalance;
     
-    public BalanceRmi(Balance balance) throws RemoteException{
-        this.balance = balance;
+    public BalanceRmi() throws RemoteException   {
+        this.registerForRmi();
+        
+    
     }
     
-    public void registerRMI() {
-        try {
-            System.out.println("Server: Dienst für RMI registrieren...");
-
-            IBalance intbalance = this;
-            
-            
-            LocateRegistry.createRegistry(1100);  
-            Registry registry = LocateRegistry.getRegistry(1100);  
-            registry.rebind("Balance", intbalance);
-            
-           // LocateRegistry.createRegistry(1099);
-           // Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-            //registry.rebind("rmi://localhost/Balance", intbalance); 
-           // Naming.rebind("rmi://localhost/Balance", intbalance);
-            
-            System.out.println("LoadBalancer: Remote-Dienst registriert!");
-            
+   private void registerForRmi(){
+        try {        
+            LocateRegistry.createRegistry(1099);
         } catch (RemoteException ex) {
-            System.err.println("LoadBalancer: RemoteException aufgetreten");
-            ex.printStackTrace();
+            System.err.println("Loadbalancer: Port 1099 bereits belegt.");
+        } try {
+            System.out.println("Loadbalancer: Balance Dientse für RMI registrieren...");
+
+            this.iBalance = this;
+            Registry registry = LocateRegistry.getRegistry(1099);
+            registry.rebind("Balance", iBalance);
+
+            System.out.println("Loadbalancer: Balance RMI-Dienste registriert!");
+        } catch (RemoteException ex) {
+            Logger.getLogger(BalanceRmi.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
     }
-
-    @Override
-    public String getAdress() throws RemoteException {
         
         
-       
-        String adress = balance.BalanceWith1();
-        
-        System.out.println(adress);
-        
-        return adress;
-    }
-   @Override
-    public void setAnzserv(int anzserv) throws RemoteException {
-       
-        balance.setAnzserv(anzserv);
-    }
-   @Override
-    public void setServer1(String server1) throws RemoteException {
-       System.out.println("Loadbalancer: server1 adresse "+server1);
-       
-        balance.setServer1(server1);
-    }
-       @Override
-    public void setServer2(String server2) throws RemoteException {
-               System.out.println("Loadbalancer: server2 adresse "+server2);
-
-        balance.setServer1(server2);
-    }
     
-    
+
+       
    
+     public void setAnzserv(int anzserv){
+         balance.setServeranzahl(anzserv);
+     }
+   
+    public int getAnzserv(){
+       return  balance.getServeranzahl();
+     }
 
+    
+    public boolean getBalancemethod() {
+        return balance.getBalancemethod();
+    }
+   
+    public void setBalancemethod(boolean balancemethod) {
+        balance.setBalancemethod(balancemethod);
+    }
 }
 
 

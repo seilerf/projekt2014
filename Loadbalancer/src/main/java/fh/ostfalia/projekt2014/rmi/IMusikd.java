@@ -17,16 +17,14 @@ import java.util.List;
 public interface IMusikd extends Remote{
 
     public String getTest() throws RemoteException;
-    public void addMp3(String mp3_title, String mp3_Artist, String mp3_name) throws RemoteException;
+    public void addMp3(String mp3_title, String mp3_Artist) throws RemoteException;
     public void deleteMp3(int mp3_id) throws RemoteException;
     public String[] getMp3(int mp3_id) throws RemoteException;
     public String[] getMp3ByArtist (int mp3ArtistId) throws RemoteException;
     public List<String[]> getAllMp3() throws RemoteException;
     public void setServeradress1(String serveradress1) throws RemoteException;
     public void setServeradress2(String serveradress2) throws RemoteException;
-    public void setServeranzahl(int serveranzahl) throws RemoteException;
     public String getServeradress1() throws RemoteException;
     public String getServeradress2() throws RemoteException;
-    public int getServeranzahl() throws RemoteException;
     
 }
