@@ -33,6 +33,8 @@ import javax.transaction.UserTransaction;
 public class Mp3ArtistDao implements IMp3ArtistDao{
     @PersistenceContext
     private EntityManager em;
+    @PersistenceContext
+    private EntityManager em2;
     @Resource
     UserTransaction ut;
     private Id3Tag id3;
@@ -46,6 +48,7 @@ public class Mp3ArtistDao implements IMp3ArtistDao{
             System.out.println(mp3Artist.getArtistName());
             System.out.println(mp3Artist.getArtistId());
             em.persist(mp3Artist);
+            em2.persist(mp3Artist);
             ut.commit();
 
         } catch (RollbackException ex) {
@@ -87,6 +90,7 @@ public class Mp3ArtistDao implements IMp3ArtistDao{
     @Override
     public void deleteMp3Artist(int mp3ArtistId) {
         em.remove(getMp3Artist(mp3ArtistId));
+        em2.remove(getMp3Artist(mp3ArtistId));
     }
 
     @Override

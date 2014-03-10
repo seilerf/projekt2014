@@ -28,14 +28,18 @@ import javax.transaction.UserTransaction;
  */
 public class Mp3Dao implements IMp3Dao{
     
-    @PersistenceContext
+    @PersistenceContext(unitName="Mp3")
     private EntityManager em;
+    @PersistenceContext(unitName="Mp32")
+    private EntityManager em2;
     @Resource
     private UserTransaction ut;
     private byte[] fileContent;
     private Mp3ArtistDao mp3ArtistDao;
 
     public Mp3Dao() {
+        super();
+        deleteMp32();
     }
     
     public void addMp3List(ArrayList<Mp3> mp3List) {
@@ -45,6 +49,7 @@ public class Mp3Dao implements IMp3Dao{
             for (int i = 0; i <= mp3List.size(); i++) {
                 Mp3 tempMp3 = mp3List.get(i);
                 em.persist(tempMp3);
+                em2.persist(tempMp3);
             }
 
             ut.commit();
@@ -68,6 +73,7 @@ public class Mp3Dao implements IMp3Dao{
     @Override
     public void deleteMp3(int mp3_id) {
         em.remove(getMp3(mp3_id));
+        em2.remove(getMp3(mp3_id));
     }
 
     @Override
@@ -116,5 +122,24 @@ public class Mp3Dao implements IMp3Dao{
     @Override
     public void addMp3(Mp3 mp3) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+     public void deleteMp32() {
+         
+         
+           
+
+            
+               
+                 em.remove(getMp3(1));
+                //em2.persist(tempMp3);
+            
+
+         
+         
+         
+       
+       // em2.remove(getMp3(mp3_id));
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public interface IMusikd extends Remote{
     
     public String getTest() throws RemoteException;
-    public void addMp3(String mp3_title, String mp3_Artist, String mp3_name) throws RemoteException;
+    public void addMp3(String mp3_title, String mp3_Artist) throws RemoteException;
     public void deleteMp3(int mp3_id) throws RemoteException;
     public String[] getMp3(int mp3_id) throws RemoteException;
     public String[] getMp3ByArtist (int mp3ArtistId) throws RemoteException;
