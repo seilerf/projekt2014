@@ -22,30 +22,17 @@ public class BalanceRmi implements IBalance, Serializable {
     
     
        private IBalance iBalance;
-       private String server1;
-
-    public String getServer1() {
-        return server1;
-    }
-
-    public String getServer2() {
-        return server2;
-    }
-       private String server2;
+     
     
     public BalanceRmi(){
        super();
         this.lookupRMI();
     }
     
-    public BalanceRmi(IBalance iBalance){
-        this.iBalance = iBalance;
-        this.lookupRMI();
-    }
-
+  
     private void lookupRMI(){
         try {
-            Registry registry = LocateRegistry.getRegistry("localhost", 1100);
+            Registry registry = LocateRegistry.getRegistry(1099);
             System.out.println("Registry erkannt");
             //Remote obj = (Remote) Naming.lookup("Mp3DaoRmi");
             this.iBalance = (IBalance) registry.lookup("Balance");
@@ -61,8 +48,8 @@ public class BalanceRmi implements IBalance, Serializable {
   
 
     @Override
-    public String getAdress() {
-return iBalance.getAdress();
+    public int getAnzserv() {
+    return iBalance.getAnzserv();
     }
     
     @Override
@@ -71,19 +58,14 @@ return iBalance.getAdress();
     }
      
     @Override
-    public void setServer1(String server1)  {
-      iBalance.setServer1(server1);
+    public boolean getBalancemethod() {
+     return iBalance.getBalancemethod();
     }
     
     @Override
-    public void setServer2(String server2) {
-        iBalance.setServer2(server2);
+    public void setBalancemethod(boolean balancemethod)  {
+        iBalance.setBalancemethod(balancemethod);
     }
-    public void setServer(String server1, String server2)
-        {
-            setServer1(server1);
-            setServer2(server2);
-        }
     
 
 }

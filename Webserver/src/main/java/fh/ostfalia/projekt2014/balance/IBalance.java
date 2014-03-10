@@ -13,12 +13,9 @@ package fh.ostfalia.projekt2014.balance;
  */
 public interface IBalance {
     
-     public String getAdress();
-     
-     public void setAnzserv(int anzserv) ;
-    
-     public void setServer1(String server1);
-    
-     public void setServer2(String server2);
+    public void setAnzserv(int anzserv) ;
+    public int getAnzserv() ;
+    public boolean getBalancemethod() ;
+    public void setBalancemethod(boolean balancemethod);
     
 }

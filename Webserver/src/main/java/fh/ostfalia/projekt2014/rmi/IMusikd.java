@@ -20,8 +20,6 @@ public interface IMusikd {
     public Object getAllMp3();
     public void setServeradress1(String serveradress1);
     public void setServeradress2(String serveradress2);
-    public void setServeranzahl(int serveranzahl);
     public String getServeradress1();
     public String getServeradress2();
-    public int getServeranzahl();
 }
