@@ -41,40 +41,45 @@ public class Balance {
 
     
 
-    public int getServeranzahl() {
+   
+    private int ghf=0;
+    private BalanceTimer balancetimer;
+    public Balance() {
+    
+    }
+    
+    
+     public int getServeranzahl() {
         return serveranzahl;
     }
 
     public void setServeranzahl(int serveranzahl) {
         this.serveranzahl = serveranzahl;
     }
-    private int ghf=0;
-    private BalanceTimer balancetimer;
-    public Balance() {
-    
-    }
    
-     public IMusikd balancieren(){
-         
+     public IMusikd balancieren(Musikd musik){
+         System.out.println("Methodenaufruf1 getTest von server 2");
          if(balancemethod==false)
-         {
+         {System.out.println("Methodenaufruf2 getTest von server 2");
          
             if(serveranzahl==2)
-             {
+             {System.out.println("Methodenaufruf3 getTest von server 2");
         
         if (ghf == 1)
                     {
            
-               System.out.println("Methodenaufruf getTest von server 2");
+               System.out.println("Methodenaufrufist drin getTest von server 2");
                this.ghf=0;
+               
                return musik.getiServer2();
                
            
                      }
         else{
            
-               System.out.println("Methodenaufruf getTest von server 1");
-               this.ghf+=1;
+               System.out.println("Methodenaufrufist drin getTest von server 2");
+               this.ghf=1;
+               System.out.println(musik.getiServer1().toString());
                return musik.getiServer1();
            
 
@@ -84,7 +89,7 @@ public class Balance {
             else{
              
                System.out.println("Methodenaufruf getTest von server 1");
-               this.ghf+=1;
+               
                return musik.getiServer1();
             }
          

@@ -27,7 +27,9 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     
     private Balance balance;
     
-    
+      private IMusikd iServer1;
+    private IMusikd iServer2;
+    private IMusikd iServer333;
     
     private String serveradress1= "localhost";
     private String serveradress2= "localhost";
@@ -54,8 +56,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
 
     
-    private IMusikd iServer1;
-    private IMusikd iServer2;
+  
     
     
     public Musikd(int g) throws RemoteException{
@@ -63,6 +64,8 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
     
     public Musikd() throws RemoteException{
+        Balance balance = new Balance();
+        this.balance= balance;
         this.registerForRmi();
         this.lookupRmi();
     }
@@ -90,23 +93,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
 
     }
     
-    private void registerForRmi(){
-        try {        
-            LocateRegistry.createRegistry(1099);
-        } catch (RemoteException ex) {
-            System.err.println("Loadbalancer: Port 1099 bereits belegt.");
-        } try {
-            System.out.println("Loadbalancer: Dientse für RMI registrieren...");
-
-            this.iMusikd = this;
-            Registry registry = LocateRegistry.getRegistry(1099);
-            registry.rebind("Musikd", iMusikd);
-
-            System.out.println("Loadbalancer: RMI-Dienste registriert!");
-        } catch (RemoteException ex) {
-            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
     
     private void lookupRmi(){
         try {
@@ -130,29 +117,49 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             System.err.println("Loadbalancer: Beim RMI-Lookup wurde kein Objekt unter \"/Musikd_2\" gefunden!");
         }
     }
+    
+    
+     private void registerForRmi(){
+        try {        
+            LocateRegistry.createRegistry(1099);
+        } catch (RemoteException ex) {
+            System.err.println("Loadbalancer: Port 1099 bereits belegt.");
+        } try {
+            System.out.println("Loadbalancer: Dientse für RMI registrieren...");
+
+            this.iMusikd = this;
+            Registry registry = LocateRegistry.getRegistry(1099);
+            registry.rebind("Musikd", iMusikd);
+
+            System.out.println("Loadbalancer: RMI-Dienste registriert!");
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     
-    public String getTest() {
-        this.addMp3("Test", "Auquid");
-        return "OK";
-    }
     
-    public String getTest2() {
-        try {
+   
+    public String test()   {
+        
             
             System.out.println("gettest loadbalancer aufgerufen");
-            return balance.balancieren().getTest();
+        try {
+            this.iServer333=balance.balancieren(Musikd.this);
+            return iServer333.test();
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+        
+        
            
     }
         
     
  public void addMp3(String mp3_title, String mp3_Artist) {
         try {
-            balance.balancieren().addMp3(mp3_title, mp3_Artist);
+            balance.balancieren(Musikd.this).addMp3(mp3_title, mp3_Artist);
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -165,13 +172,13 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     public String[] getMp3(int mp3_id) throws RemoteException {
        
             System.out.println("Methodenaufruf getmp3 von server 2");
-           return balance.balancieren().getMp3(mp3_id);
+           return balance.balancieren(Musikd.this).getMp3(mp3_id);
        
     }
     
     public String[] getMp3ByArtist(int mp3ArtistId) {
         try {
-           return balance.balancieren().getMp3ByArtist(mp3ArtistId);
+           return balance.balancieren(Musikd.this).getMp3ByArtist(mp3ArtistId);
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -180,7 +187,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
 
     public List<String[]> getAllMp3() {
         try {
-             balance.balancieren().getAllMp3();
+             balance.balancieren(Musikd.this).getAllMp3();
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -188,6 +195,22 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
  
     
+     public void setAnzserv(int anzserv){
+         balance.setServeranzahl(anzserv);
+     }
+   
+    public int getAnzserv(){
+       return  balance.getServeranzahl();
+     }
+
+    
+    public boolean getBalancemethod() {
+        return balance.getBalancemethod();
+    }
+   
+    public void setBalancemethod(boolean balancemethod) {
+        balance.setBalancemethod(balancemethod);
+    }
    
     
 }

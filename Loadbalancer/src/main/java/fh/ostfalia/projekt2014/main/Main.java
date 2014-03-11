@@ -20,9 +20,11 @@ public class Main {
     
     public static void main (String[] args){
         try {
+            
+         //   BalanceRmi balance = new BalanceRmi();
+          //  balance.registerForRmi();
             Musikd musikd = new Musikd();
-            BalanceRmi balance = new BalanceRmi();
-            musikd.getTest();
+           // musikd.getTest();
         } catch (RemoteException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
