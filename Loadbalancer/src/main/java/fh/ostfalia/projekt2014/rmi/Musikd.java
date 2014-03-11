@@ -211,6 +211,8 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     public void setBalancemethod(boolean balancemethod) {
         balance.setBalancemethod(balancemethod);
     }
-   
+   public void balanceMethod() {
+        balance.balanceMethod();
+    }
     
 }

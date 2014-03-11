@@ -6,7 +6,6 @@
 
 package fh.ostfalia.projekt2014.main;
 
-import fh.ostfalia.projekt2014.balance.BalanceRmi;
 import fh.ostfalia.projekt2014.rmi.Musikd;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
@@ -21,8 +20,7 @@ public class Main {
     public static void main (String[] args){
         try {
             
-         //   BalanceRmi balance = new BalanceRmi();
-          //  balance.registerForRmi();
+        
             Musikd musikd = new Musikd();
            // musikd.getTest();
         } catch (RemoteException ex) {

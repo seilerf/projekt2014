@@ -31,5 +31,6 @@ public interface IMusikd extends Remote{
     public int getAnzserv() throws RemoteException;
     public boolean getBalancemethod() throws RemoteException;
     public void setBalancemethod(boolean balancemethod) throws RemoteException;
+    public void balanceMethod() throws RemoteException;
     
 }
