@@ -13,13 +13,19 @@
     	<h:form>
  
 	   <h:outputText value="Anzahl der Musikdienste" />  
-           <p:selectOneListbox id="serveranzahl" value="#{Musikd.serveranzahl}">  
+           <p:selectOneListbox id="serveranzahl" value="#{Musikd.anzserv}">  
             <f:selectItem itemLabel="1 Musikdienst" itemValue="1" />  
             <f:selectItem itemLabel="2 Musikdienste" itemValue="2" />  
             <f:selectItem itemLabel="3 Musikdienste" itemValue="3" />  
         </p:selectOneListbox>  
+  <br/>
+            <h:outputText value="Loadbalancing Methode" />  
+            <p:selectOneListbox id="method" value="#{Musikd.balancemethod}">  
+            <f:selectItem itemLabel="Round Robin" itemValue="false" />  
+            <f:selectItem itemLabel="In 5sek Intervallen" itemValue="true" />  
             
-            
+        </p:selectOneListbox>  
+   <br/>         
             <h:outputText id="serveradress1" value="Server Adresse 1: "/>
             <h:inputText id="serveradre1" value="#{Musikd.serveradress1}"/>
               <br />
@@ -27,18 +33,20 @@
             <h:inputText id="serveradr2" value="#{Musikd.serveradress2}"/>
             
   <p:separator />   
-    <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg1').show()" />  
+  <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg1').show()" action="#{Musikd.balanceMethod()}" />  
   
     <p:dialog header="Eingegebene Werte" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg1">  
         <h:panelGrid columns="3" id="display">  
-            <h:outputText value="Anzahl Musikdienste:" /><h:outputText id="sanzahlserver" value="#{Musikd.serveranzahl}" />  
-    <br />           
+            <h:outputText value="Anzahl Musikdienste:" /><h:outputText id="sanzahlserver" value="#{Musikd.anzserv}" />  
+<br />           
 
             <h:outputText value="Serveradresse 1:" /><h:outputText id="ss1" value="#{Musikd.serveradress1}" />  
-     <br />           
+<br />           
          
             <h:outputText value="Serveradresse 2:" /><h:outputText id="ss2" value="#{Musikd.serveradress2}" />  
-
+       
+         
+            
         </h:panelGrid>  
     </p:dialog>  
                        

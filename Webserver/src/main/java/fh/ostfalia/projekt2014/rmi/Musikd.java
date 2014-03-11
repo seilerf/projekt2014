@@ -125,6 +125,9 @@ public class Musikd implements IMusikd, Serializable {
     public void setBalancemethod(boolean balancemethod)  {
         intfMusikd.setBalancemethod(balancemethod);
     }
-    
+    @Override
+    public void balanceMethod()  {
+        intfMusikd.balanceMethod();
+    }
     
 }

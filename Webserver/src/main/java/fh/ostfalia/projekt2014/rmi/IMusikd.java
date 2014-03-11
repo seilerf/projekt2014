@@ -27,5 +27,5 @@ public interface IMusikd {
     public int getAnzserv() ;
     public boolean getBalancemethod() ;
     public void setBalancemethod(boolean balancemethod);
-    
+    public void balanceMethod();
 }
