@@ -1,6 +1,7 @@
 
 
-import fh.ostfalia.projekt2014.rmi.Mp3DaoRmi;
+import fh.ostfalia.projekt2014.balance.BalanceRmi;
+import fh.ostfalia.projekt2014.rmi.Musikd;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,7 +15,8 @@ import static org.junit.Assert.*;
  */
 public class Balancing_Simulation {
    
-          Mp3DaoRmi balancetest = new Mp3DaoRmi(); 
+          Musikd balancetest = new Musikd(); 
+         // BalanceRmi balancetest2= new BalanceRmi();
 
     public Balancing_Simulation() {
     }
@@ -28,16 +30,29 @@ public class Balancing_Simulation {
  */
     
     @Test
-    public void balancetest()
+    public void balancetest1()
             
     {
         
         for(int i=0; i<50; i++)
         {           System.out.println("Testdurchlauf"+ i);
-                  System.out.println(balancetest.getTest());
+                  System.out.println(balancetest.test());
 
         }
     }
-    
-    
+     
+   /** @Test
+    public void balancetest2()
+            
+    {
+        balancetest.setBalancemethod(true);
+        
+        for(int i=0; i<50; i++)
+        {           System.out.println("Testdurchlauf"+ i);
+                
+                  System.out.println(balancetest.test());
+
+        }
+    }
+    **/
 }

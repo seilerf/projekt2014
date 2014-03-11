@@ -13,7 +13,7 @@
         
          <h:form>
         
-             <h:outputLabel id="test" value="#{Mp3DaoRmi.getTest()}" /> 
+             <h:outputLabel id="test" value="#{Musikd.test()}" /> 
           </h:form>
 
            </p:panel>
@@ -21,7 +21,7 @@
         <h:form>
         
        
-           <p:commandButton value="Logout" action="#{UserBean.logout()}" update="display" oncomplete="PF('dlg').show()"/>
+            <p:commandButton value="Logout" action="#{UserBean.logout()}" update="display" oncomplete="PF('dlg').show()"/>
                   
         
          <p:dialog header="Logout" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  

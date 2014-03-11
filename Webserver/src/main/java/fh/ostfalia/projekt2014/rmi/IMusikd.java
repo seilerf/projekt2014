@@ -12,7 +12,7 @@ package fh.ostfalia.projekt2014.rmi;
  */
 public interface IMusikd {
     
-    public String getTest();
+    public String test();
     public void addMp3(String mp3_title, String mp3_Artist, String mp3_name);
     public void deleteMp3(int mp3_id);
     public Object getMp3(int mp3_id);
@@ -22,4 +22,10 @@ public interface IMusikd {
     public void setServeradress2(String serveradress2);
     public String getServeradress1();
     public String getServeradress2();
+    
+    public void setAnzserv(int anzserv) ;
+    public int getAnzserv() ;
+    public boolean getBalancemethod() ;
+    public void setBalancemethod(boolean balancemethod);
+    
 }

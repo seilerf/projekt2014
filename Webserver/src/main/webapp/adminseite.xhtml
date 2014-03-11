@@ -13,7 +13,7 @@
     	<h:form>
  
 	   <h:outputText value="Anzahl der Musikdienste" />  
-           <p:selectOneListbox id="serveranzahl" value="#{Mp3DaoRmi.serveranzahl}">  
+           <p:selectOneListbox id="serveranzahl" value="#{Musikd.serveranzahl}">  
             <f:selectItem itemLabel="1 Musikdienst" itemValue="1" />  
             <f:selectItem itemLabel="2 Musikdienste" itemValue="2" />  
             <f:selectItem itemLabel="3 Musikdienste" itemValue="3" />  
@@ -21,23 +21,23 @@
             
             
             <h:outputText id="serveradress1" value="Server Adresse 1: "/>
-            <h:inputText id="serveradre1" value="#{Mp3DaoRmi.serveradress1}"/>
+            <h:inputText id="serveradre1" value="#{Musikd.serveradress1}"/>
               <br />
             <h:outputText id="serveradress2" value="Server Adresse 2: "/>
-            <h:inputText id="serveradr2" value="#{Mp3DaoRmi.serveradress2}"/>
+            <h:inputText id="serveradr2" value="#{Musikd.serveradress2}"/>
             
   <p:separator />   
     <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg1').show()" />  
   
     <p:dialog header="Eingegebene Werte" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg1">  
         <h:panelGrid columns="3" id="display">  
-            <h:outputText value="Anzahl Musikdienste:" /><h:outputText id="sanzahlserver" value="#{Mp3DaoRmi.serveranzahl}" />  
+            <h:outputText value="Anzahl Musikdienste:" /><h:outputText id="sanzahlserver" value="#{Musikd.serveranzahl}" />  
     <br />           
 
-            <h:outputText value="Serveradresse 1:" /><h:outputText id="ss1" value="#{Mp3DaoRmi.serveradress1}" />  
+            <h:outputText value="Serveradresse 1:" /><h:outputText id="ss1" value="#{Musikd.serveradress1}" />  
      <br />           
          
-            <h:outputText value="Serveradresse 2:" /><h:outputText id="ss2" value="#{Mp3DaoRmi.serveradress2}" />  
+            <h:outputText value="Serveradresse 2:" /><h:outputText id="ss2" value="#{Musikd.serveradress2}" />  
 
         </h:panelGrid>  
     </p:dialog>  

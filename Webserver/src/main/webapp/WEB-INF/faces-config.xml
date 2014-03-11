@@ -24,13 +24,9 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>Mp3DaoRmi</managed-bean-name>
-        <managed-bean-class>fh.ostfalia.projekt2014.rmi.Mp3DaoRmi</managed-bean-class>
+        <managed-bean-name>Musikd</managed-bean-name>
+        <managed-bean-class>fh.ostfalia.projekt2014.rmi.Musikd</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
-    <managed-bean>
-        <managed-bean-name>BalanceRmi</managed-bean-name>
-        <managed-bean-class>fh.ostfalia.projekt2014.balance.BalanceRmi</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+    
 </faces-config>

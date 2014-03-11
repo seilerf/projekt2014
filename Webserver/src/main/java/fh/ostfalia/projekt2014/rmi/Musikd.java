@@ -17,13 +17,13 @@ import java.util.List;
  *
  * @author fseiler
  */
-public class Mp3DaoRmi implements IMusikd, Serializable {
+public class Musikd implements IMusikd, Serializable {
     
     private IMusikd intfMusikd = null;
     
-    private String serveradress;
+    //private String serveradress;
     
-    public Mp3DaoRmi(){
+    public Musikd(){
         super();
         this.lookupRMI();
     }
@@ -41,11 +41,15 @@ public class Mp3DaoRmi implements IMusikd, Serializable {
             System.err.println("NotBoundException aufgetreten. Objekt nicht gefunden.");
         } 
     }
-    
+
+    /**
+     *
+     * @return
+     */
     @Override
-    public String getTest() {
+    public String test() {
        // System.out.println("MP3: " + this.getMp3(4)[1]);
-        return intfMusikd.getTest();
+        return intfMusikd.test();
         
     }
 
@@ -101,5 +105,26 @@ public class Mp3DaoRmi implements IMusikd, Serializable {
     }
     
    
+
+    @Override
+    public int getAnzserv() {
+    return intfMusikd.getAnzserv();
+    }
+    
+    @Override
+     public void setAnzserv(int anzserv)  {
+        intfMusikd.setAnzserv(anzserv);
+    }
+     
+    @Override
+    public boolean getBalancemethod() {
+     return intfMusikd.getBalancemethod();
+    }
+    
+    @Override
+    public void setBalancemethod(boolean balancemethod)  {
+        intfMusikd.setBalancemethod(balancemethod);
+    }
+    
     
 }
