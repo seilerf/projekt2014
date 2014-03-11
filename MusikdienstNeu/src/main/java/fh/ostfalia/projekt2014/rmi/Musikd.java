@@ -75,8 +75,8 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
 
     @Override
-    public String getTest() throws RemoteException {
-        return "Musikdienst online!";
+    public String test() throws RemoteException {
+        return "Musikdienst1 online!";
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Main {
         try {
             musikd = new Musikd();
             musikd.registerForRmi();
-            musikd.getTest();
+           // musikd.getTest();
         } catch (RemoteException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
