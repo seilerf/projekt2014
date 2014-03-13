@@ -11,7 +11,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.LinkedList;
 import java.util.List;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.ejb.Stateless;
 
 /**
  *
@@ -32,7 +36,7 @@ public class Musikd implements IMusikd, Serializable {
         try {
             Registry registry = LocateRegistry.getRegistry(1099);
             System.out.println("Registry erkannt");
-            this.intfMusikd = (IMusikd) registry.lookup("Musikd");
+            this.intfMusikd = (IMusikd) registry.lookup("rmi://localhost/Musikd_1");
             System.out.println("Lookup für das MusikInterface ausgeführt");
 
         } catch (RemoteException ex) {
@@ -48,8 +52,9 @@ public class Musikd implements IMusikd, Serializable {
      */
     @Override
     public String test() {
-       // System.out.println("MP3: " + this.getMp3(4)[1]);
-        return intfMusikd.test();
+        //System.out.println("MP3: " + this.getMp3(4)[1]);
+        //return intfMusikd.test();
+        return "TEST";
         
     }
 
@@ -60,15 +65,14 @@ public class Musikd implements IMusikd, Serializable {
 
     @Override
     public void deleteMp3(int mp3_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        intfMusikd.deleteMp3(mp3_id);
     }
 
     @Override
     public String[] getMp3(int mp3_id) {
         //this.lookupRMI();
         String[] mp3 = (String[]) intfMusikd.getMp3(mp3_id);
-        System.out.println("Client --> Titel: " + mp3[4]);
-        return (String[]) intfMusikd.getMp3(mp3_id);
+        return mp3;
     }
 
     @Override
@@ -78,9 +82,18 @@ public class Musikd implements IMusikd, Serializable {
 
     @Override
     public List<String[]> getAllMp3() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return intfMusikd.getAllMp3();
     }
     
+    public List<String[]> getTest(){
+        System.out.println(intfMusikd.getMp3(101)[1]);
+        List<String[]> liste = new LinkedList<>();
+        String[] test = {"ID Z1", "Titel Z1", "Interpret Z1"};
+        liste.add(test);
+        String[] test2 = {"ID Z2", "Titel Z2"};
+        liste.add(test2);
+        return liste;
+    }
     
     @Override
     public void setServeradress1(String serveradress1)  {
@@ -128,6 +141,12 @@ public class Musikd implements IMusikd, Serializable {
     @Override
     public void balanceMethod()  {
         intfMusikd.balanceMethod();
+    }
+
+    @Override
+    public byte[] getFile(int mp3_id) {
+        byte[] file = intfMusikd.getFile(mp3_id);
+        return file;
     }
     
 }

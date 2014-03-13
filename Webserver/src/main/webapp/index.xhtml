@@ -7,34 +7,26 @@
     <h:head>
         <title>Musikservice</title>
     </h:head>
+
     <h:body>
         <p:panel header="Login Musikdienst">
-       <h:form id="j_security_check">
-           
-            
+            <h:form id="j_security_check">
+                <br />
+                <h:panelGrid columns="2">
+                    <h:outputText value="Username : "/>
+                    <h:inputText id="j_username" value="#{UserBean.username}"/>
+                    <h:outputText value="Password : "/>
+                    <h:inputSecret id="j_password" value="#{UserBean.password}"/>
 
-            <br />
-            
-            <h:panelGrid columns="2">
-					<h:outputText value="Username : "/>
-					<h:inputText id="j_username" value="#{UserBean.username}"/>
-
-					<h:outputText value="Password : "/>
-					<h:inputSecret id="j_password" value="#{UserBean.password}"/>
-
-					<p:commandButton value="Login" action="#{UserBean.login}" type="submit"/>
-				</h:panelGrid>
-                                <br />
-        				<p:commandButton value="Registrierung" action="registrierung.xhtml" />
-
-            
-        </h:form>
-        
-                  </p:panel>
-
-        <h:form> 
-            
-        </h:form>
+                    <p:commandButton value="Login" action="#{UserBean.login}" type="submit"/>
+                </h:panelGrid>
+                <br/>
+                <p:commandButton value="Registrierung" action="registrierung.xhtml" />
+            </h:form>
+            <p>
+                <h:link value="Musikservice" outcome="/faces/musik.xhtml" />
+            </p>
+        </p:panel>
     </h:body>
 </html>
 

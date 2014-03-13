@@ -6,6 +6,8 @@
 
 package fh.ostfalia.projekt2014.rmi;
 
+import java.util.List;
+
 /**
  *
  * @author fseiler
@@ -15,9 +17,11 @@ public interface IMusikd {
     public String test();
     public void addMp3(String mp3_title, String mp3_Artist, String mp3_name);
     public void deleteMp3(int mp3_id);
-    public Object getMp3(int mp3_id);
-    public Object getMp3ByArtist (int mp3ArtistId);
-    public Object getAllMp3();
+    public String[] getMp3(int mp3_id);
+    public String[] getMp3ByArtist (int mp3ArtistId);
+    public List<String[]> getAllMp3();
+    public byte[] getFile(int mp3_id);
+    
     public void setServeradress1(String serveradress1);
     public void setServeradress2(String serveradress2);
     public String getServeradress1();

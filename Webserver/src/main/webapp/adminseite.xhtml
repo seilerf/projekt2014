@@ -7,72 +7,55 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-   <h:body>
+    <h:body>
  
-    	   <p:panel header="Adminseite">
-    	<h:form>
- 
-	   <h:outputText value="Anzahl der Musikdienste" />  
-           <p:selectOneListbox id="serveranzahl" value="#{Musikd.anzserv}">  
-            <f:selectItem itemLabel="1 Musikdienst" itemValue="1" />  
-            <f:selectItem itemLabel="2 Musikdienste" itemValue="2" />  
-            <f:selectItem itemLabel="3 Musikdienste" itemValue="3" />  
-        </p:selectOneListbox>  
-  <br/>
-            <h:outputText value="Loadbalancing Methode" />  
-            <p:selectOneListbox id="method" value="#{Musikd.balancemethod}">  
-            <f:selectItem itemLabel="Round Robin" itemValue="false" />  
-            <f:selectItem itemLabel="In 5sek Intervallen" itemValue="true" />  
-            
-        </p:selectOneListbox>  
-   <br/>         
-            <h:outputText id="serveradress1" value="Server Adresse 1: "/>
-            <h:inputText id="serveradre1" value="#{Musikd.serveradress1}"/>
-              <br />
-            <h:outputText id="serveradress2" value="Server Adresse 2: "/>
-            <h:inputText id="serveradr2" value="#{Musikd.serveradress2}"/>
-            
-  <p:separator />   
-  <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg1').show()" action="#{Musikd.balanceMethod()}" />  
-  
-    <p:dialog header="Eingegebene Werte" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg1">  
-        <h:panelGrid columns="3" id="display">  
-            <h:outputText value="Anzahl Musikdienste:" /><h:outputText id="sanzahlserver" value="#{Musikd.anzserv}" />  
-<br />           
+        <p:panel header="Adminseite">
+            <h:form>
 
-            <h:outputText value="Serveradresse 1:" /><h:outputText id="ss1" value="#{Musikd.serveradress1}" />  
-<br />           
-         
-            <h:outputText value="Serveradresse 2:" /><h:outputText id="ss2" value="#{Musikd.serveradress2}" />  
-       
-         
-            
-        </h:panelGrid>  
-    </p:dialog>  
-                       
+                <h:outputText value="Anzahl der Musikdienste" />  
+                <p:selectOneListbox id="serveranzahl" value="#{Musikd.anzserv}">  
+                    <f:selectItem itemLabel="1 Musikdienst" itemValue="1" />  
+                    <f:selectItem itemLabel="2 Musikdienste" itemValue="2" />  
+                    <f:selectItem itemLabel="3 Musikdienste" itemValue="3" />  
+                </p:selectOneListbox>  
+                <br/>
+                <h:outputText value="Loadbalancing Methode" />  
+                <p:selectOneListbox id="method" value="#{Musikd.balancemethod}">  
+                    <f:selectItem itemLabel="Round Robin" itemValue="false" />  
+                    <f:selectItem itemLabel="In 5sek Intervallen" itemValue="true" />  
 
-    	</h:form>
-               </p:panel>
-       
-       
+                </p:selectOneListbox>  
+                <br/>         
+                <h:outputText id="serveradress1" value="Server Adresse 1: "/>
+                <h:inputText id="serveradre1" value="#{Musikd.serveradress1}"/>
+                <br />
+                <h:outputText id="serveradress2" value="Server Adresse 2: "/>
+                <h:inputText id="serveradr2" value="#{Musikd.serveradress2}"/>
+                <p:separator />   
+                <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg1').show()" action="#{Musikd.balanceMethod()}" />  
+
+                <p:dialog header="Eingegebene Werte" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg1">  
+                    <h:panelGrid columns="3" id="display">  
+                        <h:outputText value="Anzahl Musikdienste:" /><h:outputText id="sanzahlserver" value="#{Musikd.anzserv}" />  
+                        <br />           
+                        <h:outputText value="Serveradresse 1:" /><h:outputText id="ss1" value="#{Musikd.serveradress1}" />  
+                        <br />           
+                        <h:outputText value="Serveradresse 2:" /><h:outputText id="ss2" value="#{Musikd.serveradress2}" />  
+                    </h:panelGrid>  
+                </p:dialog>  
+            </h:form>
+        </p:panel>
+              
         <h:form>
-        
-       
-           <p:commandButton value="Logout" action="#{UserBean.logout()}" update="display" oncomplete="PF('dlg2').show()"/>
-                  
-        
-         <p:dialog header="Logout" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg2">  
-        <h:panelGrid columns="2" id="display">  
-           Sie wurden erfolgreich ausgeloggt
-    <br />           
-
-            <h:link outcome="index.xhtml" value="Zurück zur Anmeldung"/> 
-            
-       
-
-        </h:panelGrid>  
-    </p:dialog> 
-                  </h:form>
+            <p:commandButton value="Logout" action="#{UserBean.logout()}" update="display" oncomplete="PF('dlg2').show()"/>
+            <p:dialog header="Logout" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg2">  
+                <h:panelGrid columns="2" id="display">  
+                    Sie wurden erfolgreich ausgeloggt
+                <br />           
+                <h:link outcome="index.xhtml" value="Zurück zur Anmeldung"/> 
+                </h:panelGrid>  
+            </p:dialog> 
+        </h:form>
     </h:body>
 </html>
 
