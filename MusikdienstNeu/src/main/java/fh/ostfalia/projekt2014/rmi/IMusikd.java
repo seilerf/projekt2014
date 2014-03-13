@@ -22,5 +22,6 @@ public interface IMusikd extends Remote{
     public String[] getMp3(int mp3_id) throws RemoteException;
     public String[] getMp3ByArtist (int mp3ArtistId) throws RemoteException;
     public List<String[]> getAllMp3() throws RemoteException;
+    public byte[] getFile(int mp3_id) throws RemoteException;
     
 }

@@ -115,6 +115,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     public String[] getMp3(int mp3_id) throws RemoteException {
         et.begin();
         Mp3 mp3 = em.find(Mp3.class, mp3_id);
+        System.out.println("Musikdienst: MP3 --> " + mp3.getMp3Title());
         et.commit();
         
         String[] mp3String = {mp3.getMp3Id().toString(), mp3.getMp3Title(), mp3.getArtist().getArtistName()};
@@ -148,5 +149,13 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         }
         
         return mp3Strings;
+    }
+
+    @Override
+    public byte[] getFile(int mp3_id) throws RemoteException {
+        et.begin();
+        byte[] mp3File = em.find(Mp3.class, mp3_id).getMp3File();
+        et.commit();
+        return mp3File;
     }
 }
