@@ -16,6 +16,10 @@ import java.util.List;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -36,7 +40,8 @@ public class Musikd implements IMusikd, Serializable {
         try {
             Registry registry = LocateRegistry.getRegistry(1099);
             System.out.println("Registry erkannt");
-            this.intfMusikd = (IMusikd) registry.lookup("rmi://localhost/Musikd_1");
+            this.intfMusikd = (IMusikd) registry.lookup("Musikd");
+            //this.intfMusikd = (IMusikd) registry.lookup("rmi://localhost/Musikd_1");
             System.out.println("Lookup für das MusikInterface ausgeführt");
 
         } catch (RemoteException ex) {
@@ -52,10 +57,7 @@ public class Musikd implements IMusikd, Serializable {
      */
     @Override
     public String test() {
-        //System.out.println("MP3: " + this.getMp3(4)[1]);
-        //return intfMusikd.test();
-        return "TEST";
-        
+        return intfMusikd.test();
     }
 
     @Override
@@ -70,7 +72,6 @@ public class Musikd implements IMusikd, Serializable {
 
     @Override
     public String[] getMp3(int mp3_id) {
-        //this.lookupRMI();
         String[] mp3 = (String[]) intfMusikd.getMp3(mp3_id);
         return mp3;
     }
@@ -83,16 +84,6 @@ public class Musikd implements IMusikd, Serializable {
     @Override
     public List<String[]> getAllMp3() {
         return intfMusikd.getAllMp3();
-    }
-    
-    public List<String[]> getTest(){
-        System.out.println(intfMusikd.getMp3(101)[1]);
-        List<String[]> liste = new LinkedList<>();
-        String[] test = {"ID Z1", "Titel Z1", "Interpret Z1"};
-        liste.add(test);
-        String[] test2 = {"ID Z2", "Titel Z2"};
-        liste.add(test2);
-        return liste;
     }
     
     @Override
@@ -148,5 +139,4 @@ public class Musikd implements IMusikd, Serializable {
         byte[] file = intfMusikd.getFile(mp3_id);
         return file;
     }
-    
 }

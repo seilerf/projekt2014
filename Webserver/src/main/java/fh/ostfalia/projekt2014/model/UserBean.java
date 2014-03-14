@@ -4,13 +4,10 @@
  */
 package fh.ostfalia.projekt2014.model;
 
-import fh.ostfalia.projekt2014.dao.UserDao;
 import java.io.Serializable;
 import java.security.Principal;
 import javax.annotation.security.DeclareRoles;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.NamingException;
 import javax.naming.Reference;
@@ -21,17 +18,17 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Yannick
+ * @author Anton
  */
 @DeclareRoles({"user", "admin"})
 public class UserBean implements Serializable{
 
+    private String username;
+    private String password;
+    private String loginBean;
+    private User current;
+    private EntityManager userService;
     
-  private String username;
-  private String password;
-  private String loginBean;
-  private User current;
-  private EntityManager userService;
     public String getUsername() {
         return username;
     }
@@ -48,52 +45,41 @@ public class UserBean implements Serializable{
         this.password = password;
     }
     
-   
-    
-
+    public String login () {
       
-  public String login () {
-      
-     FacesContext fc = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
-		try {
-			//Login per Servlet 3.0
-			request.login(username, password);
- 
-			// Der Principal entspricht dem Usernamen
-			Principal principal = request.getUserPrincipal();
- 
-			// Wir können hier nur abfragen, ob der User eine Rolle hat (isUserInRole('whatever')),
-			// aber wir können NICHT die Rolle aktiv erfragen (z.B. mit getUserRole(...))
-			if (request.isUserInRole("admin")) {
-				String msg = "User: " + principal.getName() + ", Role: admin";
-				fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-				return "adminseite";
-			} else if (request.isUserInRole("user")) {
-				String msg = "User: " + principal.getName() + ", Role: User";
-				fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-				return "musikservice";
-			} 
-			return "error";	// hier sollte etwas sinnvolles passieren ;-)
-		} catch (ServletException e) {
-			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An Error Occured: Login failed", null));
-			e.printStackTrace();
-		}
-		return "error";
-	}
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
+        try {
+            //Login per Servlet 3.0
+            request.login(username, password);
 
-  public void logout() {
-    FacesContext fc = FacesContext.getCurrentInstance();
-    HttpServletRequest request = (HttpServletRequest)
-        fc.getExternalContext().getRequest();
-    try {
-      request.logout();
-    } catch (ServletException e) {
-  
-      fc.addMessage(null, new FacesMessage("Logout failed."));
+            // Der Principal entspricht dem Usernamen
+            Principal principal = request.getUserPrincipal();
+
+            // Wir können hier nur abfragen, ob der User eine Rolle hat (isUserInRole('whatever')),
+            // aber wir können NICHT die Rolle aktiv erfragen (z.B. mit getUserRole(...))
+            if (request.isUserInRole("admin"))
+                return "adminseite";
+            else if (request.isUserInRole("user"))
+                return "musik";
+
+            return "error";
+        } catch (ServletException e) {
+            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An Error Occured: Login failed", null));
+        }
+        return "error";
     }
-  }
 
+    public void logout() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest)
+        fc.getExternalContext().getRequest();
+        try {
+            request.logout();
+        } catch (ServletException e) {
+            fc.addMessage(null, new FacesMessage("Logout failed."));
+        }
+    }
     
     public Reference getReference() throws NamingException {
         return new Reference(
@@ -102,6 +88,4 @@ public class UserBean implements Serializable{
 	    null,
 	    null);          // Factory location
     }
-  
-
 }

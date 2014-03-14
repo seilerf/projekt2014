@@ -7,40 +7,56 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p = "http://primefaces.org/ui"
-      xmlns:h = "http://xmlns.jcp.org/jsf/html">
+      xmlns:h = "http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>MP3-Sammlung</title>
         <meta name="viewport" content="width=device-width"/>
     </h:head>
     <h:body>
+        
+        <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addCom">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:form>
+                        <p:outputLabel value="Titel: "/>
+                        <p:selectOneMenu effect="fade">
+                            <f:selectItem itemLabel="Bitte auswählen" itemValue=""/>
+                            <f:selectItems value="#{Musikd.allMp3}" var="mp3" itemLabel="#{mp3[1]}" itemValue="#{mp3[0]}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="oder Interpret: "/>
+                        <p:inputText id="editInterpret" />
+                        <br/>
+                        <p:outputLabel value="Kommentar: "/>
+                        <p:inputTextarea id="comment"/>
+                    </h:form>
+                </h:panelGrid>
+        </p:dialog>
+        
         <p:menubar autoDisplay="true">
             <p:menuitem value="Start" url="./index.xhtml" />
             <p:menuitem value="Adminseite" url="./adminseite.xhtml" />
             <p:menuitem value="Logout" url="./index.xhtml" action="#{UserBean.logout()}"/>
         </p:menubar>
-        <p:panel header="MP3-Liste" toggleable="true" toggleTitle="Minimieren" >
+        <p:panel header="MP3-Liste" toggleable="true">
             <p:dataTable var="mp3" value="#{Musikd.allMp3}">
-                <p:column headerText="ID" sortBy="#{mp3[0]}">
-                    <h:outputText value="#{mp3[0]}"/>
-                </p:column>
-                <p:column headerText="Titel" sortBy="#{mp3[1]}">
+                <p:column headerText="Titel">
                     <h:outputText value="#{mp3[1]}"/>
                 </p:column>
-                <p:column headerText="Interpret" sortBy="#{mp3[2]}">
+                <p:column headerText="Interpret">
                     <h:outputText value="#{mp3[2]}"/>
+                </p:column>
+                <p:column headerText="Kommentare">
+                    
                 </p:column>
                 <p:column width='10'>
                     <h:form>
                         <h:commandLink value="Download" action="#{Musikd.getFile(mp3[0])}"/>
                     </h:form>
-                </p:column>
-                <p:column width="10">
-                    <h:form>
-                        <h:commandLink value="edit" action="#{Musikd.getFile(mp3[0])}"/>
-                    </h:form>
-                </p:column>
-                
+                </p:column>                
             </p:dataTable>
         </p:panel>
+        <h:form>
+            <p:commandLink value="Kommentar hinzufügen" oncomplete="PF('addCom').show()"/>
+        </h:form>
     </h:body>
 </html>
