@@ -11,8 +11,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- *
- * @author fseiler
+ * Die Interfaces welche Registriert werden.
+ * @author Anton
  */
 public interface IMusikd extends Remote{
 
@@ -34,5 +34,7 @@ public interface IMusikd extends Remote{
     public boolean getBalancemethod() throws RemoteException;
     public void setBalancemethod(boolean balancemethod) throws RemoteException;
     public void balanceMethod() throws RemoteException;
+    public int getInterval() throws RemoteException;
+    public void setInterval(int interval) throws RemoteException;
     
 }

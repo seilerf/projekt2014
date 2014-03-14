@@ -13,8 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author fseiler
+ * Diese Klasse holt sich die Registry der beiden Musikdienste und Registriert daraus eine neue 
+ * mit den zusätzlichen Loadbalancer Methoden, welche der Webserver dann abruft.
+ * @author Anton
  */
 public class Musikd extends UnicastRemoteObject implements IMusikd{
 
@@ -26,21 +27,37 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     private String serveradress1= "localhost";
     private String serveradress2= "localhost";
     
-    
+    /**
+     * Instanziiert eine neue Balance Klasse 
+     * ruft die Registrierung auf, welche die Methoden des Loadbalancers registriert
+     * ruft die look up Methode auf, welche sich die beiden Registry Einträge der Musikdienste holt
+     * @throws RemoteException
+     */
     public Musikd() throws RemoteException{
         this.balance=  new Balance();
         this.registerForRmi();
         this.lookupRmi();
     }
-    
+    /**
+     *
+     * @return Interface1 vom Musikdienst1
+     */
     public IMusikd getiServer1() {
         return iServer1;
     }
 
+    /**
+     *
+     * @param iServer1
+     */
     public void setiServer1(IMusikd iServer1) {
         this.iServer1 = iServer1;
     }
 
+    /**
+     *
+     * @return Interface2 vom Musikdienst2
+     */
     public IMusikd getiServer2() {
         return iServer2;
     }
@@ -67,6 +84,15 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         System.out.println("Loadbalancer: server2 adresse "+serveradress2);
     }
     
+    
+     /**
+     *Holt sich die Registry unter Port 1099 und schaut nach den Musikdienst einträgen
+     * unter berücksichtigung der jeweiligen Serveradresse des Musikdienstes
+     * bindet den Eintrag unter iServer interface
+     * 
+     * Geschieht für beide Musikdienste, falls sie etwas Eingetragen haben
+     * 
+     */
     private void lookupRmi(){
         try {
             Registry registry = LocateRegistry.getRegistry(1099);
@@ -92,7 +118,12 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         }
     }
     
-    
+     /**
+     *Bindet das IMusikd Interface unter Port 1099 mit dem Namen Musikd
+     * Das Interface beinhaltet die Methoden des Musikdienstes, sowie auch die 
+     * notwendigen Loadbalancer Methoden für den Webserver
+     * 
+     */
      private void registerForRmi(){
         try {        
             LocateRegistry.createRegistry(1099);
@@ -110,7 +141,10 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * ruft balancieren der Balance Klasse auf
+     * @return die getTest Methode des entsprechenden Musikdienstes
+     */
     public String test()   {
         try {
            return balance.balancieren(Musikd.this).test();
@@ -120,7 +154,12 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         }
         return null;
     }
-        
+    /**
+     * ruft balancieren der Balance Klasse auf
+     * addMp3 Methode des entsprechenden Musikdienstes
+     * @param mp3_title
+     * @param mp3_Artist
+     */
     public void addMp3(String mp3_title, String mp3_Artist) {
         try {
             balance.balancieren(Musikd.this).addMp3(mp3_title, mp3_Artist);
@@ -128,7 +167,11 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+/**
+     * ruft balancieren der Balance Klasse auf
+     * @param mp3_id
+     *  die deleteMp3 Methode des entsprechenden Musikdienstes
+     */
     public void deleteMp3(int mp3_id) {
         try {
             balance.balancieren(Musikd.this).deleteMp3(mp3_id);
@@ -136,12 +179,24 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+/**
+     * ruft balancieren der Balance Klasse auf
+     * @param mp3_id
+     *  die getMp3 Methode des entsprechenden Musikdienstes
+     * @return 
+     * @throws java.rmi.RemoteException
+     */
     public String[] getMp3(int mp3_id) throws RemoteException {
         System.out.println("Methodenaufruf getmp3 von server 2");
         return balance.balancieren(Musikd.this).getMp3(mp3_id);
     }
     
+     /**
+     * ruft balancieren der Balance Klasse auf
+     * @param mp3ArtistId
+     * die getMp3ByArtist Methode des entsprechenden Musikdienstes
+     * @return 
+     */
     public String[] getMp3ByArtist(int mp3ArtistId) {
         try {
            return balance.balancieren(Musikd.this).getMp3ByArtist(mp3ArtistId);
@@ -152,6 +207,10 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         return null;
     }
 
+    /**
+     * ruft balancieren der Balance Klasse auf
+     * @return die getAllMp3 Methode des entsprechenden Musikdienstes
+     */
     public List<String[]> getAllMp3() {
         try {
              return balance.balancieren(Musikd.this).getAllMp3();
@@ -162,27 +221,65 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         return null;
     }
     
+   /**
+     *
+     * @param anzserv
+     */
     public void setAnzserv(int anzserv){
          balance.setServeranzahl(anzserv);
-    }
+     }
    
+    /**
+     *
+     * @return serveranzahl
+     */
     public int getAnzserv(){
        return  balance.getServeranzahl();
-    }
-    
+     }
+
+    /**
+     *
+     * @return BalanceMethode (true, false)
+     */
     public boolean getBalancemethod() {
         return balance.getBalancemethod();
     }
    
+    /**
+     *
+     * @param balancemethod
+     */
     public void setBalancemethod(boolean balancemethod) {
         balance.setBalancemethod(balancemethod);
     }
-    
+
+    /**
+     *ruft BalanceMethod von Klasse Balance auf
+     * 
+     */
     public void balanceMethod() {
         balance.balanceMethod();
     }
 
+    /**
+     *ruft setInterval von Klasse Balance auf
+     * @param interval
+     */
+    public void setInterval(int interval){
+        balance.setInterval(interval);
+    }
+    
+    /**
+     *ruft getInterval von Klasse Balance auf
+     * @return interval
+     */
+    public int getInterval(){
+       return balance.getInterval();
+    }
+    
+    
     public byte[] getFile(int mp3_id) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+   
 }
