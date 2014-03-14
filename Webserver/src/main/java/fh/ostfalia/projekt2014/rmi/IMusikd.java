@@ -32,4 +32,7 @@ public interface IMusikd {
     public boolean getBalancemethod() ;
     public void setBalancemethod(boolean balancemethod);
     public void balanceMethod();
+    public int getInterval()  ;
+    public void setInterval(int interval)  ;
+    
 }

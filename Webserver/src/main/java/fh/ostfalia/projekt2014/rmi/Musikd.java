@@ -133,6 +133,16 @@ public class Musikd implements IMusikd, Serializable {
     public void balanceMethod()  {
         intfMusikd.balanceMethod();
     }
+    
+     @Override
+    public void setInterval(int interval)  {
+        intfMusikd.setInterval(interval);
+    }
+    @Override
+    public int getInterval()  {
+        
+        return intfMusikd.getInterval();
+    }
 
     @Override
     public byte[] getFile(int mp3_id) {

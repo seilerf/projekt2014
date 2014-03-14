@@ -1,33 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fh.ostfalia.projekt2014.model;
 
 import java.io.Serializable;
-import java.security.Principal;
 import javax.annotation.security.DeclareRoles;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.naming.NamingException;
 import javax.naming.Reference;
 import javax.naming.StringRefAddr;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
- * @author Anton
- */
+* Diese Klasse dient zum Login und Logout
+*
+* @author Anton
+*/
 @DeclareRoles({"user", "admin"})
 public class UserBean implements Serializable{
 
     private String username;
     private String password;
     private String loginBean;
-    private User current;
-    private EntityManager userService;
     
     public String getUsername() {
         return username;
@@ -45,21 +39,22 @@ public class UserBean implements Serializable{
         this.password = password;
     }
     
+    /**
+     * Versucht den login durchzuführen wenn geprüft, schaut er die Rolle des Users nach und
+     * gibt entweder die Adminseite für admins zurück oder die Musikseite
+     * Bei fehlschlägen die error Seite
+     * @return die entsprechende Webseite
+     */
     public String login () {
       
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
         try {
-            //Login per Servlet 3.0
             request.login(username, password);
 
-            // Der Principal entspricht dem Usernamen
-            Principal principal = request.getUserPrincipal();
-
-            // Wir können hier nur abfragen, ob der User eine Rolle hat (isUserInRole('whatever')),
-            // aber wir können NICHT die Rolle aktiv erfragen (z.B. mit getUserRole(...))
             if (request.isUserInRole("admin"))
                 return "adminseite";
+            
             else if (request.isUserInRole("user"))
                 return "musik";
 
@@ -70,6 +65,9 @@ public class UserBean implements Serializable{
         return "error";
     }
 
+    /**
+     * holt sich den aktuellen request um ihn auszuloggen
+     */
     public void logout() {
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest)
@@ -83,9 +81,9 @@ public class UserBean implements Serializable{
     
     public Reference getReference() throws NamingException {
         return new Reference(
-	    UserBean.class.getName(),
-	    new StringRefAddr("UserBean", loginBean),
-	    null,
-	    null);          // Factory location
-    }
+            UserBean.class.getName(),
+            new StringRefAddr("UserBean", loginBean),
+                        null,
+                        null) ; // Factory location
+                            }
 }

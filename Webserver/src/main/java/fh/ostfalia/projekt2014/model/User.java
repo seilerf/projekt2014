@@ -5,9 +5,6 @@
 package fh.ostfalia.projekt2014.model;
 
 import java.io.Serializable;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- *
+ * Diese Klasse enthält das User Model und die getter und setter für den User
  * @author anton
  */
 @Entity
@@ -26,6 +23,7 @@ import javax.persistence.Table;
 @NamedQueries({@NamedQuery(name="User.getAll",query="SELECT e FROM User e")})
 public class User implements Serializable{
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column (name = "userid")
     private int userid;
     @Column (name = "username")
@@ -35,6 +33,7 @@ public class User implements Serializable{
     @Column (name = "groupname")
     private String groupname="user";
 
+    public User(){}
 
     public String getUsername() {
         return username;
@@ -81,5 +80,5 @@ public class User implements Serializable{
 
 
     
-    public User(){}
+    
 }
