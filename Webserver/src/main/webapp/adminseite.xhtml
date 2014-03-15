@@ -11,39 +11,32 @@
  
         <p:panel header="Adminseite">
             <h:form>
-
-                <h:outputText value="Anzahl der Musikdienste" />  
-                <p:selectOneListbox id="serveranzahl" value="#{Musikd.anzserv}">  
-                    <f:selectItem itemLabel="1 Musikdienst" itemValue="1" />  
-                    <f:selectItem itemLabel="2 Musikdienste" itemValue="2" />  
-               
-                </p:selectOneListbox>  
-                <br/>
-                <h:outputText value="Loadbalancing Methode" />  
-                <p:selectOneListbox id="method" value="#{Musikd.balancemethod}">  
-                    <f:selectItem itemLabel="Round Robin" itemValue="false" />  
-                    <f:selectItem itemLabel="In 5sek Intervallen" itemValue="true" />  
-
-                </p:selectOneListbox>  
-                <br/>        
-                <h:outputText value="Intervallänge" />  
-                <p:selectOneListbox id="interval" value="#{Musikd.interval}">  
-                    <f:selectItem itemLabel="1 Sek." itemValue="1" />  
-                    <f:selectItem itemLabel="2 Sek." itemValue="2" />  
-                    <f:selectItem itemLabel="3 Sek." itemValue="3" />
-                    <f:selectItem itemLabel="4 Sek." itemValue="4" />  
-                    <f:selectItem itemLabel="5 Sek." itemValue="5" />  
-                    <f:selectItem itemLabel="6 Sek." itemValue="6" /> 
-                    <f:selectItem itemLabel="7 Sek." itemValue="7" /> 
-                </p:selectOneListbox>  
-                <br/>
-                <h:outputText id="serveradress1" value="Server Adresse 1: "/>
-                <h:inputText id="serveradre1" value="#{Musikd.serveradress1}"/>
-                <br />
-                <h:outputText id="serveradress2" value="Server Adresse 2: "/>
-                <h:inputText id="serveradr2" value="#{Musikd.serveradress2}"/>
-                <p:separator />   
-                <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg1').show()" action="#{Musikd.balanceMethod()}" />  
+                <p>
+                    <h:outputText value="Anzahl der Musikdienste:" />  
+                    <p:selectOneListbox id="serveranzahl" value="#{Musikd.anzserv}">  
+                        <f:selectItem itemLabel="1 Musikdienst" itemValue="1" />  
+                        <f:selectItem itemLabel="2 Musikdienste" itemValue="2" />  
+                    </p:selectOneListbox>
+                    <h:outputText id="serveradress1" value="Adresse des 1. Servers: "/>
+                    <h:inputText id="serveradre1" value="#{Musikd.serveradress1}"/>
+                    <br />
+                    <h:outputText id="serveradress2" value="Adresse des 2. Servers: "/>
+                    <h:inputText id="serveradr2" value="#{Musikd.serveradress2}"/>
+                </p>
+                <p:separator/>
+                <p>
+                    <h:outputText value="Loadbalancing-Methode:" />  
+                    <p:selectOneMenu id="method" value="#{Musikd.balancemethod}">  
+                        <f:selectItem itemLabel="Round Robin" itemValue="false" />  
+                        <f:selectItem itemLabel="In Sekunden-Intervallen" itemValue="true" />  
+                    </p:selectOneMenu>
+                    <br/>
+                    <h:outputText value="Intervallänge: " /><br/>
+                    <p:spinner id="interval" value="#{Musikd.interval}" min="1" max="20" prefix="Sek "/>
+                </p>
+                <p:separator />
+                
+                <p:commandButton id="submitButton" value="OK" update="display" oncomplete="PF('dlg1').show()" action="#{Musikd.balanceMethod()}" />  
 
                 <p:dialog header="Eingegebene Werte" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg1">  
                     <h:panelGrid columns="3" id="display">  
