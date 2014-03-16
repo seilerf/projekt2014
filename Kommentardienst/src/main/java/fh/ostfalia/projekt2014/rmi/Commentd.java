@@ -74,6 +74,7 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
     
     public String getTest() throws RemoteException {
         return "Antwort vom Server bezueglich des Kommentardienstes! Ende der Kette!";
+      
     }
 
     public void addComment(String comment_Title, String comment_Description) throws RemoteException {
