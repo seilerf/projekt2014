@@ -35,4 +35,6 @@ public interface IMusikd {
     public int getInterval()  ;
     public void setInterval(int interval)  ;
     
+    public void upLoad(String part); 
+    
 }

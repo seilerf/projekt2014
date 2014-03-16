@@ -23,11 +23,12 @@ import org.primefaces.event.SelectEvent;
 
 /**
  *
- * @author fseiler
+ * @author fseiler/M.Ullmann
  */
 public class Musikd implements IMusikd, Serializable {
     
     private IMusikd intfMusikd = null;
+    private String part;
     
     //private String serveradress;
     
@@ -148,5 +149,23 @@ public class Musikd implements IMusikd, Serializable {
     public byte[] getFile(int mp3_id) {
         byte[] file = intfMusikd.getFile(mp3_id);
         return file;
+    }
+    
+    public void upLoad() {
+     intfMusikd.upLoad(part);
+        System.out.println("Der WebServer wird verlassen ==> LoadBalancer!!!");
+    }
+    
+    public void setPart(String part) {
+        this.part = part;
+    }
+    
+    public String getPart() {
+        return this.part;
+    }
+    
+    @Override
+    public void upLoad(String part) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 }

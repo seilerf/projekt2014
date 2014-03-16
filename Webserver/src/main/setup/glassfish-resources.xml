@@ -6,7 +6,7 @@
         <property name="portNumber" value="3306"/>
         <property name="databaseName" value="userdb"/>
         <property name="User" value="root"/>
-        <property name="Password" value="mysql@1tnc"/>
+        <property name="Password" value="testpw"/>
         <property name="URL" value="jdbc:mysql://localhost:3306/userdb?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
