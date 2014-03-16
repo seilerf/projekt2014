@@ -28,6 +28,7 @@ public interface IMusikd extends Remote{
     public void setServeradress2(String serveradress2) throws RemoteException;
     public String getServeradress1() throws RemoteException;
     public String getServeradress2() throws RemoteException;
+     public void upLoad(String part) throws RemoteException;
     
     public void setAnzserv(int anzserv) throws RemoteException;
     public int getAnzserv() throws RemoteException;

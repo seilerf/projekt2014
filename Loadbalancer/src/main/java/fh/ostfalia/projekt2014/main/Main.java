@@ -22,7 +22,7 @@ public class Main {
             
         
             Musikd musikd = new Musikd();
-           // musikd.getTest();
+           
         } catch (RemoteException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

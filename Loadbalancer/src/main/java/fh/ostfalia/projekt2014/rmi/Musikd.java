@@ -34,7 +34,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
      * @throws RemoteException
      */
     public Musikd() throws RemoteException{
-        this.balance=  new Balance();
+        this.balance =  new Balance();
         this.registerForRmi();
         this.lookupRmi();
     }
@@ -280,6 +280,14 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     
     public byte[] getFile(int mp3_id) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void upLoad(String part) {
+      try {    
+          balance.balancieren(Musikd.this).upLoad(part);      
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
    
 }
