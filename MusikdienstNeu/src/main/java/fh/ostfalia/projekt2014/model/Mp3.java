@@ -11,12 +11,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.AUTO;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -27,16 +26,17 @@ import javax.persistence.Table;
 
 /**
  *
- * @author fseiler
+ * @author M.Ullmann
  */
 @Entity
 @Table(name = "mp3")
 @NamedQueries({
-    @NamedQuery(name = "Mp3.findAll", query = "SELECT m FROM Mp3 m")})
+    @NamedQuery(name = "Mp3.findAll", query = "SELECT m FROM Mp3 m"),
+    @NamedQuery(name = "getNameForMp3", query = "SELECT m FROM Mp3 m where m.mp3Title = :name")})
 public class Mp3 implements Serializable {
     
     private static final long serialVersionUID = 1L;
-    private Integer mp3Id;
+    private int mp3Id;
     private byte[] mp3File;
     private String mp3Title;
     private Mp3Artist mp3Artist;
@@ -44,18 +44,18 @@ public class Mp3 implements Serializable {
     public Mp3() {
     }
 
-    public Mp3(Integer mp3Id) {
+    public Mp3(int mp3Id) {
         this.mp3Id = mp3Id;
     }
 
     @Id
     @Column(name = "mp3_id")
     @GeneratedValue(strategy = AUTO)
-    public Integer getMp3Id() {
+    public int getMp3Id() {
         return mp3Id;
     }
 
-    public void setMp3Id(Integer mp3Id) {
+    public void setMp3Id(int mp3Id) {
         this.mp3Id = mp3Id;
     }
 
@@ -77,8 +77,8 @@ public class Mp3 implements Serializable {
         this.mp3Title = mp3Title;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "artist_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity=Mp3Artist.class)
+    @JoinColumn(name = "artist_id", nullable = true)
     public Mp3Artist getArtist(){
         return this.mp3Artist;
     }
@@ -107,24 +107,12 @@ public class Mp3 implements Serializable {
         }
     }
     
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (mp3Id != null ? mp3Id.hashCode() : 0);
-        return hash;
+    public void setNewArtistID(int artist_id) {
+        mp3Artist.setArtistId(artist_id);
     }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Mp3)) {
-            return false;
-        }
-        Mp3 other = (Mp3) object;
-        if ((this.mp3Id == null && other.mp3Id != null) || (this.mp3Id != null && !this.mp3Id.equals(other.mp3Id))) {
-            return false;
-        }
-        return true;
+    
+    public String getArtistName() {
+        return this.mp3Artist.getArtistName();
     }
 
     @Override

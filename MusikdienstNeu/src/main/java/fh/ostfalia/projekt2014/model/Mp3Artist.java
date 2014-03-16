@@ -20,39 +20,40 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author fseiler
+ * @author fseiler/ M.Ullmann
  */
 @Entity
 @Table(name = "mp3artist")
 @NamedQueries({
     @NamedQuery(name = "Mp3Artist.findAll", query = "SELECT m FROM Mp3Artist m"),
-    @NamedQuery(name = "Mp3Artist.findByName", query = "SELECT m FROM Mp3Artist m WHERE m.artistName = :name")})
+    @NamedQuery(name = "getName", query = "SELECT m FROM Mp3Artist m WHERE m.artistName = :name")})
 public class Mp3Artist implements Serializable {
+    
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional = false)
-    @Column(name = "artist_id")
-    private Integer artistId;
-    @Size(max = 255)
-    @Column(name = "artist_name")
+    private int artistId;
     private String artistName;
 
     public Mp3Artist() {
     }
 
-    public Mp3Artist(Integer artistId) {
+    public Mp3Artist(int artistId) {
         this.artistId = artistId;
     }
-
-    public Integer getArtistId() {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Basic(optional = false)
+    @Column(name = "artist_id")
+    public int getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Integer artistId) {
+    public void setArtistId(int artistId) {
         this.artistId = artistId;
     }
-
+    
+    @Size(max = 255)
+    @Column(name = "artist_name")
     public String getArtistName() {
         return artistName;
     }
@@ -61,29 +62,11 @@ public class Mp3Artist implements Serializable {
         this.artistName = artistName;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (artistId != null ? artistId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Mp3Artist)) {
-            return false;
-        }
-        Mp3Artist other = (Mp3Artist) object;
-        if ((this.artistId == null && other.artistId != null) || (this.artistId != null && !this.artistId.equals(other.artistId))) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {
         return "fh.ostfalia.projekt2014.model.Mp3Artist[ artistId=" + artistId + " ]";
     }
+    
     
 }

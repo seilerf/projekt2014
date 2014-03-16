@@ -6,13 +6,13 @@
     <class>fh.ostfalia.projekt2014.model.Mp3</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/webservice?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.password" value="mysql@1tnc"/>
+      <property name="javax.persistence.jdbc.password" value="testpw"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
-  <persistence-unit name="Mp32" transaction-type="RESOURCE_LOCAL">
+  <!--<persistence-unit name="Mp32" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fh.ostfalia.projekt2014.model.Mp3Artist</class>
     <class>fh.ostfalia.projekt2014.model.Mp3</class>
@@ -23,5 +23,5 @@
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
-  </persistence-unit>
+  </persistence-unit>-->
 </persistence>
