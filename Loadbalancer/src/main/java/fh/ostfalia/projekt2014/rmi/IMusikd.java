@@ -22,13 +22,15 @@ public interface IMusikd extends Remote{
     public String[] getMp3(int mp3_id) throws RemoteException;
     public String[] getMp3ByArtist (int mp3ArtistId) throws RemoteException;
     public List<String[]> getAllMp3() throws RemoteException;
+    public List<String[]> getAllArtist() throws RemoteException;
     public byte[] getFile(int mp3_id) throws RemoteException;
     
     public void setServeradress1(String serveradress1) throws RemoteException;
     public void setServeradress2(String serveradress2) throws RemoteException;
     public String getServeradress1() throws RemoteException;
     public String getServeradress2() throws RemoteException;
-     public void upLoad(String part) throws RemoteException;
+    public void upLoad(String part) throws RemoteException;
+    public void mp3Download(String mp3_title, int mp3_id) throws RemoteException;
     
     public void setAnzserv(int anzserv) throws RemoteException;
     public int getAnzserv() throws RemoteException;

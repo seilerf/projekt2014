@@ -146,8 +146,10 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
      * @return die getTest Methode des entsprechenden Musikdienstes
      */
     public String test()   {
+        System.out.println("Im Loadbalancer angekommen!!");
         try {
-           return balance.balancieren(Musikd.this).test();
+            System.out.println("Im LoadBalancer gewesen!!");
+           return iServer1.test();
              
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
@@ -221,6 +223,16 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         return null;
     }
     
+      public List<String[]> getAllArtist() {
+        try {
+             return balance.balancieren(Musikd.this).getAllArtist();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
    /**
      *
      * @param anzserv
@@ -285,6 +297,14 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     public void upLoad(String part) {
       try {    
           balance.balancieren(Musikd.this).upLoad(part);      
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void mp3Download(String mp3_title, int mp3_id) {
+         try {    
+          balance.balancieren(Musikd.this).mp3Download(mp3_title, mp3_id);      
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
