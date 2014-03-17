@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.AUTO;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -31,31 +32,31 @@ public class Comment implements Serializable {
     
     private static final long serialVersionUID = 1L;
     //CommentID um den jeweiligen Kommentar eindeutig zu definieren
-    private Integer commentID;
+    private int commentID;
     //CommentTitel, welcher als Überschrift oder Schlagwort gedacht ist
     private String commentTitle;
     //Die comToMp3ID gibt immer die ID der Mp3 an, zu dem der Kommentar gehört
-    private Integer comToMp3ID;
+    private int comToMp3ID;
     //Beschreibung des Eigentlichen Kommentars
     private String commentDescription;
     //Die comToArtID gibt immer die ID des Künstlers an, zu dem der Kommentar gehört
-    private Integer comToArtID;
+    private int comToArtID;
     
     public Comment() {
     }
     
-    public Comment(Integer commentID) {
+    public Comment(int commentID) {
         this.commentID = commentID;
     }
 
     @Id
     @Column(name = "comment_id")
-    @GeneratedValue(strategy = IDENTITY)
-    public Integer getCommentID() {
+    @GeneratedValue(strategy = AUTO)
+    public int getCommentID() {
         return commentID;
     }
     
-     public void setCommentID(Integer commentID) {
+     public void setCommentID(int commentID) {
         this.commentID = commentID;
     }
     
@@ -79,42 +80,23 @@ public class Comment implements Serializable {
     
    
     @Column(name = "comment_refmp3")
-    public Integer getCommentToMp3() {
+    public int getCommentToMp3() {
         return this.comToMp3ID;
     }
 
-    public void setCommentToMp3(Integer commentToMp3) {
+    public void setCommentToMp3(int commentToMp3) {
         this.comToMp3ID = commentToMp3;
     }
     
     @Column(name = "comment_refart")
-    public Integer getCommentToArt() {
+    public int getCommentToArt() {
         return this.comToArtID;
     }
     
-    public void setCommentToArt(Integer comToArtID) {
+    public void setCommentToArt(int comToArtID) {
         this.comToArtID = comToArtID;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (commentID != null ? commentID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the commentID fields are not set
-        if (!(object instanceof Comment)) {
-            return false;
-        }
-        Comment other = (Comment) object;
-        if ((this.commentID == null && other.commentID != null) || (this.commentID != null && !this.commentID.equals(other.commentID))) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {

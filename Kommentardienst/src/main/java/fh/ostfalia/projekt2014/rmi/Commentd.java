@@ -41,9 +41,7 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
             System.out.println("Server: Dienst für RMI registrieren...");
             
             ICommentd intfCommentService = this;
-            
-           // LocateRegistry.createRegistry(1088);
-          //  Naming.rebind("rmi://localhost/AccessToComment", intfMusicService);
+
             LocateRegistry.createRegistry(1088);  
             Registry registry = LocateRegistry.getRegistry(1088);  
             registry.rebind("rmi://localhost/Commentd", intfCommentService);
@@ -53,23 +51,11 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
         } catch (RemoteException ex) {
            System.err.println("CommentService: RemoteException aufgetreten!");
         }
-        
-      /**  EntityManagerFactory emf = Persistence.createEntityManagerFactory("CommentServicePU");
-        EntityManager em = emf.createEntityManager();
-        
-        em.getTransaction().begin();
-        
-        Comment comment = em.find(Comment.class, 1);
-       /** System.out.println("Commnet:" +comment.getCommentTitle());
-        System.out.println("Comment_Beschreibung:" +comment.getCommentDescription());
-        
-        em.close();
-        emf.close();**/
     }
     
     /**
-     * TestFunktion: Um die Verbindung zum Server zu t
-     * esten.
+     * TestFunktion: Um die Verbindung zum Server zu testen.
+     * 
      * @return
      * @throws RemoteException 
      */
@@ -79,10 +65,26 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
       
     }
 
-    public void addComment(int refArt, int refMp3) throws RemoteException {
+    @Override
+    public void addCommentForMp3(String comTitle, String comDesc, int refMp3) throws RemoteException {
        Comment com = new Comment();
-       com.setCommentToArt(refArt);
+       com.setCommentTitle(comTitle);
+       com.setCommentDescription(comDesc);
+       com.setCommentToArt(0);
        com.setCommentToMp3(refMp3);
+       
+       et.begin();
+       em.persist(com);
+       et.commit();
+    }
+      
+     @Override
+     public void addCommentForArt(String comTitle, String comDesc, int refArt) throws RemoteException {
+       Comment com = new Comment();
+       com.setCommentTitle(comTitle);
+       com.setCommentDescription(comDesc);
+       com.setCommentToArt(refArt);
+       com.setCommentToMp3(0);
        
        et.begin();
        em.persist(com);
