@@ -310,9 +310,17 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         }
     }
 
-    public void addComment(int refArt, int refMp3) throws RemoteException {
+    public void addCommentForMp3(String comTitle, String comDesc, int refMp3) throws RemoteException {
         try {    
-          balance.balancieren(Musikd.this).addComment(refArt, refMp3);
+          balance.balancieren(Musikd.this).addCommentForMp3(comTitle, comDesc, refMp3);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addCommentForArt(String comTitle, String comDesc, int refArt) throws RemoteException {
+        try {    
+          balance.balancieren(Musikd.this).addCommentForArt(comTitle, comDesc, refArt);
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
