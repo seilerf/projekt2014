@@ -61,20 +61,30 @@ public class Commentd implements ICommentd {
             return iCommentd.getTest();  
     }
 
-    public void addComment(String comment_Title, String comment_Description) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addComment(int refArt, int refMp3) {
+        iCommentd.addComment(refArt, refMp3);
     }
 
     public void deleteComment(int comment_ID){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        iCommentd.deleteComment(comment_ID);
     }
 
     public String[] getComment(int comment_ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return iCommentd.getComment(comment_ID);
     }
 
     public List<String[]> getAllComment() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return iCommentd.getAllComment();
+    }
+
+    @Override
+    public List<String[]> getAllCommentForTitle(int refMp3) {
+        return iCommentd.getAllCommentForArt(refMp3);
+    }
+
+    @Override
+    public List<String[]> getAllCommentForArt(int refArt) {
+         return iCommentd.getAllComment();
     }
     
 }

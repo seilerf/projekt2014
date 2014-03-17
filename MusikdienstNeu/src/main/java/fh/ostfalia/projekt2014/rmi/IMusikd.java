@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author fseiler
+ * @author fseiler/ M.Ullmann
  */
 public interface IMusikd extends Remote{
     
@@ -26,5 +26,10 @@ public interface IMusikd extends Remote{
     //public byte[] getFile(int mp3_id) throws RemoteException;
     public void mp3Download(String mp3_title, int mp3_id) throws RemoteException;
     public void upLoad(String part) throws RemoteException;
+    public void addComment(int refArt, int refMp3) throws RemoteException;
+    public void deleteComment(int com_Id) throws RemoteException;
+    public void getAllComment() throws RemoteException;
+    public void getAllCommentForArt(int refArt) throws RemoteException;
+    public void getAllCommentForTitle(int refMp3) throws RemoteException;
     
 }

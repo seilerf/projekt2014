@@ -15,9 +15,10 @@ import java.util.List;
 public interface ICommentd {
     
     public String getTest();
-    public void addComment(String comment_Title, String comment_Description);
+    public void addComment(int refArt, int refMp3);
     public void deleteComment(int comment_ID);
     public String[] getComment(int comment_ID);
     public List<String[]> getAllComment();
-    
+    public List<String[]> getAllCommentForTitle(int refMp3);
+    public List<String[]> getAllCommentForArt(int refArt);
 }

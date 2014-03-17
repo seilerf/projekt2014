@@ -90,6 +90,32 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         System.out.println("Im Musikdienst angekommen!!");
         return  this.commentd.getTest();
     }
+   
+    @Override
+    public void addComment(int refArt, int refMp3) throws RemoteException {
+        this.commentd.addComment(refArt, refMp3);
+    }
+    
+    @Override
+    public void deleteComment(int com_Id) throws RemoteException {
+        this.commentd.deleteComment(com_Id);
+    }
+    
+    @Override
+    public void getAllComment() throws RemoteException {
+       this.commentd.getAllComment();
+    }
+    
+    @Override
+    public void getAllCommentForArt(int refArt) throws RemoteException {
+        this.commentd.getAllCommentForArt(refArt);
+    }
+    
+    @Override
+    public void getAllCommentForTitle(int refMp3) throws RemoteException {
+        this.commentd.getAllCommentForTitle(refMp3);
+    }
+    
 
     @Override
     public void addMp3(String mp3_title, String mp3_Artist) throws RemoteException {
