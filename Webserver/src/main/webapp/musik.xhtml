@@ -15,8 +15,7 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form>
-            
-        <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addComTitle">
+            <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addComTitle1">
                 <h:panelGrid columns="2" cellpadding="5">
                    <h:form>
                         <tr>
@@ -24,9 +23,9 @@ and open the template in the editor.
                         <p:outputLabel value="Titel: "/> 
                             </td>
                             <td>
-                        <p:selectOneMenu effect="fade">
+                                <p:selectOneMenu effect="fade" value="#{Musikd.comRefArt}">
                             <f:selectItem itemLabel="Bitte auswählen" itemValue=""/>
-                            <f:selectItems value="#{Musikd.allMp3}" var="mp3" itemLabel="#{mp3[1]}" itemValue="#{mp3[0]}"/>
+                            <f:selectItems value="#{Musikd.allArtist}" var="mp3" itemLabel="#{mp3[1]}" itemValue="#{mp3[0]}"/>
                         </p:selectOneMenu>
                             </td> 
                         </tr>
@@ -35,7 +34,7 @@ and open the template in the editor.
                         <p:outputLabel value="Überschrift: " />
                             </td>
                             <td>
-                         <p:inputText id="commentTitle" value="" />
+                            <h:inputText id="commentTitle" value="#{Musikd.comTitle}" /> 
                             </td>
                         </tr>
                         <tr>
@@ -43,51 +42,15 @@ and open the template in the editor.
                         <p:outputLabel value="Kommentar: "/>
                             </td>
                             <td>
-                        <p:inputTextarea id="comment" value="" />
+                                <h:inputTextarea id="comment" value="#{Musikd.comDesc}" />
                         <br />
-                        <h:commandButton value="Add" action="#{Musikd.addComment(null, mp3[0])}" />
+                        <h:commandButton value="Add" action="#{Musikd.addCommentForArt()}" />
                              </td>
-                        </tr>   
+                        </tr>
                     </h:form>
                 </h:panelGrid>
         </p:dialog>
-        
-        <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addComArt">
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:form>
-                        <tr>
-                            <td>
-                        <p:outputLabel value="Künstler: "/> 
-                            </td>
-                            <td>
-                        <p:selectOneMenu effect="fade">
-                            <f:selectItem itemLabel="Bitte auswählen" itemValue=""/>
-                            <f:selectItems value="#{Musikd.allArtist}" var="art" itemLabel="#{art[2]}" itemValue="#{art[0]}"/>
-                        </p:selectOneMenu>
-                            </td> 
-                        </tr>
-                        <tr>
-                            <td>
-                        <p:outputLabel value="Titel: " />
-                            </td>
-                            <td>
-                                <p:inputText id="commentTitle" value="" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                        <p:outputLabel value="Kommentar: "/>
-                            </td>
-                            <td>
-                                <p:inputTextarea id="comment" value="" />
-                        <br />
-                        <h:commandButton value="Add" action="#{Musikd.addComment(art[0], null)}"/>
-                             </td>
-                        </tr>   
-                    </h:form>
-                </h:panelGrid>
-        </p:dialog>
-        
+     
         <p:menubar autoDisplay="true">
             <p:menuitem value="Start" url="./index.xhtml" />
             <p:menuitem value="Adminseite" url="./adminseite.xhtml" />
@@ -112,15 +75,51 @@ and open the template in the editor.
             </p:dataTable>
             <p:commandLink value="Kommentar für einen Titel hinzufügen" oncomplete="PF('addComTitle').show()" />
             <br />
-            <p:commandLink value="Kommentar für einen Künstler hinzufügen" oncomplete="PF('addComArt').show()" />         
+            <p:commandLink value="Kommentar für einen Künstler hinzufügen" oncomplete="PF('addComTitle1').show()" />         
         </p:panel>     
         </h:form>
         <p:panel>
         <h:form id="form" enctype="multipart/form-data" >
                     <h:inputFile id ="file" value="#{Musikd.part}" />
                     <h:commandButton value="Upload Mp3" action="#{Musikd.upLoad()}" />  
-                    <h:commandButton value="Comment Test" action="#{Musikd.test()}" />
                 </h:form>
         </p:panel>
+        <h:form>
+            <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addComTitle">
+                <h:panelGrid columns="2" cellpadding="5">
+                   <h:form>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Titel: "/> 
+                            </td>
+                            <td>
+                                <p:selectOneMenu effect="fade" value="#{Musikd.comRefMp3}">
+                            <f:selectItem itemLabel="Bitte auswählen" itemValue=""/>
+                            <f:selectItems value="#{Musikd.allMp3}" var="mp3" itemLabel="#{mp3[1]}" itemValue="#{mp3[0]}"/>
+                        </p:selectOneMenu>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Überschrift: " />
+                            </td>
+                            <td>
+                            <h:inputText id="commentTitle" value="#{Musikd.comTitle}" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Kommentar: "/>
+                            </td>
+                            <td>
+                                <h:inputTextarea id="comment" value="#{Musikd.comDesc}" />
+                        <br />
+                        <h:commandButton value="Add" action="#{Musikd.addCommentForMp3()}" />
+                             </td>
+                        </tr>
+                    </h:form>
+                </h:panelGrid>
+        </p:dialog>
+        </h:form>
     </h:body>
 </html>

@@ -29,8 +29,12 @@ public class Musikd implements IMusikd, Serializable {
     
     private IMusikd intfMusikd = null;
     private String part;
+    private String comTitle;
+    private String comDesc;
+    private int comRefMp3;
+    private int comRefArt;
+
     
-    //private String serveradress;
     
     public Musikd(){
         super();
@@ -89,7 +93,7 @@ public class Musikd implements IMusikd, Serializable {
     
     @Override
     public List<String[]> getAllArtist() {
-        return intfMusikd.getAllMp3();
+        return intfMusikd.getAllArtist();
     }
     
     @Override
@@ -168,6 +172,38 @@ public class Musikd implements IMusikd, Serializable {
         return this.part;
     }
     
+    public void setComTitle(String comTitle) {
+        this.comTitle = comTitle;
+    }
+    
+    public String getComTitle() {
+        return this.comTitle;
+    }
+    
+    public void setComDesc(String comDesc) {
+        this.comDesc = comDesc;
+    }
+    
+    public String getComDesc() {
+        return this.comDesc;
+    }
+    
+    public int getComRefMp3() {
+        return this.comRefMp3;
+    }
+    
+    public void setComRefMp3(int refMp3) {
+        this.comRefMp3 = refMp3;
+    }
+    
+    public int getComRefArt() {
+        return this.comRefArt;
+    }
+    
+    public void setComRefArt(int refArt) {
+        this.comRefArt = refArt;
+    }
+    
     @Override
     public void upLoad(String part) {
         throw new UnsupportedOperationException("Not supported yet."); 
@@ -179,8 +215,17 @@ public class Musikd implements IMusikd, Serializable {
     }
 
     @Override
-    public void addComment(int refArt, int refMp3) {
-         intfMusikd.addComment( refArt, refMp3);
+    public void addCommentForMp3() {
+  
+         intfMusikd.addCommentForMp3(comTitle, comDesc, this.comRefMp3);
+    }
+    
+    @Override
+    public void addCommentForArt() {
+        System.out.println("Der CommentTitle für den Künstler: "+comTitle);
+        System.out.println("Die Commentbeschreibung für den Künstler: "+comDesc);
+        System.out.println("Die Referenzid auf den Künstler: "+comRefArt);
+         intfMusikd.addCommentForArt(comTitle, comDesc, comRefArt);
     }
 
     @Override
@@ -201,5 +246,16 @@ public class Musikd implements IMusikd, Serializable {
     @Override
     public void getAllCommentForTitle(int refMp3) {
         intfMusikd.getAllCommentForTitle(refMp3);
+    }
+
+    @Override
+    public void addCommentForMp3(String comTitle, String comDesc, int refMp3) {
+        intfMusikd.addCommentForMp3(comTitle, comDesc, refMp3);
+    }
+    
+    @Override
+    public void addCommentForArt(String comTitle, String comDesc, int refArt) {
+        intfMusikd.addCommentForArt(comTitle, comDesc, refArt);
+        
     }
 }

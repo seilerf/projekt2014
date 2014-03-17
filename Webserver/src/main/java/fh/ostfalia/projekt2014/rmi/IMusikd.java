@@ -38,7 +38,11 @@ public interface IMusikd {
     
     public void upLoad(String part);
     public void mp3Download(String mp3_title, int mp3_id);
-    public void addComment(int refArt, int refMp3);
+    public void addCommentForMp3(String comTitle, String comDesc,  int refMp3);
+    public void addCommentForArt(String comTitle, String comDesc,  int refArt);
+ 
+    public void addCommentForMp3();
+    public void addCommentForArt();
     public void deleteComment(int com_Id);
     public void getAllComment();
     public void getAllCommentForArt(int refArt);
