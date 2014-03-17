@@ -64,9 +64,6 @@ and open the template in the editor.
                 <p:column headerText="Interpret">
                     <h:outputText value="#{mp3[2]}"/>
                 </p:column>
-                <p:column headerText="Kommentare">
-                    
-                </p:column>
                 <p:column width='10'>
                     <h:form>
                         <h:commandLink value="Download" action="#{Musikd.mp3Download(mp3[1], mp3[0])}"/>
@@ -84,6 +81,12 @@ and open the template in the editor.
                     <h:commandButton value="Upload Mp3" action="#{Musikd.upLoad()}" />  
                 </h:form>
         </p:panel>
+        <p:panel>
+            <h:form>
+                    <h:commandButton value="Show Comments for Mp3s" action="showCommentMp3.xhtml" />
+                    <h:commandButton value="Show Comments for Artists" action="showCommentArtist.xhtml" />
+            </h:form>
+        </p:panel> 
         <h:form>
             <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addComTitle">
                 <h:panelGrid columns="2" cellpadding="5">

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p = "http://primefaces.org/ui"
+      xmlns:h = "http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Artist-Kommentar</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body>
+        <h:form>  
+           
+        <p:menubar autoDisplay="true">
+            <p:menuitem value="Start" url="./index.xhtml" />
+            <p:menuitem value="Adminseite" url="./adminseite.xhtml" />
+            <p:menuitem value="Logout" url="./index.xhtml" action="#{UserBean.logout()}"/>
+        </p:menubar>
+        <p:panel header="Artist-Kommentar-Liste" toggleable="true">
+            <p:selectOneMenu effect="fade" value="#{Musikd.comRefArt}">
+                            <f:selectItem itemLabel="Bitte auswählen" itemValue=""/>
+                            <f:selectItems value="#{Musikd.allArtist}" var="var" itemLabel="#{var[1]}" itemValue="#{var[0]}"/>
+            </p:selectOneMenu>
+            <br />
+            <p:commandLink value="Show" oncomplete="PF('showCom').show()"/>
+             <p:dialog header="Kommentar Anzeige" modal="true" showEffect="fade" hideEffect="fade" widgetVar="showCom" >
+                   <h:form>                 
+                       <p:dataTable var="com" value="#{Musikd.getAllCommentForArt(Musikd.comRefArt)}">
+                            <p:column headerText="Title">
+                                <h:outputText value="#{com[1]}"/>    
+                            </p:column>
+                            <p:column headerText="Beschreibung">
+                                <h:outputText value="#{com[2]}"/>
+                            </p:column>             
+                        </p:dataTable> 
+                    </h:form>    
+            </p:dialog>
+        </p:panel>  
+        </h:form>
+    </h:body>
+</html>

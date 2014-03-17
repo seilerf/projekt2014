@@ -45,6 +45,6 @@ public interface IMusikd {
     public void addCommentForArt();
     public void deleteComment(int com_Id);
     public void getAllComment();
-    public void getAllCommentForArt(int refArt);
-    public void getAllCommentForTitle(int refMp3);
+    public List<String[]> getAllCommentForArt(int refArt);
+    public List<String[]> getAllCommentForTitle(int refMp3);
 }

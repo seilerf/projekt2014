@@ -11,15 +11,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.LinkedList;
 import java.util.List;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
+
 
 /**
  *
@@ -222,10 +215,8 @@ public class Musikd implements IMusikd, Serializable {
     
     @Override
     public void addCommentForArt() {
-        System.out.println("Der CommentTitle für den Künstler: "+comTitle);
-        System.out.println("Die Commentbeschreibung für den Künstler: "+comDesc);
-        System.out.println("Die Referenzid auf den Künstler: "+comRefArt);
-         intfMusikd.addCommentForArt(comTitle, comDesc, comRefArt);
+       
+         intfMusikd.addCommentForArt(comTitle, comDesc, this.comRefArt);
     }
 
     @Override
@@ -239,13 +230,18 @@ public class Musikd implements IMusikd, Serializable {
     }
 
     @Override
-    public void getAllCommentForArt(int refArt) {
-        intfMusikd.getAllCommentForArt(refArt);
+    public List<String[]> getAllCommentForArt(int refArt) {
+        System.out.println("Wert von refArt vorher: "+refArt);
+        System.out.println("Hier beim Aufruf angekommen");
+        System.out.println("Welchen Wert hat comRefArt: "+this.comRefArt);
+        this.comRefArt = refArt;
+        System.out.println("Welchen Wert hat refArt: "+refArt);       
+        return intfMusikd.getAllCommentForArt(refArt);
     }
 
     @Override
-    public void getAllCommentForTitle(int refMp3) {
-        intfMusikd.getAllCommentForTitle(refMp3);
+    public List<String[]> getAllCommentForTitle(int refMp3) {
+        return intfMusikd.getAllCommentForTitle(refMp3);
     }
 
     @Override
@@ -258,4 +254,5 @@ public class Musikd implements IMusikd, Serializable {
         intfMusikd.addCommentForArt(comTitle, comDesc, refArt);
         
     }
+ 
 }
