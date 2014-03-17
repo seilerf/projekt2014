@@ -7,6 +7,7 @@
 package fh.ostfalia.projekt2014.rmi;
 
 import fh.ostfalia.projekt2014.model.Comment;
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -117,7 +118,8 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
         List<Comment> commentList = em.createNamedQuery("Comment.findAll").getResultList();
         et.commit();
          
-        List<String[]> commentStrings = new LinkedList();
+        List<String[]> commentStrings = new LinkedList<>();
+        
         for (int i=0; i<commentList.size(); i++){
             Comment com = commentList.get(i);
             String[] commentString = {String.valueOf(com.getCommentID()),com.getCommentTitle(),com.getCommentDescription(),String.valueOf(com.getCommentToMp3()),String.valueOf(com.getCommentToArt())};
@@ -134,7 +136,8 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
         List<Comment> comList = query.getResultList();
         et.commit();
          
-        List<String[]> commentStrings = new LinkedList();
+        List<String[]> commentStrings = new LinkedList<>();
+        
         for (int i=0; i<comList.size(); i++){
             Comment com = comList.get(i);
             String[] commentString = {String.valueOf(com.getCommentID()),com.getCommentTitle(),com.getCommentDescription(),String.valueOf(com.getCommentToMp3()),String.valueOf(com.getCommentToArt())};
@@ -151,7 +154,9 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
         List<Comment> comList = query.getResultList();
         et.commit();
          
-        List<String[]> commentStrings = new LinkedList();
+        List<String[]> commentStrings = new LinkedList<>();
+       
+        
         for (int i=0; i<comList.size(); i++){
             Comment com = comList.get(i);
             String[] commentString = {String.valueOf(com.getCommentID()),com.getCommentTitle(),com.getCommentDescription(),String.valueOf(com.getCommentToMp3()),String.valueOf(com.getCommentToArt())};
