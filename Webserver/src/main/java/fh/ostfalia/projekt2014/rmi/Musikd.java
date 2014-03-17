@@ -88,6 +88,11 @@ public class Musikd implements IMusikd, Serializable {
     }
     
     @Override
+    public List<String[]> getAllArtist() {
+        return intfMusikd.getAllMp3();
+    }
+    
+    @Override
     public void setServeradress1(String serveradress1)  {
       intfMusikd.setServeradress1(serveradress1);
     }
@@ -153,7 +158,6 @@ public class Musikd implements IMusikd, Serializable {
     
     public void upLoad() {
      intfMusikd.upLoad(part);
-        System.out.println("Der WebServer wird verlassen ==> LoadBalancer!!!");
     }
     
     public void setPart(String part) {
@@ -167,5 +171,35 @@ public class Musikd implements IMusikd, Serializable {
     @Override
     public void upLoad(String part) {
         throw new UnsupportedOperationException("Not supported yet."); 
+    }
+    
+    @Override
+    public void mp3Download(String mp3_title, int mp3_id) {
+        intfMusikd.mp3Download(mp3_title, mp3_id);
+    }
+
+    @Override
+    public void addComment(int refArt, int refMp3) {
+         intfMusikd.addComment( refArt, refMp3);
+    }
+
+    @Override
+    public void deleteComment(int com_Id) {
+        intfMusikd.deleteMp3(com_Id);
+    }
+
+    @Override
+    public void getAllComment() {
+        intfMusikd.getAllComment();
+    }
+
+    @Override
+    public void getAllCommentForArt(int refArt) {
+        intfMusikd.getAllCommentForArt(refArt);
+    }
+
+    @Override
+    public void getAllCommentForTitle(int refMp3) {
+        intfMusikd.getAllCommentForTitle(refMp3);
     }
 }

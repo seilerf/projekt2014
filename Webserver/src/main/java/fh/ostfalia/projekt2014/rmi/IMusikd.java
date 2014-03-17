@@ -20,6 +20,7 @@ public interface IMusikd {
     public String[] getMp3(int mp3_id);
     public String[] getMp3ByArtist (int mp3ArtistId);
     public List<String[]> getAllMp3();
+    public List<String[]> getAllArtist();
     public byte[] getFile(int mp3_id);
     
     public void setServeradress1(String serveradress1);
@@ -35,6 +36,11 @@ public interface IMusikd {
     public int getInterval()  ;
     public void setInterval(int interval)  ;
     
-    public void upLoad(String part); 
-    
+    public void upLoad(String part);
+    public void mp3Download(String mp3_title, int mp3_id);
+    public void addComment(int refArt, int refMp3);
+    public void deleteComment(int com_Id);
+    public void getAllComment();
+    public void getAllCommentForArt(int refArt);
+    public void getAllCommentForTitle(int refMp3);
 }

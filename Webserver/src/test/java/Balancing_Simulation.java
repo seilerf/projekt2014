@@ -1,15 +1,11 @@
-
-
 import fh.ostfalia.projekt2014.rmi.Musikd;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 
 /**
- *
+ * Diese Tests beweisen die RMI Kommunikation vom Webserver bis hin zum Musikdienst und beweisen unter anderem auch
+ * die beiden Loadbalancing Methoden.
  * @author Anton
  */
 public class Balancing_Simulation {
@@ -22,14 +18,13 @@ public class Balancing_Simulation {
     
    /**
  *
- * Diese Methode ruft die getTest() Methode 50 mal über rmi auf, über den
+ * Diese Methode ruft die test() Methode 50 mal über rmi auf, über den
  * Loadbalancer bis hin zum entsprechenden Musikdienst. Dabei entstehen die entsprechenden Ausgaben, 
- * welche beweisen, dass das Loadbalancing funktioniert. Wenn es funktioniert müssen abwechselnd "Musikdienst online 1"
- * // "Musikdienst online 2" in der Ausgabe erscheinen.
+ * welche beweisen, dass das Loadbalancing funktioniert. Wenn es funktioniert muss Musikdienst 1 online in der Ausgabe erscheinen. 
+ * In der Loadbalancing Ausgabe wird die funktionalität der Round Robin Balancing Methode bewiesen.
  */
-    
    @Test
-    public void balancetest1()
+    public void Round_Robin_Test()
             
     {
         
@@ -39,15 +34,21 @@ public class Balancing_Simulation {
 
         }
     }  
-     
+     /**
+     *  Tut das gleiche wie der obere Test, aber diesmal mit dem Interval Balancing. Hierfür wird zunächst die Balance Methode auf true= interval gesetzt 
+     *  und der Timer gestartet
+     *  Hier wird die Methode 7 mal aufgerufen aber immer mit einer 3 sek. Verzögerung
+     *  Bei einem voreingestelltem 5 sek.Intervall ist dann zu beobachten das manchmal 2 mal hintereinander der gleiche Musikdienst zurückgegeben wird.
+     * @throws InterruptedException
+     */
     @Test
-    public void balancetest2() throws InterruptedException
+    public void Interval_Test() throws InterruptedException
             
     {
         balancetest.setBalancemethod(true);
         balancetest.balanceMethod();
         
-        for(int i=0; i<5; i++)
+        for(int i=0; i<7; i++)
             
         {   
             Thread.sleep(3000);

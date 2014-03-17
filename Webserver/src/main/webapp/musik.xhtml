@@ -14,20 +14,76 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width"/>
     </h:head>
     <h:body>
-        
-        <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addCom">
+        <h:form>
+            
+        <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addComTitle">
                 <h:panelGrid columns="2" cellpadding="5">
-                    <h:form>
-                        <p:outputLabel value="Titel: "/>
+                   <h:form>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Titel: "/> 
+                            </td>
+                            <td>
                         <p:selectOneMenu effect="fade">
                             <f:selectItem itemLabel="Bitte auswählen" itemValue=""/>
                             <f:selectItems value="#{Musikd.allMp3}" var="mp3" itemLabel="#{mp3[1]}" itemValue="#{mp3[0]}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="oder Interpret: "/>
-                        <p:inputText id="editInterpret" />
-                        <br/>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Überschrift: " />
+                            </td>
+                            <td>
+                         <p:inputText id="commentTitle" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                         <p:outputLabel value="Kommentar: "/>
-                        <p:inputTextarea id="comment"/>
+                            </td>
+                            <td>
+                        <p:inputTextarea id="comment" value="" />
+                        <br />
+                        <h:commandButton value="Add" action="#{Musikd.addComment(null, mp3[0])}" />
+                             </td>
+                        </tr>   
+                    </h:form>
+                </h:panelGrid>
+        </p:dialog>
+        
+        <p:dialog header="Kommentar hinzufügen" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addComArt">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:form>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Künstler: "/> 
+                            </td>
+                            <td>
+                        <p:selectOneMenu effect="fade">
+                            <f:selectItem itemLabel="Bitte auswählen" itemValue=""/>
+                            <f:selectItems value="#{Musikd.allArtist}" var="art" itemLabel="#{art[2]}" itemValue="#{art[0]}"/>
+                        </p:selectOneMenu>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Titel: " />
+                            </td>
+                            <td>
+                                <p:inputText id="commentTitle" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                        <p:outputLabel value="Kommentar: "/>
+                            </td>
+                            <td>
+                                <p:inputTextarea id="comment" value="" />
+                        <br />
+                        <h:commandButton value="Add" action="#{Musikd.addComment(art[0], null)}"/>
+                             </td>
+                        </tr>   
                     </h:form>
                 </h:panelGrid>
         </p:dialog>
@@ -40,7 +96,7 @@ and open the template in the editor.
         <p:panel header="MP3-Liste" toggleable="true">
             <p:dataTable var="mp3" value="#{Musikd.allMp3}">
                 <p:column headerText="Titel">
-                    <h:outputText value="#{mp3[1]}"/>
+                    <h:outputText value="#{mp3[1]}"/>    
                 </p:column>
                 <p:column headerText="Interpret">
                     <h:outputText value="#{mp3[2]}"/>
@@ -50,13 +106,21 @@ and open the template in the editor.
                 </p:column>
                 <p:column width='10'>
                     <h:form>
-                        <h:commandLink value="Download" action="#{Musikd.getFile(mp3[0])}"/>
+                        <h:commandLink value="Download" action="#{Musikd.mp3Download(mp3[1], mp3[0])}"/>
                     </h:form>
                 </p:column>                
             </p:dataTable>
-        </p:panel>
-        <h:form>
-            <p:commandLink value="Kommentar hinzufügen" oncomplete="PF('addCom').show()"/>
+            <p:commandLink value="Kommentar für einen Titel hinzufügen" oncomplete="PF('addComTitle').show()" />
+            <br />
+            <p:commandLink value="Kommentar für einen Künstler hinzufügen" oncomplete="PF('addComArt').show()" />         
+        </p:panel>     
         </h:form>
+        <p:panel>
+        <h:form id="form" enctype="multipart/form-data" >
+                    <h:inputFile id ="file" value="#{Musikd.part}" />
+                    <h:commandButton value="Upload Mp3" action="#{Musikd.upLoad()}" />  
+                    <h:commandButton value="Comment Test" action="#{Musikd.test()}" />
+                </h:form>
+        </p:panel>
     </h:body>
 </html>
