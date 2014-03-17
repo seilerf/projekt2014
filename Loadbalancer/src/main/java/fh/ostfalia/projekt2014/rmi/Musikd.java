@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 /**
  * Diese Klasse holt sich die Registry der beiden Musikdienste und Registriert daraus eine neue 
  * mit den zusätzlichen Loadbalancer Methoden, welche der Webserver dann abruft.
- * @author Anton
+ * @author Anton / M.Ullmann
  */
 public class Musikd extends UnicastRemoteObject implements IMusikd{
 
@@ -305,6 +305,46 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     public void mp3Download(String mp3_title, int mp3_id) {
          try {    
           balance.balancieren(Musikd.this).mp3Download(mp3_title, mp3_id);      
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void addComment(int refArt, int refMp3) throws RemoteException {
+        try {    
+          balance.balancieren(Musikd.this).addComment(refArt, refMp3);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteComment(int com_Id) throws RemoteException {
+       try {    
+          balance.balancieren(Musikd.this).deleteComment(com_Id);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void getAllComment() throws RemoteException {
+        try {    
+          balance.balancieren(Musikd.this).getAllComment();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void getAllCommentForArt(int refArt) throws RemoteException {
+        try {    
+          balance.balancieren(Musikd.this).getAllCommentForArt(refArt);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void getAllCommentForTitle(int refMp3) throws RemoteException {
+        try {    
+          balance.balancieren(Musikd.this).getAllCommentForTitle(refMp3);      
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }

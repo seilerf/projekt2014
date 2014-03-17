@@ -40,4 +40,10 @@ public interface IMusikd extends Remote{
     public int getInterval() throws RemoteException;
     public void setInterval(int interval) throws RemoteException;
     
+    public void addComment(int refArt, int refMp3) throws RemoteException;
+    public void deleteComment(int com_Id) throws RemoteException;
+    public void getAllComment() throws RemoteException;
+    public void getAllCommentForArt(int refArt) throws RemoteException;
+    public void getAllCommentForTitle(int refMp3) throws RemoteException;
+    
 }
