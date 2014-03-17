@@ -23,7 +23,9 @@ import javax.persistence.Table;
 
 @Table(name = "comment")
 @NamedQueries({
-    @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")})
+    @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
+    @NamedQuery(name = "Comment.getAllWithArtist", query = "SELECT c FROM Comment c WHERE c.commentToArt = :artId"),
+    @NamedQuery(name = "Comment.getAllWithTitle", query = "SELECT c FROM Comment c WHERE c.commentToMp3 = :titleId")})
 @Entity
 public class Comment implements Serializable {
     

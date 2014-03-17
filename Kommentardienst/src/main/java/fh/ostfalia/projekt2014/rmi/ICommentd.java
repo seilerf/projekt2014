@@ -17,9 +17,11 @@ import java.util.List;
 public interface ICommentd extends Remote {
     
     public String getTest() throws RemoteException;
-    public void addComment(String comment_Title, String comment_Description) throws RemoteException;
+    public void addComment(int refArt, int refMp3) throws RemoteException;
     public void deleteComment(int comment_ID) throws RemoteException;
     public String[] getComment(int comment_ID) throws RemoteException;
     public List<String[]> getAllComment() throws RemoteException;
+    public List<String[]> getAllCommentForTitle(int refMp3) throws RemoteException;
+    public List<String[]> getAllCommentForArt(int refArt) throws RemoteException;
     
 }

@@ -11,12 +11,14 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -77,13 +79,21 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
       
     }
 
-    public void addComment(String comment_Title, String comment_Description) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addComment(int refArt, int refMp3) throws RemoteException {
+       Comment com = new Comment();
+       com.setCommentToArt(refArt);
+       com.setCommentToMp3(refMp3);
+       
+       et.begin();
+       em.persist(com);
+       et.commit();
     }
 
     @Override
     public void deleteComment(int comment_ID) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        et.begin();
+        em.remove(getComment(comment_ID));
+        et.commit();
     }
 
     @Override
@@ -101,6 +111,52 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
     }
 
     public List<String[]> getAllComment() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        et.begin();
+        List<Comment> commentList = em.createNamedQuery("Comment.findAll").getResultList();
+        et.commit();
+         
+        List<String[]> commentStrings = new LinkedList();
+        for (int i=0; i<commentList.size(); i++){
+            Comment com = commentList.get(i);
+            String[] commentString = {String.valueOf(com.getCommentID()),com.getCommentTitle(),com.getCommentDescription(),String.valueOf(com.getCommentToMp3()),String.valueOf(com.getCommentToArt())};
+            boolean add = commentStrings.add(commentString);
+        }
+        
+        return commentStrings;
     }
+    
+    public List<String[]> getAllCommentForArt(int refArt) throws RemoteException {
+        et.begin();
+        Query query = em.createNamedQuery("Comment.getAllWithArtist");
+        query.setParameter("artId", refArt);
+        List<Comment> comList = query.getResultList();
+        et.commit();
+         
+        List<String[]> commentStrings = new LinkedList();
+        for (int i=0; i<comList.size(); i++){
+            Comment com = comList.get(i);
+            String[] commentString = {String.valueOf(com.getCommentID()),com.getCommentTitle(),com.getCommentDescription(),String.valueOf(com.getCommentToMp3()),String.valueOf(com.getCommentToArt())};
+            boolean add = commentStrings.add(commentString);
+        }
+        
+        return commentStrings;
+    }
+    
+      public List<String[]> getAllCommentForTitle(int refMp3) throws RemoteException {
+        et.begin();
+        Query query = em.createNamedQuery("Comment.getAllWithTitle");
+        query.setParameter("titleId", refMp3);
+        List<Comment> comList = query.getResultList();
+        et.commit();
+         
+        List<String[]> commentStrings = new LinkedList();
+        for (int i=0; i<comList.size(); i++){
+            Comment com = comList.get(i);
+            String[] commentString = {String.valueOf(com.getCommentID()),com.getCommentTitle(),com.getCommentDescription(),String.valueOf(com.getCommentToMp3()),String.valueOf(com.getCommentToArt())};
+            boolean add = commentStrings.add(commentString);
+        }
+        
+        return commentStrings;
+    }
+    
 }
