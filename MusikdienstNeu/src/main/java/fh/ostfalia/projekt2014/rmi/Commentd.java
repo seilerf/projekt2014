@@ -61,8 +61,12 @@ public class Commentd implements ICommentd {
             return iCommentd.getTest();  
     }
 
-    public void addComment(int refArt, int refMp3) {
-        iCommentd.addComment(refArt, refMp3);
+    public void addCommentForMp3(String comTitle, String comDesc, int refMp3) {
+        iCommentd.addCommentForMp3(comTitle, comDesc, refMp3);
+    }
+    
+    public void addCommentForArt(String comTitle, String comDesc, int refArt) {
+        iCommentd.addCommentForArt(comTitle, comDesc, refArt);
     }
 
     public void deleteComment(int comment_ID){

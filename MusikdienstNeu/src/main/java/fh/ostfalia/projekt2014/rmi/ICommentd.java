@@ -15,7 +15,8 @@ import java.util.List;
 public interface ICommentd {
     
     public String getTest();
-    public void addComment(int refArt, int refMp3);
+    public void addCommentForMp3(String comTitle, String comDesc, int refMp3); 
+    public void addCommentForArt(String comTitle, String comDesc, int refArt); 
     public void deleteComment(int comment_ID);
     public String[] getComment(int comment_ID);
     public List<String[]> getAllComment();

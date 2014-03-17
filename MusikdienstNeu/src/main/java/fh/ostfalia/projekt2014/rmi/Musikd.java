@@ -91,9 +91,14 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         return  this.commentd.getTest();
     }
    
-    @Override
-    public void addComment(int refArt, int refMp3) throws RemoteException {
-        this.commentd.addComment(refArt, refMp3);
+    @Override 
+    public void addCommentForMp3(String comTitle, String comDesc, int refMp3) throws RemoteException {
+        this.commentd.addCommentForMp3(comTitle, comDesc, refMp3);
+    }
+    
+    @Override 
+    public void addCommentForArt(String comTitle, String comDesc, int refArt) throws RemoteException {
+        this.commentd.addCommentForArt(comTitle, comDesc, refArt);
     }
     
     @Override
@@ -197,7 +202,8 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         et.commit();
         
         List<String[]> mp3ArtistStrings = new LinkedList<>();
-        for(int i=0; i<artistList.size(); i++) {
+        int i;
+        for(i=0; i<artistList.size(); i++) {
             Mp3Artist mp3Artist = artistList.get(i);
             String[] mp3ArtistString = { String.valueOf(mp3Artist.getArtistId()), mp3Artist.getArtistName()};
             boolean add = mp3ArtistStrings.add(mp3ArtistString);
