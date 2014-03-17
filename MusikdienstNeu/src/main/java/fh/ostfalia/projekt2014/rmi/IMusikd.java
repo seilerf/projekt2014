@@ -28,8 +28,8 @@ public interface IMusikd extends Remote{
     public void addCommentForMp3(String comTitle, String comDesc, int refMp3) throws RemoteException;
     public void addCommentForArt(String comTitle, String comDesc, int refArt) throws RemoteException;
     public void deleteComment(int com_Id) throws RemoteException;
-    public void getAllComment() throws RemoteException;
-    public void getAllCommentForArt(int refArt) throws RemoteException;
-    public void getAllCommentForTitle(int refMp3) throws RemoteException;
+    public List<String[]> getAllComment() throws RemoteException;
+    public List<String[]> getAllCommentForArt(int refArt) throws RemoteException;
+    public List<String[]> getAllCommentForTitle(int refMp3) throws RemoteException;
     
 }

@@ -107,18 +107,18 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
     
     @Override
-    public void getAllComment() throws RemoteException {
-       this.commentd.getAllComment();
+    public List<String[]> getAllComment() throws RemoteException {
+       return this.commentd.getAllComment();
     }
     
     @Override
-    public void getAllCommentForArt(int refArt) throws RemoteException {
-        this.commentd.getAllCommentForArt(refArt);
+    public List<String[]> getAllCommentForArt(int refArt) throws RemoteException {
+        return this.commentd.getAllCommentForArt(refArt);
     }
     
     @Override
-    public void getAllCommentForTitle(int refMp3) throws RemoteException {
-        this.commentd.getAllCommentForTitle(refMp3);
+    public List<String[]> getAllCommentForTitle(int refMp3) throws RemoteException {
+        return this.commentd.getAllCommentForTitle(refMp3);
     }
     
 
@@ -211,13 +211,6 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         return mp3ArtistStrings;
     }
 
-   /** @Override
-    public byte[] getFile(int mp3_id) throws RemoteException {
-        et.begin();
-        byte[] mp3File = em.find(Mp3.class, mp3_id).getMp3File();
-        et.commit();
-        return mp3File;
-    }*/
     
     public String getPassedParameter() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
