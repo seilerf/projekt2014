@@ -6,11 +6,10 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Musikprojekt</name>
-  
   <modules>
     <module>Musikprojekt-ear</module>
     <module>../Loadbalancer</module>
-    <module>../Musikdienst</module>
+    <module>../MusikdienstNeu</module>
     <module>../Webserver</module>
     <module>../Kommentardienst</module>
   </modules>
