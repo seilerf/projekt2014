@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- *
+ * Interface ICommentd für den Kommentardienst, mit alle benötigten Funktionsaufrufen.
  * @author M.Ullmann
  */
 public interface ICommentd extends Remote {
