@@ -289,11 +289,21 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
        return balance.getInterval();
     }
     
-    
+    /**
+     * Findet in der Applikation keine Verwendung mehr, diente Testzwecken.
+     * @param mp3_id    -> Referenz auf eine Mp3-Id
+     * @return
+     * @throws RemoteException 
+     */
     public byte[] getFile(int mp3_id) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Die Upload Funktion ruft die, über das Musikdienst Interface definierte, Upload Methode mit dem String Paramater Part auf. 
+     * Zusätzlich wird die aufgerufene Funktion gebalanct.
+     * @param part -> Referenz-String auf den in der GUI ausgewählten Mp3-Pfad
+     */
     public void upLoad(String part) {
       try {    
           balance.balancieren(Musikd.this).upLoad(part);      
@@ -302,6 +312,12 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         }
     }
     
+    /**
+     * Die mp3Download Funktion ruft die, über das Musikdienst Interface definierte, mp3Download Methode mit den mit übergebenen Parametern auf.
+     * Zusätzlich wird die aufgerufene Funktion gebalanct.
+     * @param mp3_title -> Referenz auf den Mp3-Titel
+     * @param mp3_id    -> Referenz auf die Mp3-Id
+     */
     public void mp3Download(String mp3_title, int mp3_id) {
          try {    
           balance.balancieren(Musikd.this).mp3Download(mp3_title, mp3_id);      
@@ -309,7 +325,15 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Die addCommentForMp3 Funktion ruft, die über Musikdienst Interface definierte, addCommentForMp3 Methode mit den mit übergebenen Parametern auf.
+     * Zusätzlich wird die aufgerufene Funktion gebalanct.
+     * @param comTitle  -> Referenz auf den Kommentar-Titel
+     * @param comDesc   -> Referenz auf die Kommentar-Beschreibung
+     * @param refMp3    -> Referenz auf die Mp3-Id
+     * @throws RemoteException 
+     */
     public void addCommentForMp3(String comTitle, String comDesc, int refMp3) throws RemoteException {
         try {    
           balance.balancieren(Musikd.this).addCommentForMp3(comTitle, comDesc, refMp3);
@@ -318,6 +342,14 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         }
     }
     
+    /**
+     * Die addCommentForArt Funktion ruft, die über Musikdienst Interface definierte, addCommentForArt Methode mit den mit übergebenen Parametern auf.
+     * Zusätzlich wird die aufgerufene Funktion gebalanct.
+     * @param comTitle  -> Referenz auf den Kommentar-Titel
+     * @param comDesc   -> Referenz auf die Kommentar-Beschreibung
+     * @param refArt    -> Referenz auf die Künstler-Id
+     * @throws RemoteException 
+     */
     public void addCommentForArt(String comTitle, String comDesc, int refArt) throws RemoteException {
         try {    
           balance.balancieren(Musikd.this).addCommentForArt(comTitle, comDesc, refArt);
@@ -325,29 +357,39 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Die deleteComment Funktion ruft, die über das Musikdienst Interface definierte, deleteComment Methode mit dem übergebenen Parameter auf.
+     * Zusätzlich wird die aufgerufene Funktion gebalanct.
+     * @param com_Id    -> Referenz auf die Kommentar-Id
+     * @throws RemoteException 
+     */
     public void deleteComment(int com_Id) throws RemoteException {
-        System.out.println("Im LoadBalancer angekommen!!");
-        System.out.println("Wert von com_Id: "+com_Id);
        try {    
           balance.balancieren(Musikd.this).deleteComment(com_Id);
-           System.out.println("Balancing absolviert auf dem Weg zum Musikd!");
-           System.out.println("Wert von com_Id nach dem Balancieren: "+com_Id);
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Die getAllComment Funktion ruft, die über das Musikdienst Interface definierte, getAllComment Methode auf.
+     * Zusätzlich wird die aufgerufene Funktion gebalanct.
+     * @return  ->Liste von String-Arrays
+     * @throws RemoteException 
+     */
     public List<String[]> getAllComment() throws RemoteException {
-        /**try {    
-          balance.balancieren(Musikd.this).getAllComment();
-        } catch (RemoteException ex) {
-            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;*/
+        
         return balance.balancieren(Musikd.this).getAllComment();
     }
 
+    /**
+     * Die getAllCommentForArt Funktion ruft, die über das Musikdienst Interface definierte, getAllCommentForArt Methode mit dem übergebenen Parameter auf.
+     * Zusätzlich wird die aufgerufene Funktion gebalanct.
+     * @param refArt    -> Referenz auf die Künstler-Id
+     * @return
+     * @throws RemoteException 
+     */
     public List<String[]> getAllCommentForArt(int refArt) throws RemoteException {
    
         return balance.balancieren(Musikd.this).getAllCommentForArt(refArt);
