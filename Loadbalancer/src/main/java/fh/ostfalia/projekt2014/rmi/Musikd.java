@@ -327,38 +327,35 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
 
     public void deleteComment(int com_Id) throws RemoteException {
+        System.out.println("Im LoadBalancer angekommen!!");
+        System.out.println("Wert von com_Id: "+com_Id);
        try {    
           balance.balancieren(Musikd.this).deleteComment(com_Id);
+           System.out.println("Balancing absolviert auf dem Weg zum Musikd!");
+           System.out.println("Wert von com_Id nach dem Balancieren: "+com_Id);
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public List<String[]> getAllComment() throws RemoteException {
-        try {    
+        /**try {    
           balance.balancieren(Musikd.this).getAllComment();
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return null;*/
+        return balance.balancieren(Musikd.this).getAllComment();
     }
 
     public List<String[]> getAllCommentForArt(int refArt) throws RemoteException {
-        try {    
-          balance.balancieren(Musikd.this).getAllCommentForArt(refArt);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+   
+        return balance.balancieren(Musikd.this).getAllCommentForArt(refArt);
     }
 
     public List<String[]> getAllCommentForTitle(int refMp3) throws RemoteException {
-        try {    
-          balance.balancieren(Musikd.this).getAllCommentForTitle(refMp3);      
-        } catch (RemoteException ex) {
-            Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        
+        return balance.balancieren(Musikd.this).getAllCommentForTitle(refMp3);
     }
         
 }
