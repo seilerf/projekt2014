@@ -9,11 +9,13 @@ import java.util.logging.Logger;
 
 
 /**
- *
+ * Start-Klasse um den Kommentardienst zu starten.
+ * Regestrierung des Dienstes für den RMI Zugriff -> registerRmi().
  * @author M.Ullmann
  */
 public class App {
     public static void main( String[] args ) {
+        //Anlegen eines Kommentardienstes
         Commentd commentd;
         try {
             commentd = new Commentd();

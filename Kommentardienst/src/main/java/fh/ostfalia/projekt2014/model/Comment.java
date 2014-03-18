@@ -11,14 +11,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.AUTO;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- *
+ * Die Klasse Comment realisiert Kommentare für Mp3s und Künstler
+ * @see 1NamedQuery Comment.findAll -> Liefert alle vorhandenen Kommentare aus der Datenbank zurück.
+ * @see 2NamedQuery Comment.getAllWithArtist -> Liefert alle vorhandenen Kommentare zu der angegebenen Künstler-Id aus der Datenbank.
+ * @see 2NamedQuery Comment.getAllWithTitle -> Liefert alle vorhandenen Kommentare zu der angegebenen Mp3-Id aus der Datenbank.
+ * Standard Getter und Setter, sowie die Spalten- und Eigenschaften-Deklaration für das Datenbank-Schema, welches die Kommentare-Datenbank definiert.
  * @author M.Ullmann
  */
 
@@ -42,6 +45,7 @@ public class Comment implements Serializable {
     //Die comToArtID gibt immer die ID des Künstlers an, zu dem der Kommentar gehört
     private int comToArtID;
     
+    //Default Konstruktor
     public Comment() {
     }
     
