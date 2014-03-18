@@ -26,6 +26,7 @@ public class Musikd implements IMusikd, Serializable {
     private String comDesc;
     private int comRefMp3;
     private int comRefArt;
+    private int comRefDel;
 
     
     
@@ -197,6 +198,14 @@ public class Musikd implements IMusikd, Serializable {
         this.comRefArt = refArt;
     }
     
+    public int getComRefDel() {
+        return this.comRefDel;
+    }
+    
+    public void setComRefDel(int refDel) {
+        this.comRefDel = refDel;
+    }
+    
     @Override
     public void upLoad(String part) {
         throw new UnsupportedOperationException("Not supported yet."); 
@@ -218,30 +227,51 @@ public class Musikd implements IMusikd, Serializable {
        
          intfMusikd.addCommentForArt(comTitle, comDesc, this.comRefArt);
     }
-
+    
+    @Override
+    public void deleteComment() {
+        
+        intfMusikd.deleteComment(this.comRefDel);
+    }
+    
     @Override
     public void deleteComment(int com_Id) {
-        intfMusikd.deleteMp3(com_Id);
+        System.out.println("Werde ich im Webserver aufgerufen?!");
+        System.out.println("Welchen Wert hat die hier übergebene com_id: "+com_Id);
+        intfMusikd.deleteComment(com_Id);
     }
 
     @Override
-    public void getAllComment() {
-        intfMusikd.getAllComment();
+    public List<String[]> getAllComment() {
+       return intfMusikd.getAllComment();
     }
 
     @Override
     public List<String[]> getAllCommentForArt(int refArt) {
+        if(refArt > 0) {
         System.out.println("Wert von refArt vorher: "+refArt);
         System.out.println("Hier beim Aufruf angekommen");
         System.out.println("Welchen Wert hat comRefArt: "+this.comRefArt);
         this.comRefArt = refArt;
         System.out.println("Welchen Wert hat refArt: "+refArt);       
         return intfMusikd.getAllCommentForArt(refArt);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public List<String[]> getAllCommentForTitle(int refMp3) {
+        if(refMp3 > 0) {
+        System.out.println("Wert von refMp3 vorher: "+refMp3);
+        System.out.println("Hier beim Aufruf angekommen");
+        System.out.println("Welchen Wert hat comRefMp3 vorher: "+this.comRefMp3);
+        this.comRefMp3 = refMp3;
+        System.out.println("Welchen Wert hat refMp3: "+refMp3);
         return intfMusikd.getAllCommentForTitle(refMp3);
+        } else {
+            return null;
+        }
     }
 
     @Override
