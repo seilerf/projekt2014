@@ -17,7 +17,7 @@ public interface ICommentd {
     public String getTest();
     public void addCommentForMp3(String comTitle, String comDesc, int refMp3); 
     public void addCommentForArt(String comTitle, String comDesc, int refArt); 
-    public void deleteComment(int comment_ID);
+    public void deleteComment(int com_Id);
     public String[] getComment(int comment_ID);
     public List<String[]> getAllComment();
     public List<String[]> getAllCommentForTitle(int refMp3);

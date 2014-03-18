@@ -19,10 +19,11 @@ public class Main {
     
     public static void main (String[] args){
         Musikd musikd;
+       
         try {
             musikd = new Musikd();
             musikd.registerForRmi();
-            //musikd.test();
+
         } catch (RemoteException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

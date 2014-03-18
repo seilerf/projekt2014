@@ -108,17 +108,18 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     
     @Override
     public List<String[]> getAllComment() throws RemoteException {
-       return this.commentd.getAllComment();
+       return commentd.getAllComment();
     }
     
     @Override
     public List<String[]> getAllCommentForArt(int refArt) throws RemoteException {
-        return this.commentd.getAllCommentForArt(refArt);
+        return commentd.getAllCommentForArt(refArt);
+        
     }
     
     @Override
     public List<String[]> getAllCommentForTitle(int refMp3) throws RemoteException {
-        return this.commentd.getAllCommentForTitle(refMp3);
+        return commentd.getAllCommentForTitle(refMp3);
     }
     
 

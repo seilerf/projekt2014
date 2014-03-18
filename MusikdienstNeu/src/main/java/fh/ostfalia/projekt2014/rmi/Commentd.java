@@ -69,8 +69,8 @@ public class Commentd implements ICommentd {
         iCommentd.addCommentForArt(comTitle, comDesc, refArt);
     }
 
-    public void deleteComment(int comment_ID){
-        iCommentd.deleteComment(comment_ID);
+    public void deleteComment(int com_Id){
+        iCommentd.deleteComment(com_Id);
     }
 
     public String[] getComment(int comment_ID) {
@@ -83,12 +83,13 @@ public class Commentd implements ICommentd {
 
     @Override
     public List<String[]> getAllCommentForTitle(int refMp3) {
-        return iCommentd.getAllCommentForArt(refMp3);
+        return iCommentd.getAllCommentForTitle(refMp3);
     }
 
     @Override
     public List<String[]> getAllCommentForArt(int refArt) {
-         return iCommentd.getAllComment();
+        return iCommentd.getAllCommentForArt(refArt);
+        
     }
     
 }
