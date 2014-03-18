@@ -18,6 +18,7 @@ public class App {
         try {
             commentd = new Commentd();
             commentd.registerRmi();
+              
         } catch (RemoteException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }

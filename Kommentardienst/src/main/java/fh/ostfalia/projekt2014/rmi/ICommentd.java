@@ -19,7 +19,7 @@ public interface ICommentd extends Remote {
     public String getTest() throws RemoteException;
     public void addCommentForMp3(String comTitle, String comDesc, int refMp3) throws RemoteException;  
     public void addCommentForArt(String comTitle, String comDesc, int refArt) throws RemoteException; 
-    public void deleteComment(int comment_ID) throws RemoteException;
+    public void deleteComment(int com_Id) throws RemoteException;
     public String[] getComment(int comment_ID) throws RemoteException;
     public List<String[]> getAllComment() throws RemoteException;
     public List<String[]> getAllCommentForTitle(int refMp3) throws RemoteException;

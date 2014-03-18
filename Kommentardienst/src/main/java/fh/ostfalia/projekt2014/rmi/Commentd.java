@@ -93,10 +93,18 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
     }
 
     @Override
-    public void deleteComment(int comment_ID) throws RemoteException {
+    public void deleteComment(int com_Id) throws RemoteException {
         et.begin();
-        em.remove(getComment(comment_ID));
+        em.remove(getCommentForDelete(com_Id));
         et.commit();
+    }
+    
+    public Comment getCommentForDelete(int com_Id) {
+      //  et.begin();
+        Comment comment = em.find(Comment.class, com_Id);
+       // et.commit();
+        
+        return comment;
     }
 
     @Override
@@ -143,7 +151,6 @@ public class Commentd extends UnicastRemoteObject implements ICommentd{
             String[] commentString = {String.valueOf(com.getCommentID()),com.getCommentTitle(),com.getCommentDescription(),String.valueOf(com.getCommentToMp3()),String.valueOf(com.getCommentToArt())};
             boolean add = commentStrings.add(commentString);
         }
-        
         return commentStrings;
     }
     
