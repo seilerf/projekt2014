@@ -19,7 +19,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * Die Klasse Mp3Artist realisiert die Mp3 Künstler, welche vom Musikdienst benötigt werden.
+ * -> Klassische Getter/ Setter für die Mp3-Künstler Attribute 
+ * Zudem sind die Getter der Attribute mit den entsprechenden Annotationen für das Datenbank-Schema für die Mp3-Künstler-Datenbank versehen.
+ * @see Mp3Artist.findAll Query -> Gibt alle Künstler aus der Künstler Datenbank zurück
+ * @see getName Query -> Gibt alle Künstler aus der Künstler Datenbank zurück, die den Künstlernamen entsprechend des übergebenen Paramters haben 
  * @author fseiler/ M.Ullmann
  */
 @Entity
@@ -30,9 +34,12 @@ import javax.validation.constraints.Size;
 public class Mp3Artist implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    //Eindeutige Id für den Künstler
     private int artistId;
+    //String für den Künstlernamen
     private String artistName;
 
+    //Default Konstruktor
     public Mp3Artist() {
     }
 

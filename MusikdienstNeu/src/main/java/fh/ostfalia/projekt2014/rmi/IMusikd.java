@@ -11,7 +11,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- *
+ * Interface für den Musikdienst, mit allen nötigen Funktionsaufrufen zur
+ * Kommunikation mit LoadBalancer und Webserver.
  * @author fseiler/ M.Ullmann
  */
 public interface IMusikd extends Remote{

@@ -9,7 +9,8 @@ package fh.ostfalia.projekt2014.rmi;
 import java.util.List;
 
 /**
- *
+ * Interface für die Kommentardienst-Klasse im Musikdienst mit alle
+ * Funktionsaufrufen, um mit dem Kommentardienst kommunizieren zu können.
  * @author M.Ullmann
  */
 public interface ICommentd {

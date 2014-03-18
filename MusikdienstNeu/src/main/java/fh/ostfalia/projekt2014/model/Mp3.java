@@ -25,7 +25,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- *
+ * Die Klasse Mp3 realisiert die Mp3s des Musikdienstes.
+ * -> Klassische Getter/ Setter für die Mp3 Attribute 
+ * Zudem sind die Getter der Attribute mit den entsprechenden Annotationen für das Datenbank-Schema für die Mp3-Datenbank versehen.
+ * @see Mp3.findAll Query -> Gibt alle Mp3s aus der Datenbank zurück
+ * @see Mp3.getNameForMp3 -> Gibt alle Mp3s aus der Datenkank zurück, bei denen der Titel dem übergebenen Parameter entspricht
  * @author M.Ullmann
  */
 @Entity
@@ -36,11 +40,16 @@ import javax.persistence.Table;
 public class Mp3 implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    //Mp3-Id zur Einzigartigkeit
     private int mp3Id;
+    //Byte-Array wird für die Mp3-Datei benötigt
     private byte[] mp3File;
+    //String für den Titel der Mp3
     private String mp3Title;
+    //Gibt den Künstler der Mp3-Datei zurück
     private Mp3Artist mp3Artist;
-
+    
+    //Default Konstruktor
     public Mp3() {
     }
 
@@ -77,6 +86,10 @@ public class Mp3 implements Serializable {
         this.mp3Title = mp3Title;
     }
 
+    /**
+     * Mit der ManyToOne- u.JoinColumn-Annotation wird für die Verknüpfung zur "artist_id" Spalte in der Mp3Artist-DB gesorgt.
+     * @return -> Gibt den Künstler der Mp3-Datei zurück
+     */
     @ManyToOne(cascade = CascadeType.ALL, targetEntity=Mp3Artist.class)
     @JoinColumn(name = "artist_id", nullable = true)
     public Mp3Artist getArtist(){
@@ -91,6 +104,11 @@ public class Mp3 implements Serializable {
         return this.mp3Artist.getArtistId();
     }
 
+    /**
+     * Die setByteCodeFromFile Funktion liest den Bytestrom der Dati aus und liest diesen
+     * über einen InputStream ein. Diese Methode wird in der Id3Tag Klasse benötigt.
+     * @param file 
+     */
     public void setByteCodeFromFile(File file) {
         try {
             mp3File = new byte[(int) file.length()];
