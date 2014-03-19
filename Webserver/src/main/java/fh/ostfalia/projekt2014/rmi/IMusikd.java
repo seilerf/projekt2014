@@ -9,8 +9,9 @@ package fh.ostfalia.projekt2014.rmi;
 import java.util.List;
 
 /**
- *
- * @author fseiler
+ * Interface für den Musikdienst, mit allen benötigten Funktionsaufrufen für die
+ * Kommunikationsketten zwischen Webserver <==> Loadbalancer <==> [Musikdienst <--> Kommentardienst]
+ * @author fseiler/ M.Ullmann
  */
 public interface IMusikd {
     
