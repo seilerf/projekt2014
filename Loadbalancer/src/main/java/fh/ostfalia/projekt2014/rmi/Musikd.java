@@ -39,7 +39,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         this.lookupRmi();
     }
     /**
-     *
+     *  Getter für iServer1
      * @return Interface1 vom Musikdienst1
      */
     public IMusikd getiServer1() {
@@ -47,7 +47,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
 
     /**
-     *
+     * Setter für iServer1
      * @param iServer1
      */
     public void setiServer1(IMusikd iServer1) {
@@ -55,43 +55,60 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
     }
 
     /**
-     *
+     * Getter für iServer2
      * @return Interface2 vom Musikdienst2
      */
     public IMusikd getiServer2() {
         return iServer2;
     }
 
+    /**
+     * Setter für iServer2
+     * @param iServer2 
+     */
     public void setiServer2(IMusikd iServer2) {
         this.iServer2 = iServer2;
     }
 
+    /**
+     * Getter für serveradress1
+     * @return 
+     */
     public String getServeradress1() {
         return serveradress1;
     }
 
+    /**
+     * Setter für serveradress1
+     * @param serveradress1 
+     */
     public void setServeradress1(String serveradress1) {
         this.serveradress1 = serveradress1;
         System.out.println("Loadbalancer: server1 adresse "+serveradress1);
     }
 
+    /**
+     * Getter für serveradress2
+     * @return 
+     */
     public String getServeradress2() {
         return serveradress2;
     }
 
+    /**
+     * Setter für serveradress2
+     * @param serveradress2 
+     */
     public void setServeradress2(String serveradress2) {
         this.serveradress2 = serveradress2;
         System.out.println("Loadbalancer: server2 adresse "+serveradress2);
     }
-    
-    
-     /**
-     *Holt sich die Registry unter Port 1099 und schaut nach den Musikdienst einträgen
+     
+    /**
+     * Holt sich die Registry unter Port 1099 und schaut nach den Musikdienst einträgen
      * unter berücksichtigung der jeweiligen Serveradresse des Musikdienstes
      * bindet den Eintrag unter iServer interface
-     * 
-     * Geschieht für beide Musikdienste, falls sie etwas Eingetragen haben
-     * 
+     * Geschieht für beide Musikdienste, falls sie etwas Eingetragen haben 
      */
     private void lookupRmi(){
         try {
@@ -103,8 +120,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         } catch (NotBoundException ex) {
             System.err.println("Loadbalancer: Beim RMI-Lookup wurde kein Objekt unter \"/Musikd_1\" gefunden!");
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }  
         try {
             Registry registry = LocateRegistry.getRegistry(1099);
             this.iServer2 = (IMusikd) registry.lookup("rmi://"+serveradress2+"/Musikd_2");
@@ -141,6 +157,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     
     /**
      * ruft balancieren der Balance Klasse auf
      * @return die getTest Methode des entsprechenden Musikdienstes
@@ -156,6 +173,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         }
         return null;
     }
+    
     /**
      * ruft balancieren der Balance Klasse auf
      * addMp3 Methode des entsprechenden Musikdienstes
@@ -169,7 +187,8 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-/**
+    
+    /**
      * ruft balancieren der Balance Klasse auf
      * @param mp3_id
      *  die deleteMp3 Methode des entsprechenden Musikdienstes
@@ -181,7 +200,8 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-/**
+    
+    /**
      * ruft balancieren der Balance Klasse auf
      * @param mp3_id
      *  die getMp3 Methode des entsprechenden Musikdienstes
@@ -204,8 +224,7 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
            return balance.balancieren(Musikd.this).getMp3ByArtist(mp3ArtistId);
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }   
         return null;
     }
 
@@ -223,13 +242,17 @@ public class Musikd extends UnicastRemoteObject implements IMusikd{
         return null;
     }
     
+      /**
+       * Ruft die getAllArtist Methode über das Musikdienst Interface auf.
+       * Zusätzlich wird der Aufruf noch über die Klasse Balance balanciert.
+       * @return    -> Liste von String-Arrays, welche alle Künstler enthalten
+       */
       public List<String[]> getAllArtist() {
         try {
              return balance.balancieren(Musikd.this).getAllArtist();
         } catch (RemoteException ex) {
             Logger.getLogger(Musikd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        } 
         return null;
     }
     
